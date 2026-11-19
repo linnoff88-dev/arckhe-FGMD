@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.4 - Fundamentos de Neurociencia | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button onclick="toggleTheme()" class="ml-2 p-2 rounded-lg hover:bg-dark-700 transition-colors">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span class="mx-2">/</span>
+      <span class="text-emerald-400">Modulo 1.4</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 1.4
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧬 Fundamentos de Neurociencia</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Entenda a ciencia por tras dos gatilhos - como o cerebro processa informacao e toma decisoes.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">50</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Inter.</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Teoria</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🦎 O Cerebro Reptiliano</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A parte mais antiga do cerebro e responsavel por decisoes <strong class="text-emerald-400">automaticas de sobrevivencia</strong>. E aqui que gatilhos de atencao funcionam.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O cerebro reptiliano (tronco cerebral) e a estrutura mais primitiva do nosso cerebro, desenvolvida ha <strong class="text-white">500 milhoes de anos</strong>. Ele controla funcoes basicas de sobrevivencia: respiracao, batimentos cardiacos, e crucialmente, a resposta de <strong class="text-white">luta ou fuga</strong>. No digital, ele decide em milissegundos se algo merece atencao ou pode ser ignorado.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Todo gatilho de atencao funciona <strong class="text-white">diretamente nesta area</strong>. Movimento, contraste, novidade, ameaca, oportunidade - sao todos sinais que o cerebro reptiliano esta programado para detectar automaticamente. Entender isso e hackear a biologia.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Fight or flight, pattern interrupt, orientacao reflexa, deteccao de novidade, resposta automatica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gatilhos Reptilianos -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Gatilhos que Ativam o Cerebro Reptiliano</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">⚡</span>
+            <p class="text-white font-bold">Movimento Subito</p>
+            <p class="text-neutral-400 text-sm">Detectado em 13ms</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">🎯</span>
+            <p class="text-white font-bold">Contraste Visual</p>
+            <p class="text-neutral-400 text-sm">Destaque automatico</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">👀</span>
+            <p class="text-white font-bold">Rostos Humanos</p>
+            <p class="text-neutral-400 text-sm">Prioridade maxima</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">🔊</span>
+            <p class="text-white font-bold">Sons Inesperados</p>
+            <p class="text-neutral-400 text-sm">Alerta imediato</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">⚠️</span>
+            <p class="text-white font-bold">Sinais de Perigo</p>
+            <p class="text-neutral-400 text-sm">Palavras de alerta</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+            <span class="text-3xl mb-2 block">🆕</span>
+            <p class="text-white font-bold">Novidade</p>
+            <p class="text-neutral-400 text-sm">Fora do padrao</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Seus hooks devem conter pelo menos <strong class="text-white">2-3 elementos reptilianos</strong>: movimento + contraste, rosto + novidade, som + ameaca/oportunidade. Quanto mais sinais, maior a chance de ativar a atencao automatica.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">❤️ Sistema Limbico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O centro emocional do cerebro processa <strong class="text-emerald-400">sentimentos e memorias</strong>. E aqui que conexao real acontece.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O sistema limbico inclui a <strong class="text-white">amigdala</strong> (processamento emocional) e o <strong class="text-white">hipocampo</strong> (formacao de memorias). Juntos, eles determinam o que sentimos sobre uma experiencia e se vamos lembra-la. Conteudo que ativa emocoes e processado mais profundamente e lembrado por mais tempo.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Conexao emocional e o que faz conteudo ser <strong class="text-white">memoravel</strong>. Voce pode ter a informacao mais util do mundo, mas se nao gerar emocao, sera esquecida em minutos. Emocoes tambem sao o combustivel das decisoes - compramos com emocao e justificamos com logica.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Amigdala, hipocampo, memoria emocional, ancoragem emocional, arousal emotivo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emocoes -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Emocoes que Geram Acao</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30 text-center">
+            <span class="text-2xl mb-1 block">😠</span>
+            <p class="text-red-400 font-bold text-sm">Raiva/Indignacao</p>
+            <p class="text-neutral-400 text-xs">Gera compartilhamento</p>
+          </div>
+          <div class="bg-yellow-900/20 rounded-lg p-4 border border-yellow-500/30 text-center">
+            <span class="text-2xl mb-1 block">😰</span>
+            <p class="text-yellow-400 font-bold text-sm">Medo/Urgencia</p>
+            <p class="text-neutral-400 text-xs">Gera acao imediata</p>
+          </div>
+          <div class="bg-emerald-900/20 rounded-lg p-4 border border-emerald-500/30 text-center">
+            <span class="text-2xl mb-1 block">🤩</span>
+            <p class="text-emerald-400 font-bold text-sm">Esperanca/Inspiracao</p>
+            <p class="text-neutral-400 text-xs">Gera seguimento</p>
+          </div>
+          <div class="bg-blue-900/20 rounded-lg p-4 border border-blue-500/30 text-center">
+            <span class="text-2xl mb-1 block">🥺</span>
+            <p class="text-blue-400 font-bold text-sm">Empatia/Conexao</p>
+            <p class="text-neutral-400 text-xs">Gera lealdade</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Antes de publicar, pergunte: <strong class="text-white">"Qual emocao isso gera?"</strong> Se a resposta for "nenhuma" ou "interessante", refaca. Conteudo neutro e ignorado. Conteudo emocional e compartilhado.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🧮 Neocortex</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A parte racional do cerebro <strong class="text-emerald-400">justifica decisoes</strong> ja tomadas emocionalmente. Ele busca logica para validar o que o limbico ja decidiu.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O neocortex e a camada mais externa e evoluida do cerebro, responsavel por <strong class="text-white">pensamento abstrato, linguagem e logica</strong>. Mas aqui esta o segredo: ele raramente inicia decisoes. Ele principalmente <strong class="text-white">racionaliza</strong> escolhas que as partes mais primitivas ja fizeram.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Gatilhos de autoridade, dados e prova social funcionam aqui. Eles dao ao neocortex as <strong class="text-white">justificativas</strong> que ele precisa para validar a decisao emocional. "Eu quero isso" (limbico) + "Faz sentido porque..." (neocortex) = acao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Post-rationalization, logica aparente, justificativas, dados de suporte, autoridade percebida.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hierarquia -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Hierarquia de Decisao</h3>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4 p-4 bg-dark-800 rounded-lg border-l-4 border-red-500">
+            <span class="text-3xl">🦎</span>
+            <div>
+              <p class="text-white font-bold">1. Reptiliano: "E seguro?"</p>
+              <p class="text-neutral-400 text-sm">Filtra em milissegundos. Se passar, vai para o proximo nivel.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 p-4 bg-dark-800 rounded-lg border-l-4 border-yellow-500">
+            <span class="text-3xl">❤️</span>
+            <div>
+              <p class="text-white font-bold">2. Limbico: "Como me sinto sobre isso?"</p>
+              <p class="text-neutral-400 text-sm">Processa emocao. Se gerar sentimento positivo, decide "quero".</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 p-4 bg-dark-800 rounded-lg border-l-4 border-emerald-500">
+            <span class="text-3xl">🧮</span>
+            <div>
+              <p class="text-white font-bold">3. Neocortex: "Por que faz sentido?"</p>
+              <p class="text-neutral-400 text-sm">Busca justificativas logicas para a decisao ja tomada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Estruture seu conteudo nessa ordem: <strong class="text-white">Hook reptiliano → Conexao emocional → Argumentos logicos</strong>. Inverter a ordem (comecar com dados) e o erro mais comum - e mais ineficaz.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔄 Vieses Cognitivos</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Atalhos mentais que o cerebro usa para <strong class="text-emerald-400">decidir rapidamente</strong>. Gatilhos eficazes alavancam esses vieses naturais.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Vieses cognitivos sao <strong class="text-white">"bugs de software"</strong> do cerebro - padroes de pensamento sistematicos que se desviam da logica pura. Eles evoluiram para permitir decisoes rapidas em ambientes de incerteza. No marketing, sao ferramentas poderosoas quando usadas eticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Cada gatilho mental <strong class="text-white">ativa um ou mais vieses</strong>. Escassez ativa aversao a perda. Autoridade ativa deferencia a expertise. Prova social ativa conformidade. Conhecer os vieses e entender a engrenagem por tras dos gatilhos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Ancoragem, escassez, prova social, reciprocidade, autoridade, aversao a perda, efeito halo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vieses Principais -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Vieses Mais Uteis para Comunicacao</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">⚓ Ancoragem</h4>
+            <p class="text-neutral-400 text-sm mb-2">Primeira informacao influencia todo o resto</p>
+            <p class="text-emerald-400 text-xs">Aplicacao: "De R$997 por R$297"</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">⏰ Aversao a Perda</h4>
+            <p class="text-neutral-400 text-sm mb-2">Dor de perder > prazer de ganhar (2x)</p>
+            <p class="text-emerald-400 text-xs">Aplicacao: "Nao perca" > "Ganhe"</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">👥 Prova Social</h4>
+            <p class="text-neutral-400 text-sm mb-2">Se outros fazem, deve ser certo</p>
+            <p class="text-emerald-400 text-xs">Aplicacao: "10.000 alunos ja..."</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">🎁 Reciprocidade</h4>
+            <p class="text-neutral-400 text-sm mb-2">Recebo valor, sinto obrigacao de retribuir</p>
+            <p class="text-emerald-400 text-xs">Aplicacao: Conteudo gratuito de valor</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Escolha <strong class="text-white">2-3 vieses principais</strong> para usar consistentemente na sua comunicacao. Dominar poucos e melhor que usar muitos superficialmente.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">⚡ Dopamina e Loops</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O sistema de recompensa do cerebro e <strong class="text-emerald-400">o combustivel do engajamento</strong>. Entender dopamina e entender por que as pessoas voltam.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Dopamina e um neurotransmissor associado a <strong class="text-white">antecipacao de recompensa</strong> (nao a recompensa em si). O cerebro libera dopamina quando espera algo bom, criando motivacao para buscar. Redes sociais sao maquinas de dopamina - cada scroll e uma loteria de possiveis recompensas.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Conteudo que ativa ciclos de dopamina gera <strong class="text-white">retorno repetido</strong>. As pessoas literalmente ficam "viciadas" no seu conteudo de forma saudavel. Isso e o que separa criadores que as pessoas seguem casualmente daqueles que as pessoas "precisam" acompanhar.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Variable reward, antecipacao, completion loops, habit formation, craving.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loops -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Ciclos de Dopamina em Conteudo</h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400">🎰</span>
+            </div>
+            <div>
+              <p class="text-white font-bold">Variable Reward (Recompensa Variavel)</p>
+              <p class="text-neutral-400 text-sm">Nem todo conteudo e igual. A incerteza do que vira gera mais dopamina que recompensa garantida.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400">🔓</span>
+            </div>
+            <div>
+              <p class="text-white font-bold">Open Loops (Loops Abertos)</p>
+              <p class="text-neutral-400 text-sm">Informacao incompleta cria tensao que so resolve consumindo mais. "Mas tem um problema..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400">✅</span>
+            </div>
+            <div>
+              <p class="text-white font-bold">Completion Loops (Loops de Conclusao)</p>
+              <p class="text-neutral-400 text-sm">Desejo de completar algo iniciado. Series, checklists, colecoes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Nunca entregue tudo de uma vez. Sempre deixe um <strong class="text-white">gancho para o proximo conteudo</strong>. A antecipacao e mais poderosa que a satisfacao - mantenha sempre algo "por vir".
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-emerald-400">identificar gatilhos em acao</strong> analisando conteudos virais atraves da lente da neurociencia.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio de <strong class="text-white">engenharia reversa</strong> - pegar conteudos que performaram muito bem e analisar quais estruturas cerebrais eles ativam, quais vieses exploram, e como criam ciclos de dopamina.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Conectar teoria a exemplos reais <strong class="text-white">solidifica o aprendizado</strong>. Apos este exercicio, voce vai comecar a "ver a Matrix" - identificar gatilhos automaticamente em qualquer conteudo que consumir.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Analise neurologica, mapa de ativacao, engenharia reversa, pattern recognition.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Passo a Passo</h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">1</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Selecione 3 conteudos virais do seu nicho</p>
+              <p class="text-neutral-400 text-sm">Videos, posts ou artigos que performaram excepcionalmente bem</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">2</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Analise o hook: Qual estrutura cerebral ativa?</p>
+              <p class="text-neutral-400 text-sm">Reptiliano (movimento, contraste)? Limbico (emocao)? Neocortex (curiosidade)?</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">3</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Identifique os vieses em uso</p>
+              <p class="text-neutral-400 text-sm">Escassez? Prova social? Autoridade? Reciprocidade?</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">4</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Mapeie os ciclos de dopamina</p>
+              <p class="text-neutral-400 text-sm">Onde estao os open loops? Variable rewards? Completion hooks?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Entregavel</h3>
+        <p class="text-neutral-300">
+          Ao final, voce tera uma <strong class="text-white">analise neurologica</strong> de 3 conteudos de sucesso, com padroes identificados que pode replicar no seu proprio conteudo.
+        </p>
+      </div>
+    </section>
+
+    <!-- Resumo -->
+    <section class="bg-dark-800 rounded-2xl p-8 border border-dark-600">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="mr-3">📝</span> Resumo do Modulo
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">O que aprendemos:</h3>
+          <ul class="space-y-2 text-neutral-300">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Cerebro reptiliano filtra atencao em ms</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Sistema limbico gera conexao emocional</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Neocortex racionaliza decisoes emocionais</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Vieses cognitivos sao atalhos exploraveis</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Dopamina e loops geram retorno repetido</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">Proximo modulo:</h3>
+          <p class="text-neutral-300 mb-4">
+            Vamos <strong class="text-white">preparar sua base estrategica</strong> - definir publico, mapear dores, criar personas e montar seu framework de criacao antes de mergulhar nos gatilhos individuais.
+          </p>
+          <a href="modulo-1-5.html" class="text-emerald-400 hover:text-emerald-300 font-medium">
+            Ir para Modulo 1.5 →
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+          ← Modulo Anterior
+        </a>
+        <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+          Proximo Modulo →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🧠</span>
+          <span class="font-bold text-emerald-400">FGMD</span>
+        </div>
+        <p class="text-neutral-400 text-sm">Formacao em Gatilhos Mentais no Digital</p>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        icon.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.getElementById('theme-icon').textContent = '☀️';
+    }
+  </script>
+</body>
+</html>

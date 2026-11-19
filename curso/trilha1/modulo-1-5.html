@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.5 - Preparacao para a Jornada | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1 - Fundamentos</a>
+      <span class="mx-2">/</span>
+      <span class="text-emerald-400">Modulo 1.5</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 1.5
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Preparacao para a Jornada</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Antes de aplicar gatilhos, voce precisa saber exatamente para quem esta falando. Este modulo e o mapa que vai guiar toda sua comunicacao digital.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Basico</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎯 Definindo seu Publico-Alvo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Gatilhos mentais so funcionam quando sao <strong class="text-emerald-400">direcionados para a pessoa certa</strong>. O primeiro passo e definir com precisao cirurgica quem e seu publico.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Publico-alvo e o <strong class="text-white">grupo especifico de pessoas</strong> que voce quer alcançar com seu conteudo. Nao e "todo mundo interessado em X", mas um recorte preciso baseado em <strong class="text-white">caracteristicas demograficas, psicograficas e comportamentais</strong>. Quanto mais especifico, mais poderosa sua comunicacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem publico definido, voce fala com todo mundo e nao conecta com <strong class="text-white">ninguem</strong>. O gatilho de identificacao so funciona quando a pessoa sente que voce esta falando <strong class="text-white">especificamente com ela</strong>. Publico generico = conexao generica = resultados genericos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Segmentacao, nicho, sub-nicho, especificidade, exclusao estrategica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Framework de Definicao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Framework de Definicao de Publico
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">Demografico</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Idade, genero, localizacao</li>
+              <li>• Renda, profissao, educacao</li>
+              <li>• Estado civil, familia</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">Psicografico</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Valores, crencas, prioridades</li>
+              <li>• Medos, frustraçoes, desejos</li>
+              <li>• Aspiracoes, sonhos</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">Comportamental</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Habitos de consumo</li>
+              <li>• Onde passa tempo online</li>
+              <li>• Como toma decisoes</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <h4 class="font-semibold text-emerald-400 mb-2">Situacional</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Momento de vida atual</li>
+              <li>• Problema urgente enfrentado</li>
+              <li>• Nivel de consciencia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerta -->
+      <div class="bg-amber-900/20 rounded-xl p-6 border border-amber-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Erro Comum
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">"Meu produto e para todo mundo que quer X"</strong> - Se seu publico e todo mundo, seu publico e ninguem. Quanto mais voce tenta agradar todos, menos impacto tem em cada um. <strong class="text-amber-400">Coragem de excluir e o que gera conexao profunda.</strong>
+        </p>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Complete a frase: <strong class="text-white">"Eu ajudo [QUEM ESPECIFICO] a [RESULTADO ESPECIFICO] para que [BENEFICIO FINAL]"</strong>. Se voce nao consegue preencher com precisao, seu publico ainda esta generico demais.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">💔 Mapeando Dores e Desejos</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Todo gatilho mental trabalha com <strong class="text-emerald-400">tensao emocional</strong>. E essa tensao vem da distancia entre onde a pessoa esta (dor) e onde ela quer chegar (desejo).
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              <strong class="text-white">Dores</strong> sao os problemas, frustraçoes, medos e obstaculos que seu publico enfrenta atualmente. <strong class="text-white">Desejos</strong> sao os resultados, transformacoes e estados futuros que eles querem alcançar. Mapear ambos e entender a <strong class="text-white">jornada emocional</strong> do seu publico.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Gatilhos mentais funcionam porque <strong class="text-white">ativam emocoes</strong>. Se voce nao conhece as dores e desejos profundos do seu publico, seus gatilhos serao <strong class="text-white">superficiais e fracos</strong>. Quanto mais profundo o mapeamento, mais poderosa a ativacao emocional.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Dor superficial vs profunda, desejo declarado vs real, tensao emocional, gap de transformacao.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao Dores -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Dor Superficial vs Dor Profunda</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="text-red-400 font-semibold mb-3">Dor Superficial (Sintoma)</div>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• "Nao tenho seguidores"</li>
+              <li>• "Meus posts nao tem likes"</li>
+              <li>• "Ninguem comenta"</li>
+              <li>• "Nao consigo vender"</li>
+            </ul>
+          </div>
+          <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4">
+            <div class="text-emerald-400 font-semibold mb-3">Dor Profunda (Raiz)</div>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• "Sinto que sou invisivel"</li>
+              <li>• "Meu trabalho nao e valorizado"</li>
+              <li>• "Estou perdendo tempo da minha vida"</li>
+              <li>• "Tenho medo de fracassar de novo"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecnica dos 5 Porques -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Tecnica dos 5 Porques
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <p>Para chegar na dor real, pergunte "por que" 5 vezes:</p>
+          <div class="bg-dark-800/50 rounded-lg p-4 space-y-2 text-sm">
+            <p><strong class="text-white">1.</strong> "Por que voce quer mais seguidores?" → Para ter mais alcance</p>
+            <p><strong class="text-white">2.</strong> "Por que quer mais alcance?" → Para vender mais</p>
+            <p><strong class="text-white">3.</strong> "Por que quer vender mais?" → Para ter seguranca financeira</p>
+            <p><strong class="text-white">4.</strong> "Por que quer seguranca financeira?" → Para nao depender do emprego</p>
+            <p><strong class="text-white">5.</strong> "Por que nao quer depender do emprego?" → <strong class="text-emerald-400">Para ter liberdade e mostrar pra minha familia que eu consigo</strong></p>
+          </div>
+          <p class="text-sm text-neutral-400 mt-2">A quinta resposta e onde esta a dor real que gera acao.</p>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Leia comentarios do seu nicho em redes sociais, reviews de produtos concorrentes, e grupos de discussao. <strong class="text-white">As palavras exatas que seu publico usa</strong> sao ouro - copie-as literalmente para seu conteudo.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">👤 Criando Personas</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Personas transformam dados abstratos em uma <strong class="text-emerald-400">pessoa real na sua mente</strong>. Quando voce escreve para uma persona especifica, seu conteudo ganha vida.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Persona e uma <strong class="text-white">representacao semificticia</strong> do seu cliente ideal, baseada em dados reais e padroes observados. Nao e uma lista de caracteristicas - e uma <strong class="text-white">pessoa com nome, historia, rotina, medos e sonhos</strong> que voce conhece intimamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Quando voce escreve "para todo mundo", sua escrita e <strong class="text-white">fria e generica</strong>. Quando escreve para "Marina, 32, que trabalha no RH e sonha largar o emprego para viver de marketing digital mas tem medo de nao dar certo", sua escrita e <strong class="text-white">viva e conectada</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Arquetipo, dia tipico, dialogo interno, objeçoes, gatilhos de decisao.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplo de Persona -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">👤</span> Exemplo de Persona Completa
+        </h3>
+        <div class="bg-gradient-to-r from-emerald-900/20 to-dark-700/50 rounded-lg p-5 border border-emerald-500/20">
+          <div class="flex items-start space-x-4 mb-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center text-3xl">👩</div>
+            <div>
+              <h4 class="text-xl font-bold text-white">Marina Silva, 32 anos</h4>
+              <p class="text-neutral-400">Sao Paulo, SP | Analista de RH | Casada, 1 filho</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="text-emerald-400 font-semibold mb-1">Situacao Atual:</p>
+              <p class="text-neutral-300">Trabalha 9h por dia, ganha R$4.500/mes, faz curso online a noite tentando aprender marketing digital. Cansada mas determinada.</p>
+            </div>
+            <div>
+              <p class="text-emerald-400 font-semibold mb-1">Maior Medo:</p>
+              <p class="text-neutral-300">Investir tempo e dinheiro em algo que nao vai dar certo e confirmar que "nao e para ela".</p>
+            </div>
+            <div>
+              <p class="text-emerald-400 font-semibold mb-1">Maior Desejo:</p>
+              <p class="text-neutral-300">Ter renda propria suficiente para pedir demissao e ter mais tempo com o filho.</p>
+            </div>
+            <div>
+              <p class="text-emerald-400 font-semibold mb-1">Frase que ela pensa:</p>
+              <p class="text-neutral-300 italic">"Sera que eu deveria estar fazendo outra coisa? Sera que to perdendo tempo?"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist Persona -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Checklist de Persona Completa</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Nome e idade especificos</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Profissao e rotina diaria</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Maior medo relacionado ao tema</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Maior desejo relacionado ao tema</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>O que ela fala para si mesma</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>O que impede de agir</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Onde busca informacao</span>
+          </div>
+          <div class="flex items-center space-x-2 text-neutral-300">
+            <span class="text-emerald-400">✓</span>
+            <span>Como toma decisoes de compra</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de criar conteudo, <strong class="text-white">imagine sua persona sentada na sua frente</strong>. Pergunte mentalmente: "Isso faria ela parar e prestar atencao? Isso faria ela se sentir compreendida?" Se nao, reescreva.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🎯 Objetivos de Comunicacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cada peca de conteudo precisa ter um <strong class="text-emerald-400">objetivo claro</strong>. Sem objetivo, voce nao sabe quais gatilhos usar nem como medir sucesso.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Objetivos de comunicacao sao as <strong class="text-white">metas especificas</strong> que cada peca de conteudo deve alcançar. Podem ser objetivos de <strong class="text-white">atencao</strong> (viralizar), <strong class="text-white">conexao</strong> (criar relacionamento), <strong class="text-white">autoridade</strong> (posicionar como especialista), ou <strong class="text-white">conversao</strong> (gerar acao).
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Um conteudo que tenta fazer tudo acaba <strong class="text-white">nao fazendo nada bem</strong>. Quando voce define o objetivo, escolhe os gatilhos certos, estrutura o conteudo de forma apropriada, e sabe exatamente como medir se funcionou.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Objetivo primario, metrica de sucesso, funil de conteudo, progressao de relacionamento.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline de Objetivos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📊</span> Hierarquia de Objetivos
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Atencao</h4>
+              <p class="text-sm text-neutral-400">Objetivo: Viralizar, alcançar novas pessoas. Metrica: Views, impressoes, compartilhamentos.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Conexao</h4>
+              <p class="text-sm text-neutral-400">Objetivo: Criar identificacao e relacionamento. Metrica: Comentarios profundos, DMs, saves.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Autoridade</h4>
+              <p class="text-sm text-neutral-400">Objetivo: Posicionar como referencia. Metrica: Novos seguidores qualificados, mencoes.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Conversao</h4>
+              <p class="text-sm text-neutral-400">Objetivo: Gerar acao especifica. Metrica: Cliques, cadastros, vendas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Objetivo x Gatilho -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Objetivo → Gatilhos Principais</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-emerald-400">Objetivo</th>
+                <th class="text-left py-2 text-emerald-400">Gatilhos Principais</th>
+                <th class="text-left py-2 text-emerald-400">Formato Ideal</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Atencao</td>
+                <td class="py-3">Atencao, Retencao</td>
+                <td class="py-3">Reels, TikTok, Threads</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Conexao</td>
+                <td class="py-3">Identificacao, Engajamento</td>
+                <td class="py-3">Carrossel, Stories, Texto</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Autoridade</td>
+                <td class="py-3">Autoridade, Compreensao</td>
+                <td class="py-3">Video longo, Artigo, Podcast</td>
+              </tr>
+              <tr>
+                <td class="py-3">Conversao</td>
+                <td class="py-3">Consciencia, CTA, Transformacao</td>
+                <td class="py-3">Webinar, Email, Landing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de criar, complete: <strong class="text-white">"Este conteudo tem sucesso se [METRICA ESPECIFICA] acontecer."</strong> Exemplo: "Este reels tem sucesso se tiver taxa de retencao acima de 40%."
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🏗️ Framework de Criacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Com publico, dores, persona e objetivos definidos, voce precisa de um <strong class="text-emerald-400">sistema de criacao</strong> que transforme tudo isso em conteudo de forma consistente.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um framework de criacao e um <strong class="text-white">processo sistematico</strong> para produzir conteudo. Ele garante que voce nao dependa de inspiracao, que todo conteudo tenha estrutura solida, e que os gatilhos sejam aplicados de forma <strong class="text-white">consistente e intencional</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores amadores dependem de <strong class="text-white">inspiracao e sorte</strong>. Criadores profissionais dependem de <strong class="text-white">sistema e processo</strong>. Um framework elimina bloqueio criativo, garante qualidade minima, e permite escalar producao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Processo criativo, banco de ideias, estrutura de conteudo, checklist de qualidade.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Framework Visual -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Framework FGMD de Criacao
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">1️⃣</div>
+            <h4 class="font-bold text-emerald-400 mb-2">CAPTURA</h4>
+            <p class="text-xs text-neutral-400">Coletar ideias, dores, objecoes do publico constantemente</p>
+          </div>
+          <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">2️⃣</div>
+            <h4 class="font-bold text-blue-400 mb-2">ESTRUTURA</h4>
+            <p class="text-xs text-neutral-400">Definir objetivo, formato, e gatilhos para cada peca</p>
+          </div>
+          <div class="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">3️⃣</div>
+            <h4 class="font-bold text-purple-400 mb-2">CRIACAO</h4>
+            <p class="text-xs text-neutral-400">Produzir seguindo a estrutura definida</p>
+          </div>
+          <div class="bg-amber-900/20 border border-amber-500/30 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">4️⃣</div>
+            <h4 class="font-bold text-amber-400 mb-2">ANALISE</h4>
+            <p class="text-xs text-neutral-400">Medir, aprender e ajustar para a proxima</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist Pre-Publicacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Checklist Pre-Publicacao</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Objetivo esta definido e claro?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Persona se identificaria com isso?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Hook interrompe o scroll?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Tem gatilho de retencao ativo?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Linguagem esta acessivel?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>CTA esta claro e unico?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Metrica de sucesso definida?</span>
+          </div>
+          <div class="flex items-start space-x-2 text-neutral-300">
+            <span class="text-emerald-400 mt-0.5">□</span>
+            <span>Formato ideal para o objetivo?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie um documento ou notion com <strong class="text-white">todas as dores, objecoes e frases</strong> do seu publico. Toda vez que precisar de ideia, volte a esse documento - ele e seu <strong class="text-white">banco de combustivel criativo</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Agora e hora de <strong class="text-emerald-400">construir seu mapa estrategico</strong> - o documento que vai guiar toda sua comunicacao daqui pra frente.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico onde voce vai <strong class="text-white">documentar tudo</strong> que aprendeu neste modulo em um formato que pode consultar sempre que criar conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ter esse mapa pronto <strong class="text-white">elimina bloqueio criativo</strong>, garante consistencia na comunicacao, e funciona como <strong class="text-white">bussola</strong> quando voce nao souber que tipo de conteudo criar.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Documentacao estrategica, referencia rapida, consistencia de marca.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🗺️</span> Exercicio: Monte seu Mapa Estrategico
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Crie um documento com as seguintes seçoes:
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">1. Definicao de Publico</p>
+            <p class="text-neutral-400 text-sm">Complete: "Eu ajudo [QUEM] a [O QUE] para [BENEFICIO]". Seja o mais especifico possivel.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">2. Mapa de Dores</p>
+            <p class="text-neutral-400 text-sm">Liste 10 dores superficiais e, para cada uma, encontre a dor profunda por tras usando os 5 porques.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">3. Mapa de Desejos</p>
+            <p class="text-neutral-400 text-sm">Liste 10 desejos declarados e, para cada um, encontre o desejo real por tras.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">4. Persona Principal</p>
+            <p class="text-neutral-400 text-sm">Crie uma persona completa com nome, idade, rotina, medos, desejos, objeçoes e frase mental.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">5. Banco de Frases</p>
+            <p class="text-neutral-400 text-sm">Colete 20 frases reais que seu publico usa (de comentarios, reviews, grupos, DMs).</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">6. Mix de Conteudo</p>
+            <p class="text-neutral-400 text-sm">Defina: X% para atencao, X% para conexao, X% para autoridade, X% para conversao.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-emerald-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-emerald-400">Entrega:</strong> Documento completo com todas as 6 seçoes preenchidas. Este documento sera sua <strong class="text-white">referencia durante toda a formacao</strong> e deve ser atualizado conforme voce aprende mais sobre seu publico.
+          </p>
+        </div>
+      </div>
+
+      <!-- Exemplo Parcial -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">📋</span> Exemplo de Mix de Conteudo
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          <div class="bg-dark-800/50 rounded-lg p-3">
+            <div class="text-2xl font-bold text-emerald-400">40%</div>
+            <div class="text-xs text-neutral-400">Atencao</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3">
+            <div class="text-2xl font-bold text-blue-400">30%</div>
+            <div class="text-xs text-neutral-400">Conexao</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3">
+            <div class="text-2xl font-bold text-purple-400">20%</div>
+            <div class="text-xs text-neutral-400">Autoridade</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3">
+            <div class="text-2xl font-bold text-amber-400">10%</div>
+            <div class="text-xs text-neutral-400">Conversao</div>
+          </div>
+        </div>
+        <p class="text-sm text-neutral-400 mt-3 text-center">Ajuste as proporçoes conforme seu objetivo atual e maturidade da audiencia.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Publico-alvo</strong>
+              <span class="text-neutral-400"> - Quanto mais especifico, mais poderosa a conexao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Dores e desejos</strong>
+              <span class="text-neutral-400"> - A raiz emocional que move seu publico a agir</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Personas</strong>
+              <span class="text-neutral-400"> - Transformar dados em pessoa real para escrever com vida</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Objetivos</strong>
+              <span class="text-neutral-400"> - Cada conteudo precisa de meta clara e metrica</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Framework</strong>
+              <span class="text-neutral-400"> - Sistema que elimina bloqueio e garante consistencia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-emerald-900/30 rounded-lg p-4 mb-8 border border-emerald-500/20">
+          <p class="text-emerald-400 font-semibold mb-2">🎉 Parabens! Voce concluiu a Trilha 1 - Fundamentos!</p>
+          <p class="text-neutral-300 text-sm">Voce agora tem a base teorica e estrategica para aplicar gatilhos mentais. Na Trilha 2, voce vai aprender cada um dos 10 gatilhos em profundidade.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-1-4.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="../trilha2/index.html" class="flex-1 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Ir para Trilha 2 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

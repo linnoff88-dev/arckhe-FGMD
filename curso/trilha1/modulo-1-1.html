@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.1 - O Jogo Mental do Digital | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1 - Fundamentos</a>
+      <span class="mx-2">/</span>
+      <span class="text-emerald-400">Modulo 1.1</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 1.1
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧠 O Jogo Mental do Digital</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Entenda como o cerebro humano funciona no ambiente digital e por que gatilhos mentais sao a chave para comunicacao eficaz.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">25</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Basico</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Teoria</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🧠 O Cerebro no Scroll</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Por que gatilhos mentais funcionam? A resposta esta na forma como o <strong class="text-emerald-400">cerebro humano processa informacao</strong> no ambiente digital - e ela e bem diferente do que a maioria imagina.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Gatilhos mentais sao <strong class="text-white">atalhos cognitivos</strong> que o cerebro usa para tomar decisoes rapidas. No digital, onde somos bombardeados por milhares de estimulos por dia, o cerebro ativa um modo de <strong class="text-white">economia de energia</strong> - ele filtra automaticamente o que nao parece relevante. Gatilhos sao a forma de <strong class="text-white">passar por esse filtro</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem entender como o cerebro funciona no scroll, voce cria conteudo para <strong class="text-white">ninguem</strong>. A pessoa nao escolhe conscientemente ignorar seu conteudo - o cerebro dela faz isso automaticamente em <strong class="text-white">milessegundos</strong>. Dominar gatilhos e aprender a falar a linguagem do cerebro automatico.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Filtro atencional, economia cognitiva, decisao automatica, interrupcao do fluxo, tensao cognitiva.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• Uma pessoa ve em media <strong class="text-white">6.000 a 10.000 anuncios por dia</strong></li>
+          <li>• O cerebro processa imagens em <strong class="text-white">13 milissegundos</strong></li>
+          <li>• A decisao de parar ou continuar o scroll acontece em <strong class="text-white">menos de 3 segundos</strong></li>
+          <li>• Apenas <strong class="text-white">8% do conteudo</strong> consegue ativacao consciente</li>
+        </ul>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de criar qualquer conteudo, pergunte: <strong class="text-white">"Isso interrompe o fluxo automatico?"</strong> Se a resposta for nao, o cerebro do seu publico vai descartar antes mesmo de processar conscientemente.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🛤️ A Jornada Cognitiva</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Do scroll a acao existe uma <strong class="text-emerald-400">jornada mental</strong> que toda pessoa percorre. Entender cada etapa e o que separa comunicadores amadores de profissionais.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              A jornada cognitiva e a <strong class="text-white">sequencia de estados mentais</strong> que uma pessoa atravessa desde o momento em que ve seu conteudo ate a acao final. Cada estado e ativado por um tipo especifico de gatilho, e pular etapas significa <strong class="text-white">perder a pessoa no caminho</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores foca apenas em <strong class="text-white">atencao</strong> (fazer parar) ou <strong class="text-white">CTA</strong> (fazer agir). Mas entre esses dois pontos existem <strong class="text-white">8 outros estados mentais</strong> que precisam ser ativados. Ignorar qualquer um deles e como tentar pular degraus de uma escada - voce cai.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Sequencia de ativacao, estados mentais, progressao logica, pontos de abandono.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🗺️</span> A Jornada Completa
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Atencao</h4>
+              <p class="text-sm text-neutral-400">Parar o scroll - "Espera, o que e isso?"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Retencao</h4>
+              <p class="text-sm text-neutral-400">Fazer ficar - "Quero ver onde isso vai dar"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Compreensao</h4>
+              <p class="text-sm text-neutral-400">Fazer entender - "Faz sentido pra mim"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Identificacao</h4>
+              <p class="text-sm text-neutral-400">Fazer conectar - "Isso e sobre mim"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">5</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Engajamento</h4>
+              <p class="text-sm text-neutral-400">Fazer ativar - "Preciso reagir a isso"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">6</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Autoridade</h4>
+              <p class="text-sm text-neutral-400">Fazer legitimar - "Essa pessoa sabe"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">7</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Consciencia</h4>
+              <p class="text-sm text-neutral-400">Fazer despertar - "Nao posso mais desver"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">8</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Pertencimento</h4>
+              <p class="text-sm text-neutral-400">Fazer permanecer - "Existe um lugar aqui"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">9</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">Transformacao</h4>
+              <p class="text-sm text-neutral-400">Fazer avancar - "Sei por onde comecar"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">10</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-neutral-200 mb-1">CTA</h4>
+              <p class="text-sm text-neutral-400">Fazer mover - "O proximo passo e obvio"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🔗 Os 10 Gatilhos como Sistema</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Os 10 gatilhos nao sao tecnicas isoladas - eles formam um <strong class="text-emerald-400">sistema integrado</strong> onde cada um potencializa o outro. Entender essa conexao e o que diferencia uso amador de uso profissional.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Cada gatilho <strong class="text-white">prepara o terreno</strong> para o proximo. Atencao sem retencao e desperdicio. Retencao sem compreensao e confusao. Compreensao sem identificacao e irrelevancia. Os gatilhos funcionam como <strong class="text-white">engrenagens de uma maquina</strong> - remova uma e o sistema para.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores conhece gatilhos de forma <strong class="text-white">fragmentada</strong> - uma tecnica aqui, outra ali. Isso gera resultados <strong class="text-white">inconsistentes</strong>. Quando voce entende o sistema completo, consegue <strong class="text-white">diagnosticar exatamente</strong> onde seu conteudo falha e corrigir com precisao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Interdependencia, efeito cascata, diagnostico de falhas, otimizacao sistematica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Conexoes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> Conexoes entre Gatilhos
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Atencao → Retencao:</strong> Se voce para a pessoa mas nao da direcao, ela vai embora.
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Retencao → Compreensao:</strong> Se ela fica mas nao entende, sente-se burra e sai.
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Compreensao → Identificacao:</strong> Se entende mas nao se ve ali, e conteudo para outros.
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Identificacao → Engajamento:</strong> Se se ve mas nao reage, fica passiva para sempre.
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Engajamento → Autoridade:</strong> Se reage mas nao confia, nao segue suas orientacoes.
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-emerald-400">Autoridade → Consciencia:</strong> Se confia mas nao desperta, nao muda comportamento.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Quando um conteudo nao funciona, <strong class="text-white">nao mude tudo</strong>. Analise a jornada e identifique <strong class="text-white">em qual gatilho voce esta falhando</strong>. Se tem views mas pouca retencao, o problema esta na transicao atencao → retencao. Se tem retencao mas poucos comentarios, esta na identificacao → engajamento.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">⚖️ Persuasao vs Manipulacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Gatilhos mentais sao <strong class="text-emerald-400">ferramentas neutras</strong>. O que define se e persuasao ou manipulacao e a <strong class="text-emerald-400">intencao</strong> e a <strong class="text-emerald-400">entrega</strong> por tras do uso.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              <strong class="text-white">Persuasao</strong> e influenciar alguem a tomar uma decisao que beneficia ambas as partes. <strong class="text-white">Manipulacao</strong> e influenciar alguem a tomar uma decisao que beneficia apenas voce, muitas vezes prejudicando a outra pessoa. A diferenca esta na <strong class="text-white">intencao</strong>, na <strong class="text-white">transparencia</strong> e na <strong class="text-white">entrega real</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar gatilhos de forma manipulativa pode gerar <strong class="text-white">resultados de curto prazo</strong>, mas destroi <strong class="text-white">confianca e reputacao</strong> no longo prazo. Alem disso, manipulacao gera arrependimento pos-compra, reembolsos, e destruicao de comunidade. Persuasao etica constroi <strong class="text-white">negocios sustentaveis</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Intencao, transparencia, beneficio mutuo, entrega real, sustentabilidade.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Comparacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">✅ Fazer vs ❌ Evitar</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4">
+            <div class="text-emerald-400 font-semibold mb-3">✅ Persuasao Etica</div>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• Promete o que pode entregar</li>
+              <li>• Cria urgencia real baseada em fatos</li>
+              <li>• Mostra limitacoes do produto</li>
+              <li>• Foca no beneficio do cliente</li>
+              <li>• Aceita que nao e para todos</li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="text-red-400 font-semibold mb-3">❌ Manipulacao</div>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• Promete resultados irreais</li>
+              <li>• Cria urgencia falsa ou artificial</li>
+              <li>• Esconde informacoes importantes</li>
+              <li>• Foca apenas no lucro proprio</li>
+              <li>• Pressiona quem nao deveria comprar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Teste de Etica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de publicar, pergunte: <strong class="text-white">"Se meu cliente soubesse exatamente o que esta por tras dessa tecnica, ainda confiaria em mim?"</strong> Se a resposta for nao, revise sua abordagem.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🔍 Diagnostico de Conteudo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A maioria dos criadores <strong class="text-emerald-400">nao sabe onde seu conteudo falha</strong>. Eles olham para metricas gerais (views, likes) sem entender qual gatilho especifico nao esta funcionando.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Diagnostico de conteudo e a capacidade de <strong class="text-white">identificar exatamente em qual gatilho</strong> seu conteudo esta falhando. Cada metrica revela uma falha especifica: taxa de retencao baixa = problema no gatilho de retencao; muitas views mas poucos comentarios = problema no gatilho de identificacao ou engajamento.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem diagnostico preciso, voce faz <strong class="text-white">mudancas aleatorias</strong> esperando que algo funcione. Com diagnostico, voce sabe <strong class="text-white">exatamente o que corrigir</strong>. Isso economiza tempo, energia e acelera resultados exponencialmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Metricas por gatilho, pontos de abandono, correlacao metrica-gatilho, correcao cirurgica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Diagnostico -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🩺</span> Mapa de Diagnostico
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-emerald-400">Sintoma</th>
+                <th class="text-left py-2 text-emerald-400">Gatilho com Problema</th>
+                <th class="text-left py-2 text-emerald-400">Acao Corretiva</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Poucas views</td>
+                <td class="py-3">Atencao</td>
+                <td class="py-3">Melhorar hook inicial</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Views mas baixa retencao</td>
+                <td class="py-3">Retencao</td>
+                <td class="py-3">Adicionar promessa aberta</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Retencao mas poucos saves</td>
+                <td class="py-3">Compreensao</td>
+                <td class="py-3">Simplificar linguagem</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Saves mas poucos comentarios</td>
+                <td class="py-3">Identificacao</td>
+                <td class="py-3">Usar espelhamento</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Comentarios mas poucos seguidores</td>
+                <td class="py-3">Autoridade</td>
+                <td class="py-3">Demonstrar vivencia</td>
+              </tr>
+              <tr>
+                <td class="py-3">Seguidores mas poucas vendas</td>
+                <td class="py-3">Consciencia/CTA</td>
+                <td class="py-3">Criar urgencia real</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Agora e hora de <strong class="text-emerald-400">colocar em pratica</strong>. Analise um conteudo real usando os conceitos deste modulo.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio de analise pratica onde voce vai <strong class="text-white">dissecar um conteudo</strong> (seu ou de terceiros) usando a estrutura dos 10 gatilhos para identificar pontos fortes e pontos de falha.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Teoria sem pratica nao gera <strong class="text-white">mudanca real</strong>. Este exercicio vai <strong class="text-white">calibrar seu olhar</strong> para que voce comece a enxergar gatilhos em todo conteudo que consumir - e no seu proprio.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Analise critica, identificacao de padroes, aplicacao pratica, feedback loop.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Analise de Conteudo
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Escolha um conteudo (video, post, carrossel) e responda:
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">1. Atencao</p>
+            <p class="text-neutral-400 text-sm">O hook faz parar nos primeiros 3 segundos? Qual pilar usa (ruptura, assimetria, inversao, inevitabilidade, travessia)?</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">2. Retencao</p>
+            <p class="text-neutral-400 text-sm">Existe promessa aberta? Tensao cognitiva? Progressao visivel?</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">3. Compreensao</p>
+            <p class="text-neutral-400 text-sm">A linguagem e acessivel? Usa analogias? Valida entendimento?</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">4. Identificacao</p>
+            <p class="text-neutral-400 text-sm">Descreve comportamentos do publico? Usa "voce"? Mostra vulnerabilidade?</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">5. Engajamento</p>
+            <p class="text-neutral-400 text-sm">Tem convite a acao? Provoca pensamento? Pede opiniao?</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-emerald-400 font-semibold mb-2">6. Autoridade</p>
+            <p class="text-neutral-400 text-sm">Demonstra vivencia? Mostra processo? Tem coerencia?</p>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-emerald-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-emerald-400">Entrega:</strong> Escreva sua analise identificando pelo menos <strong class="text-white">3 pontos fortes</strong> e <strong class="text-white">3 pontos de melhoria</strong> baseados nos gatilhos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">O cerebro no digital</strong>
+              <span class="text-neutral-400"> - Funciona em modo de economia, filtra automaticamente</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Jornada cognitiva</strong>
+              <span class="text-neutral-400"> - 10 estados mentais do scroll a acao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Sistema integrado</strong>
+              <span class="text-neutral-400"> - Gatilhos se conectam e potencializam mutuamente</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Etica na persuasao</strong>
+              <span class="text-neutral-400"> - Intencao e entrega definem a linha</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Diagnostico preciso</strong>
+              <span class="text-neutral-400"> - Identificar exatamente onde o conteudo falha</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Voltar para Trilha 1
+          </a>
+          <a href="modulo-1-2.html" class="flex-1 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

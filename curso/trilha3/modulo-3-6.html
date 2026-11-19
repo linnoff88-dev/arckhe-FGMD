@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.6 - Monetizacao Estrategica | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.6</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.6
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">💰 Monetizacao Estrategica</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Transforme audiencia em receita de forma sustentavel. Aprenda a construir multiplas fontes de renda e escalar seu negocio digital.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">50</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Estrategico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🗺️ Mapa de Monetizacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes de monetizar, voce precisa de um <strong class="text-purple-400">mapa completo</strong> de todas as possibilidades. Quem depende de uma unica fonte de renda esta sempre vulneravel.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O mapa de monetizacao e uma <strong class="text-white">visao panoramica</strong> de todas as formas que voce pode gerar receita a partir da sua audiencia. Inclui revenue streams (fontes de receita), product ladder (escada de produtos), service offerings (servicos) e passive income (renda passiva). E a <strong class="text-white">arquitetura financeira</strong> do seu negocio digital.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores que dependem de uma fonte morrem quando ela seca. <strong class="text-white">Diversificacao</strong> e a chave da sustentabilidade. Alem disso, diferentes produtos atendem diferentes segmentos da sua audiencia - quem nao pode pagar R$997 pode pagar R$47, e vice-versa.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Revenue streams, product ladder, service offerings, passive income, diversificacao de receita.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Mercado
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• Criadores com <strong class="text-white">3+ fontes de receita</strong> tem 4x mais estabilidade financeira</li>
+          <li>• <strong class="text-white">72% dos top creators</strong> tem produtos proprios alem de publicidade</li>
+          <li>• A margem media de produtos digitais e de <strong class="text-white">85-95%</strong> (vs 20-40% de fisicos)</li>
+          <li>• Criadores que implementam product ladder faturam em media <strong class="text-white">3.2x mais</strong> que os que vendem produto unico</li>
+        </ul>
+      </div>
+
+      <!-- Revenue Streams -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">💵</span> As 4 Categorias de Revenue Streams
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">1. Produtos Digitais</p>
+            <p class="text-neutral-300 text-sm">Cursos, ebooks, templates, ferramentas. Alta margem, escalavel, trabalho upfront.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: Curso de R$997, ebook de R$47, pack de templates R$197</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">2. Servicos</p>
+            <p class="text-neutral-300 text-sm">Consultoria, mentoria, done-for-you. Alto ticket, troca tempo por dinheiro.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: Mentoria R$5k/mes, consultoria R$500/hora, projetos R$15k</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">3. Recorrencia</p>
+            <p class="text-neutral-300 text-sm">Membership, assinatura, comunidade. Previsibilidade, requer entrega continua.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: Comunidade R$97/mes, assinatura premium R$47/mes</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">4. Parcerias</p>
+            <p class="text-neutral-300 text-sm">Patrocinios, afiliados, brand deals. Monetiza audiencia, depende de terceiros.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: Post patrocinado R$3k, afiliado 30% comissao, brand deal R$10k</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Ladder -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🪜</span> Product Ladder - A Escada de Valor
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold text-lg">R$0</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Lead Magnet (Gratis)</h4>
+              <p class="text-sm text-neutral-400">Ebook, checklist, mini-curso. Atrai e qualifica leads.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold text-sm">R$47-97</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Tripwire / Low Ticket</h4>
+              <p class="text-sm text-neutral-400">Primeiro produto pago. Valida interesse e quebra barreira de compra.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">R$297-997</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Core Offer / Mid Ticket</h4>
+              <p class="text-sm text-neutral-400">Produto principal. Onde esta o grosso do faturamento.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">R$2k-10k</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Premium / High Ticket</h4>
+              <p class="text-sm text-neutral-400">Mentoria, grupo exclusivo, done-with-you. Para os mais comprometidos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Comece pelo <strong class="text-white">servico</strong> (valida rapido, gera caixa), depois crie o <strong class="text-white">produto</strong> com base no que aprendeu atendendo clientes. O produto documenta o servico. Por ultimo, escale com <strong class="text-white">recorrencia</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📦 Produtos Digitais</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Produtos digitais sao a <strong class="text-purple-400">mina de ouro</strong> do criador moderno. Uma vez criados, vendem infinitamente sem custo marginal.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Produtos digitais sao <strong class="text-white">ativos escalaveis</strong> que voce cria uma vez e vende infinitas vezes. Incluem cursos online, ebooks, templates, ferramentas, presets, planilhas, comunidades pagas e muito mais. A <strong class="text-white">margem de lucro</strong> pode chegar a 95%.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Produtos digitais <strong class="text-white">desacoplam tempo de dinheiro</strong>. Enquanto servicos exigem sua presenca, produtos vendem enquanto voce dorme. E a unica forma de realmente <strong class="text-white">escalar</strong> como criador solo.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Course creation, digital products, membership, templates/tools, MVP de produto.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Produtos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎁</span> Tipos de Produtos Digitais
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex justify-between items-start mb-2">
+              <p class="text-purple-400 font-semibold">Cursos Online</p>
+              <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Alto Valor</span>
+            </div>
+            <p class="text-neutral-300 text-sm mb-2">Transformacao completa em formato video/texto. O produto mais valorizado.</p>
+            <p class="text-neutral-500 text-xs"><strong>Preco tipico:</strong> R$297 - R$2.997 | <strong>Tempo de criacao:</strong> 2-8 semanas</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex justify-between items-start mb-2">
+              <p class="text-purple-400 font-semibold">Ebooks e Guias</p>
+              <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Rapido</span>
+            </div>
+            <p class="text-neutral-300 text-sm mb-2">Conhecimento condensado em formato texto. Otimo para entrada.</p>
+            <p class="text-neutral-500 text-xs"><strong>Preco tipico:</strong> R$27 - R$97 | <strong>Tempo de criacao:</strong> 1-2 semanas</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex justify-between items-start mb-2">
+              <p class="text-purple-400 font-semibold">Templates e Ferramentas</p>
+              <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">Escalavel</span>
+            </div>
+            <p class="text-neutral-300 text-sm mb-2">Planilhas, Notion templates, presets, prompts. Economia de tempo para o cliente.</p>
+            <p class="text-neutral-500 text-xs"><strong>Preco tipico:</strong> R$47 - R$297 | <strong>Tempo de criacao:</strong> 1-4 semanas</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex justify-between items-start mb-2">
+              <p class="text-purple-400 font-semibold">Membership / Comunidade</p>
+              <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Recorrente</span>
+            </div>
+            <p class="text-neutral-300 text-sm mb-2">Acesso continuo a conteudo, comunidade e suporte. Gera receita previsivel.</p>
+            <p class="text-neutral-500 text-xs"><strong>Preco tipico:</strong> R$47 - R$197/mes | <strong>Tempo de criacao:</strong> Setup inicial + continuo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Framework de Criacao -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🔧</span> Framework: Criar Produto em 7 Dias
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D1</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Pesquisa:</strong> Valide a dor/desejo com sua audiencia</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D2</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Estrutura:</strong> Defina os modulos/capitulos principais</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D3</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Conteudo:</strong> Crie o conteudo core (nao precisa ser perfeito)</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D4</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Bonus:</strong> Adicione materiais complementares</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D5</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Pagina:</strong> Monte a pagina de vendas simples</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D6</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Setup:</strong> Configure checkout e entrega</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm">D7</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Lancamento:</strong> Venda para sua lista/audiencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Nao espere ter o produto perfeito. Lance um <strong class="text-white">MVP (Minimum Viable Product)</strong> e melhore com feedback real. Os primeiros clientes pagam menos e ajudam a construir. <strong class="text-white">Feito e melhor que perfeito</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎯 Lancamentos e Campanhas</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Lancamentos bem estruturados podem gerar <strong class="text-purple-400">meses de faturamento em dias</strong>. A arte esta na construcao de expectativa e urgencia genuina.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Lancamento e uma <strong class="text-white">campanha estruturada</strong> para vender um produto em um periodo especifico. Envolve pre-lancamento (construcao de expectativa), abertura de carrinho, periodo de vendas e fechamento. A <strong class="text-white">escassez temporal</strong> acelera decisoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Vendas constantes sao dificeis de escalar. Lancamentos permitem <strong class="text-white">picos de faturamento</strong> que financiam periodos de criacao. Alem disso, a urgencia genuina de carrinho fechando <strong class="text-white">converte muito mais</strong> que ofertas permanentes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Launch sequence, pre-launch content, cart open/close, urgency scarcity, seed launch, internal launch.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Lancamentos
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">60-70% das vendas</strong> acontecem nas ultimas 24-48 horas do carrinho</li>
+          <li>• Lancamentos com pre-lancamento de 7+ dias tem <strong class="text-white">2.3x mais conversao</strong></li>
+          <li>• Emails de <strong class="text-white">ultima chance</strong> convertem 3x mais que emails normais</li>
+          <li>• A media de conversao de lista em lancamento e <strong class="text-white">2-5%</strong> (bons: 5-10%)</li>
+        </ul>
+      </div>
+
+      <!-- Fases do Lancamento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> As 4 Fases do Lancamento
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">1</span>
+              <div>
+                <p class="text-blue-400 font-semibold mb-1">Pre-Pre-Lancamento (2-4 semanas antes)</p>
+                <p class="text-neutral-300 text-sm">Plante sementes. Mencione o problema/solucao no conteudo regular. Crie curiosidade sem revelar.</p>
+                <p class="text-neutral-500 text-xs mt-2">Acao: Posts sobre o tema, stories de bastidores, enquetes validando interesse</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-bold">2</span>
+              <div>
+                <p class="text-yellow-400 font-semibold mb-1">Pre-Lancamento (1-2 semanas antes)</p>
+                <p class="text-neutral-300 text-sm">Conteudo de alto valor gratuito. Webinar, sequencia de videos, desafio. Educa e aquece.</p>
+                <p class="text-neutral-500 text-xs mt-2">Acao: CPL (Conteudo Pre-Lancamento), lista de espera, antecipacao do que vem</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold">3</span>
+              <div>
+                <p class="text-green-400 font-semibold mb-1">Lancamento - Carrinho Aberto (3-7 dias)</p>
+                <p class="text-neutral-300 text-sm">Abertura oficial. Emails diarios, stories constantes, lives, bonus limitados.</p>
+                <p class="text-neutral-500 text-xs mt-2">Acao: Email de abertura, FAQ, objecoes, casos de sucesso, bonus early bird</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-bold">4</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Fechamento (ultimas 24-48h)</p>
+                <p class="text-neutral-300 text-sm">Urgencia maxima. Multiplos lembretes. Contador regressivo. Ultima chance.</p>
+                <p class="text-neutral-500 text-xs mt-2">Acao: Email 24h, 12h, 6h, 1h antes. Stories com contador. Live de encerramento</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Lancamento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🚀</span> Tipos de Lancamento
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Tipo</th>
+                <th class="text-left py-2 text-purple-400">Ideal Para</th>
+                <th class="text-left py-2 text-purple-400">Complexidade</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Seed Launch</td>
+                <td class="py-3">Primeiro produto, validacao rapida</td>
+                <td class="py-3">Baixa - Vende para lista pequena</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Internal Launch</td>
+                <td class="py-3">Lista propria, sem trafego pago</td>
+                <td class="py-3">Media - Requer pre-lancamento</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">JV Launch</td>
+                <td class="py-3">Escala com parceiros afiliados</td>
+                <td class="py-3">Alta - Coordenacao de afiliados</td>
+              </tr>
+              <tr>
+                <td class="py-3">Evergreen</td>
+                <td class="py-3">Vendas continuas automatizadas</td>
+                <td class="py-3">Alta - Funil complexo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Seu primeiro lancamento deve ser um <strong class="text-white">Seed Launch</strong>: oferte para sua lista/audiencia atual a um preco promocional em troca de feedback. Valide antes de investir em estrutura complexa. <strong class="text-white">5 vendas validam mais que 500 curtidas</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🤝 Parcerias e Patrocinios</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Monetizar sua audiencia atraves de <strong class="text-purple-400">marcas e parceiros</strong> pode gerar receita significativa enquanto voce constroi produtos proprios.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Parcerias e patrocinios sao acordos onde <strong class="text-white">marcas pagam</strong> para acessar sua audiencia. Inclui brand deals (conteudo patrocinado), affiliate marketing (comissao por venda), strategic partnerships (colaboracoes) e media kit (apresentacao profissional para marcas).
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              E uma forma de monetizar <strong class="text-white">sem criar produto</strong>. Enquanto desenvolve seu ecossistema, parcerias geram caixa. Alem disso, associacao com <strong class="text-white">marcas certas</strong> aumenta sua autoridade.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Brand deals, affiliate marketing, strategic partnerships, media kit, CPM, CPA, exclusividade.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Parcerias -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">💼</span> Tipos de Parcerias
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Brand Deals / Patrocinio</p>
+            <p class="text-neutral-300 text-sm mb-2">Marca paga valor fixo por conteudo especifico (post, video, story).</p>
+            <p class="text-neutral-500 text-xs"><strong>Preco:</strong> R$500 - R$50k+ dependendo do alcance</p>
+            <p class="text-neutral-500 text-xs"><strong>Modelo:</strong> Fee fixo por entrega</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Affiliate Marketing</p>
+            <p class="text-neutral-300 text-sm mb-2">Voce indica produto e ganha comissao por cada venda.</p>
+            <p class="text-neutral-500 text-xs"><strong>Comissao:</strong> 5-50% do valor da venda</p>
+            <p class="text-neutral-500 text-xs"><strong>Modelo:</strong> Performance (CPA)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Embaixador de Marca</p>
+            <p class="text-neutral-300 text-sm mb-2">Contrato longo prazo com entregas recorrentes e exclusividade.</p>
+            <p class="text-neutral-500 text-xs"><strong>Valor:</strong> Fee mensal/anual + perks</p>
+            <p class="text-neutral-500 text-xs"><strong>Modelo:</strong> Retainer + performance</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Co-criacao de Produto</p>
+            <p class="text-neutral-300 text-sm mb-2">Desenvolve produto junto com a marca, ganha royalties.</p>
+            <p class="text-neutral-500 text-xs"><strong>Ganho:</strong> % das vendas ou fee de licenciamento</p>
+            <p class="text-neutral-500 text-xs"><strong>Modelo:</strong> Revenue share</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Kit -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📋</span> O que incluir no Media Kit
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Bio:</strong> Quem voce e, nicho, proposta de valor</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Numeros:</strong> Seguidores, alcance, engajamento por plataforma</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Demografica:</strong> Idade, genero, localizacao da audiencia</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Cases:</strong> Parcerias anteriores e resultados</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Formatos:</strong> O que voce oferece (post, story, video, etc)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">✓</span>
+              <span class="text-neutral-300 text-sm"><strong class="text-white">Precos:</strong> Tabela de valores (ou "sob consulta")</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Como Precificar -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">💰</span> Como Precificar Parcerias
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Formula Base: CPM</p>
+            <p class="text-neutral-300 text-sm">Custo por mil impressoes. Referencia: R$30-100 CPM para nichos gerais, R$100-300 para nichos premium.</p>
+            <p class="text-neutral-500 text-xs mt-2">Exemplo: 50k alcance medio x R$50 CPM = R$2.500 por post</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Ajustes de Valor</p>
+            <p class="text-neutral-300 text-sm">
+              <strong class="text-white">+30-50%</strong> para exclusividade |
+              <strong class="text-white">+20-30%</strong> para direitos de uso |
+              <strong class="text-white">+50%</strong> para urgencia |
+              <strong class="text-white">-10-20%</strong> para pacotes
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Nunca aceite produtos em troca de divulgacao</strong> se voce ja tem audiencia engajada. Seu tempo e alcance tem valor real. Comece cobrando e va ajustando. <strong class="text-white">Quem pede desconto demais nao valoriza seu trabalho</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📊 Precificacao e Valor</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O preco nao e sobre custo - e sobre <strong class="text-purple-400">valor percebido</strong>. Aprenda a precificar de forma que maximize receita e satisfacao do cliente.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Precificacao estrategica e a arte de definir precos baseados em <strong class="text-white">valor entregue</strong>, nao em custo ou concorrencia. Envolve value-based pricing (preco pelo valor), price anchoring (ancoragem), tiered pricing (niveis) e ROI communication (mostrar retorno).
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Preco errado mata negocios. Muito baixo, voce <strong class="text-white">nao sustenta operacao</strong>. Muito alto sem justificativa, nao vende. A precificacao correta <strong class="text-white">maximiza margem</strong> mantendo valor percebido alto.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Value-based pricing, price anchoring, tiered pricing, ROI communication, elasticidade de preco.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrategias de Preco -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Estrategias de Precificacao
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">1. Value-Based Pricing</p>
+            <p class="text-neutral-300 text-sm mb-2">Preco baseado no valor/resultado que o cliente recebe, nao no custo de producao.</p>
+            <p class="text-neutral-500 text-xs"><strong>Pergunta-chave:</strong> Quanto vale resolver esse problema para o cliente?</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: Curso que ajuda a ganhar R$5k/mes pode custar R$1.500 (3 meses de ROI)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">2. Price Anchoring</p>
+            <p class="text-neutral-300 text-sm mb-2">Apresentar um preco alto primeiro faz o preco real parecer mais acessivel.</p>
+            <p class="text-neutral-500 text-xs"><strong>Aplicacao:</strong> "Valor real: R$2.997 | Hoje: R$997" ou comparar com alternativas caras</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Mentoria individual custa R$5k. O curso te da o mesmo por R$997"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">3. Tiered Pricing</p>
+            <p class="text-neutral-300 text-sm mb-2">Oferecer multiplos niveis captura diferentes segmentos de mercado.</p>
+            <p class="text-neutral-500 text-xs"><strong>Estrutura classica:</strong> Basic | Pro | Premium (o do meio vende mais)</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: Ebook R$47 | Curso R$497 | Curso + Mentoria R$1.497</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">4. ROI Communication</p>
+            <p class="text-neutral-300 text-sm mb-2">Mostrar claramente o retorno sobre investimento justifica qualquer preco.</p>
+            <p class="text-neutral-500 text-xs"><strong>Formula:</strong> Investimento de X gera retorno de Y (Y > X em quanto tempo)</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Invista R$997 para economizar 40h/mes (R$200/h = R$8k de valor)"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Erros de Precificacao -->
+      <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> 5 Erros Fatais de Precificacao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Competir por preco baixo:</strong> Corrida para o fundo que ninguem vence</p>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Preco baseado em custo:</strong> Ignora o valor para o cliente</p>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Descontos constantes:</strong> Treina audiencia a esperar promocao</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Preco unico para todos:</strong> Perde quem pagaria mais e quem pagaria menos</p>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="text-red-400">✗</span>
+              <p class="text-neutral-300 text-sm"><strong class="text-white">Nao comunicar valor:</strong> Cliente ve preco, nao ve retorno</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Referencia -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Referencia de Precos por Tipo de Produto
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Tipo</th>
+                <th class="text-left py-2 text-purple-400">Faixa Iniciante</th>
+                <th class="text-left py-2 text-purple-400">Faixa Expert</th>
+                <th class="text-left py-2 text-purple-400">Premium</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Ebook</td>
+                <td class="py-3">R$19-47</td>
+                <td class="py-3">R$47-97</td>
+                <td class="py-3">R$97-197</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Curso Online</td>
+                <td class="py-3">R$197-497</td>
+                <td class="py-3">R$497-1.497</td>
+                <td class="py-3">R$1.497-4.997</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Mentoria Grupo</td>
+                <td class="py-3">R$497-997/mes</td>
+                <td class="py-3">R$997-2.997/mes</td>
+                <td class="py-3">R$2.997-9.997/mes</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Consultoria 1:1</td>
+                <td class="py-3">R$200-500/hora</td>
+                <td class="py-3">R$500-1.500/hora</td>
+                <td class="py-3">R$1.500-5.000/hora</td>
+              </tr>
+              <tr>
+                <td class="py-3">Comunidade</td>
+                <td class="py-3">R$47-97/mes</td>
+                <td class="py-3">R$97-297/mes</td>
+                <td class="py-3">R$297-997/mes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Se <strong class="text-white">ninguem reclama do preco</strong>, provavelmente esta baixo demais. A proporcao saudavel e: 80% compram sem questionar, 15% negociam/pedem desconto, 5% acham caro. Se 100% acha barato, <strong class="text-white">suba o preco</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Plano de Monetizacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">estruturar seu plano</strong>. Voce vai criar um mapa completo de monetizacao para os proximos 12 meses.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para criar seu <strong class="text-white">plano de monetizacao completo</strong>. Inclui revenue plan (fontes de receita), product roadmap (cronograma de produtos), launch calendar (calendario de lancamentos) e financial projections (projecoes financeiras).
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem plano, voce <strong class="text-white">reage ao mercado</strong> em vez de construir estrategicamente. O plano de monetizacao e seu <strong class="text-white">GPS financeiro</strong> - mostra onde voce esta, para onde vai e como chegar la.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Revenue plan, product roadmap, launch calendar, financial projections, metas SMART.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Seu Plano de Monetizacao 12 Meses
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Complete cada secao para construir seu mapa de monetizacao estrategico.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Secao 1: Revenue Streams -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">1. REVENUE STREAMS - Suas Fontes de Receita</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste todas as formas que voce pode gerar receita (atuais e futuras):</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Produtos Digitais:</p>
+                <div class="space-y-2">
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Servicos:</p>
+                <div class="space-y-2">
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Recorrencia:</p>
+                <div class="space-y-2">
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Parcerias:</p>
+                <div class="space-y-2">
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 2: Product Ladder -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">2. PRODUCT LADDER - Sua Escada de Produtos</p>
+            <p class="text-neutral-400 text-sm mb-3">Defina um produto para cada nivel da escada:</p>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-3">
+                <span class="flex-shrink-0 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GRATIS</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-3">
+                <span class="flex-shrink-0 px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">R$47-97</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-3">
+                <span class="flex-shrink-0 px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded">R$297-997</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-3">
+                <span class="flex-shrink-0 px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">R$2k+</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 3: Launch Calendar -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">3. LAUNCH CALENDAR - Calendario de Lancamentos</p>
+            <p class="text-neutral-400 text-sm mb-3">Planeje seus lancamentos para os proximos 12 meses:</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div>
+                <p class="text-neutral-500 text-xs mb-1">Q1 (Jan-Mar)</p>
+                <div class="h-16 bg-dark-700/50 rounded border border-dark-600 p-2">
+                  <div class="h-full"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-1">Q2 (Abr-Jun)</p>
+                <div class="h-16 bg-dark-700/50 rounded border border-dark-600 p-2">
+                  <div class="h-full"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-1">Q3 (Jul-Set)</p>
+                <div class="h-16 bg-dark-700/50 rounded border border-dark-600 p-2">
+                  <div class="h-full"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-1">Q4 (Out-Dez)</p>
+                <div class="h-16 bg-dark-700/50 rounded border border-dark-600 p-2">
+                  <div class="h-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 4: Financial Projections -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">4. FINANCIAL PROJECTIONS - Projecoes Financeiras</p>
+            <p class="text-neutral-400 text-sm mb-3">Defina suas metas de faturamento:</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Meta Mensal (Atual):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 flex items-center px-3">
+                  <span class="text-neutral-500">R$</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Meta Mensal (6 meses):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 flex items-center px-3">
+                  <span class="text-neutral-500">R$</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-500 text-xs mb-2">Meta Mensal (12 meses):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 flex items-center px-3">
+                  <span class="text-neutral-500">R$</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-neutral-500 text-xs mb-2">Distribuicao por fonte (12 meses):</p>
+              <div class="grid grid-cols-4 gap-2">
+                <div class="text-center">
+                  <p class="text-xs text-neutral-500">Produtos</p>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600 flex items-center justify-center">
+                    <span class="text-neutral-500 text-sm">%</span>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-neutral-500">Servicos</p>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600 flex items-center justify-center">
+                    <span class="text-neutral-500 text-sm">%</span>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-neutral-500">Recorrencia</p>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600 flex items-center justify-center">
+                    <span class="text-neutral-500 text-sm">%</span>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-neutral-500">Parcerias</p>
+                  <div class="h-8 bg-dark-700/50 rounded border border-dark-600 flex items-center justify-center">
+                    <span class="text-neutral-500 text-sm">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 5: Proxima Acao -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">5. PROXIMA ACAO - Primeiro Passo</p>
+            <p class="text-neutral-400 text-sm mb-3">Qual e a UNICA acao que voce vai executar nos proximos 7 dias?</p>
+            <div class="h-12 bg-dark-700/50 rounded border border-dark-600"></div>
+            <p class="text-neutral-500 text-xs mt-2">Dica: Escolha a acao com maior impacto e menor fricao.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Complete todas as secoes. Revise semanalmente e ajuste conforme aprende. Seu plano deve ser um <strong class="text-white">documento vivo</strong>, nao um papel guardado na gaveta.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist Final -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Validacao do Plano
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho pelo menos 3 fontes de receita planejadas?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Minha product ladder faz sentido (progressao clara)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Os lancamentos estao espacados adequadamente?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">As metas sao ambiciosas mas realistas?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">A proxima acao e especifica e executavel?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho clareza sobre o que fazer primeiro?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Mapa de Monetizacao</strong>
+              <span class="text-neutral-400"> - Revenue streams, product ladder, diversificacao estrategica</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Produtos Digitais</strong>
+              <span class="text-neutral-400"> - Cursos, ebooks, templates, membership e MVP em 7 dias</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Lancamentos e Campanhas</strong>
+              <span class="text-neutral-400"> - 4 fases do lancamento, tipos e execucao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Parcerias e Patrocinios</strong>
+              <span class="text-neutral-400"> - Brand deals, afiliados, media kit e precificacao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Precificacao e Valor</strong>
+              <span class="text-neutral-400"> - Value-based pricing, anchoring, tiers e ROI</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Plano de Monetizacao</strong>
+              <span class="text-neutral-400"> - Revenue plan, product roadmap, launch calendar, projecoes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-5.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-7.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

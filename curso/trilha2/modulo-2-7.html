@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.7 - Gatilho da Consciencia | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2 - Central</a>
+      <span class="mx-2">/</span>
+      <span class="text-blue-400">Modulo 2.7</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 2.7
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔮 Gatilho da Consciencia</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Eleve a consciencia do seu publico sobre problemas e possibilidades. Aprenda a mover pessoas pelos 5 niveis de awareness ate estarem prontas para agir.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Central</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Estrategico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📊 Os 5 Niveis de Consciencia</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Eugene Schwartz revolucionou o marketing ao mapear os <strong class="text-blue-400">5 niveis de consciencia</strong> do consumidor. Entender onde seu publico esta e a chave para criar a mensagem certa no momento certo.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O framework de Eugene Schwartz divide a audiencia em <strong class="text-white">5 niveis de awareness</strong>: Inconsciente, Consciente do Problema, Consciente da Solucao, Consciente do Produto e Mais Consciente. Cada nivel requer uma <strong class="text-white">abordagem diferente</strong> de comunicacao. Falar de produto para quem nao sabe que tem um problema e desperdicar energia.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores fala para <strong class="text-white">apenas um nivel</strong> - geralmente o mais consciente. Isso ignora 80% do mercado potencial. Dominar os niveis permite <strong class="text-white">expandir audiencia</strong>, criar jornadas de nurturing e aumentar drasticamente conversoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Awareness levels, Message-market match, Consciousness ladder, Customer journey mapping.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Niveis em Detalhes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🪜</span> Os 5 Niveis Detalhados
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Nivel 1: Inconsciente</h4>
+              <p class="text-sm text-neutral-400 mb-2">Nao sabe que tem um problema. Vive no piloto automatico.</p>
+              <p class="text-sm text-neutral-300"><strong>Abordagem:</strong> Conteudo educativo, historias que espelham a situacao, perguntas que provocam reflexao.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Nivel 2: Consciente do Problema</h4>
+              <p class="text-sm text-neutral-400 mb-2">Sabe que tem um problema, mas nao conhece solucoes.</p>
+              <p class="text-sm text-neutral-300"><strong>Abordagem:</strong> Validar a dor, amplificar consequencias, introduzir que existem caminhos.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Nivel 3: Consciente da Solucao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Sabe que existem solucoes, mas nao conhece a sua especifica.</p>
+              <p class="text-sm text-neutral-300"><strong>Abordagem:</strong> Comparar abordagens, mostrar diferenciais, educar sobre metodologias.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Nivel 4: Consciente do Produto</h4>
+              <p class="text-sm text-neutral-400 mb-2">Conhece sua solucao especifica, mas ainda nao decidiu comprar.</p>
+              <p class="text-sm text-neutral-300"><strong>Abordagem:</strong> Prova social, garantias, objecoes, demonstracoes, casos de sucesso.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">5</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Nivel 5: Mais Consciente</h4>
+              <p class="text-sm text-neutral-400 mb-2">Ja sabe tudo, so precisa da oferta certa no momento certo.</p>
+              <p class="text-sm text-neutral-300"><strong>Abordagem:</strong> Oferta direta, urgencia real, bonus exclusivos, facilitadores de decisao.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Distribuicao Tipica de Mercado
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">40% Inconscientes</strong> - Maior volume, maior esforco para converter</li>
+          <li>• <strong class="text-white">25% Conscientes do Problema</strong> - Frustrados buscando direcao</li>
+          <li>• <strong class="text-white">20% Conscientes da Solucao</strong> - Comparando opcoes ativamente</li>
+          <li>• <strong class="text-white">10% Conscientes do Produto</strong> - Considerando sua oferta</li>
+          <li>• <strong class="text-white">5% Mais Conscientes</strong> - Prontos para comprar agora</li>
+        </ul>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie uma <strong class="text-white">matriz de conteudo</strong> com 5 colunas (uma para cada nivel). Para cada nivel, liste 5-10 temas relevantes. Isso garante que voce nunca fale so para quem ja esta pronto para comprar.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">💡 Despertar Problemas Adormecidos</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        As pessoas nao compram solucoes para problemas que nao sabem que tem. A arte de <strong class="text-blue-400">despertar consciencia</strong> e fazer o publico perceber dores que estavam invisiveis.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Despertar problemas adormecidos e a habilidade de fazer seu publico <strong class="text-white">perceber dores que nao sabia que tinha</strong>. Nao e inventar problemas - e iluminar consequencias reais que passavam despercebidas. E o trabalho de trazer para a consciencia o que estava no subconsciente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              40% do seu mercado potencial e <strong class="text-white">inconsciente</strong>. Se voce so fala para quem ja sabe que precisa de ajuda, ignora a maior fatia do bolo. Alem disso, despertar problemas cria <strong class="text-white">conexao profunda</strong> - a pessoa sente que voce a entende como ninguem.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Problem agitation, Wake-up content, Future pacing negativo, Consequencias invisiveis.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecnicas de Despertar -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔔</span> Tecnicas de Despertar Consciencia
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Future Pacing Negativo</p>
+            <p class="text-neutral-300 text-sm">Mostrar onde a pessoa estara em 1, 5, 10 anos se continuar no caminho atual.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Daqui a 5 anos, se nada mudar, onde voce estara?"</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Espelhamento de Sintomas</p>
+            <p class="text-neutral-300 text-sm">Descrever sintomas que a pessoa sente mas nunca conectou a um problema maior.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Voce sente cansaco no domingo pensando na segunda? Isso tem nome."</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Consequencias Invisiveis</p>
+            <p class="text-neutral-300 text-sm">Revelar custos ocultos de comportamentos normalizados.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Cada hora de scroll custa R$47 em produtividade perdida."</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Historia de Identificacao</p>
+            <p class="text-neutral-300 text-sm">Contar a historia de alguem que era igual a pessoa - ate descobrir o problema.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Maria achava normal trabalhar 14h por dia. Ate que..."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplo de Sequencia -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Exemplo: Sequencia de Despertar
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-1">Passo 1: Sintoma</p>
+            <p class="text-neutral-300 text-sm">"Voce sente que o dia acaba e nao fez nada importante?"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-1">Passo 2: Normalizacao</p>
+            <p class="text-neutral-300 text-sm">"Milhoes de pessoas sentem isso. E tao comum que parece normal."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-1">Passo 3: Revelacao</p>
+            <p class="text-neutral-300 text-sm">"Mas nao e normal. Isso tem um nome: deficit de prioridade."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-1">Passo 4: Consequencia</p>
+            <p class="text-neutral-300 text-sm">"Se nao for tratado, leva a burnout em media em 2-3 anos."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Liste os <strong class="text-white">10 sintomas mais comuns</strong> que seu publico sente mas ignora. Depois, conecte cada sintoma a um problema maior que voce resolve. Esse e seu arsenal de conteudo para despertar.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🌅 Revelar Possibilidades</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Alem de despertar problemas, e preciso <strong class="text-blue-400">expandir o horizonte de possibilidades</strong>. Mostrar futuros que a pessoa nem sabia serem possiveis e o combustivel da transformacao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Revelar possibilidades e a arte de mostrar <strong class="text-white">futuros e resultados que o publico nao sabia serem alcanccaveis</strong>. Nao e apenas prometer resultados - e expandir a nocao do que e possivel. Quando a pessoa ve um novo horizonte, a motivacao para agir dispara.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pessoas nao agem por objetivos que consideram <strong class="text-white">impossiveis</strong>. Antes de vender a solucao, voce precisa vender a crenca de que o resultado e alcancavel. <strong class="text-white">Vision casting</strong> e o que separa criadores que inspiram de criadores que informam.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Vision casting, Future pacing positivo, Possibility expansion, "E se...", Proof of concept.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecnicas de Revelar Possibilidades -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✨</span> Tecnicas de Vision Casting
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">1. "E Se..." Poderoso</p>
+            <p class="text-neutral-300 text-sm">Convide a audiencia a imaginar uma realidade alternativa.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"E se voce acordasse amanha sem ansiedade sobre dinheiro?"</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">2. Future Pacing Positivo</p>
+            <p class="text-neutral-300 text-sm">Descreva em detalhes vividos como sera a vida apos a transformacao.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Imagine abrir o notebook na segunda e sentir empolgacao genuina..."</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">3. Case de Possibilidade</p>
+            <p class="text-neutral-300 text-sm">Mostre alguem que estava onde a audiencia esta e chegou onde ela quer.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Joao era CLT ganhando 3k. 18 meses depois, fatura 50k/mes como freelancer."</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">4. Ponte de Crenca</p>
+            <p class="text-neutral-300 text-sm">Mostre os passos logicos que tornam o resultado inevitavel.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Se cada post trouxer 10 seguidores, em 1 ano voce tera 3.650 novos seguidores."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao: Problema vs Possibilidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">⚖️ Problema vs Possibilidade - Quando Usar Cada</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Situacao</th>
+                <th class="text-left py-2 text-blue-400">Foco em Problema</th>
+                <th class="text-left py-2 text-blue-400">Foco em Possibilidade</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Nivel Inconsciente</td>
+                <td class="py-3">✅ Despertar dor</td>
+                <td class="py-3">❌ Ainda nao conecta</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Nivel Consciente do Problema</td>
+                <td class="py-3">✅ Validar e amplificar</td>
+                <td class="py-3">✅ Introduzir esperanca</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Nivel Consciente da Solucao</td>
+                <td class="py-3">⚠️ Moderado</td>
+                <td class="py-3">✅ Mostrar diferenciais</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Nivel Consciente do Produto</td>
+                <td class="py-3">⚠️ So para objecoes</td>
+                <td class="py-3">✅ Visao do resultado</td>
+              </tr>
+              <tr>
+                <td class="py-3">Mais Consciente</td>
+                <td class="py-3">❌ Ja sabe</td>
+                <td class="py-3">✅ Reforcar decisao</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie um <strong class="text-white">"Vision Statement"</strong> de 2-3 paragrafos descrevendo a vida ideal do seu cliente apos a transformacao. Use detalhes sensoriais. Esse texto sera a base de todo seu conteudo de possibilidade.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔄 Reframe e Perspectiva</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        As vezes o problema nao e a situacao, mas <strong class="text-blue-400">como a pessoa enxerga a situacao</strong>. Reframing e a arte de mudar a moldura, transformando obstaculos em oportunidades.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Reframe e a tecnica de <strong class="text-white">mudar a perspectiva</strong> atraves da qual uma situacao e vista. Nao e negar a realidade - e mostrar um angulo diferente que muda completamente o significado. Um obstaculo pode virar vantagem. Uma fraqueza pode virar diferencial.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muitas vezes o publico esta preso em <strong class="text-white">crencas limitantes</strong> que impedem acao. Reframing quebra essas barreiras sem confronto direto. Alem disso, reframes sao altamente <strong class="text-white">compartilhaveis</strong> - aquele "momento de insight" que as pessoas querem passar adiante.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Perspective shift, Meaning reframe, Context change, "Na verdade...", Belief interruption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Reframe -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> 5 Tipos de Reframe
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">1. Reframe de Significado</p>
+            <p class="text-neutral-300 text-sm">Muda o que algo significa.</p>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="bg-red-900/20 border border-red-500/20 rounded p-2">
+                <p class="text-red-400 text-xs">Antes:</p>
+                <p class="text-neutral-400 text-xs">"Sou muito devagar"</p>
+              </div>
+              <div class="bg-green-900/20 border border-green-500/20 rounded p-2">
+                <p class="text-green-400 text-xs">Depois:</p>
+                <p class="text-neutral-400 text-xs">"Sou metodico e evito erros"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">2. Reframe de Contexto</p>
+            <p class="text-neutral-300 text-sm">Muda quando/onde algo e verdade.</p>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="bg-red-900/20 border border-red-500/20 rounded p-2">
+                <p class="text-red-400 text-xs">Antes:</p>
+                <p class="text-neutral-400 text-xs">"Sou teimoso demais"</p>
+              </div>
+              <div class="bg-green-900/20 border border-green-500/20 rounded p-2">
+                <p class="text-green-400 text-xs">Depois:</p>
+                <p class="text-neutral-400 text-xs">"Sou persistente quando importa"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">3. Reframe de Comparacao</p>
+            <p class="text-neutral-300 text-sm">Muda com o que e comparado.</p>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="bg-red-900/20 border border-red-500/20 rounded p-2">
+                <p class="text-red-400 text-xs">Antes:</p>
+                <p class="text-neutral-400 text-xs">"E muito caro"</p>
+              </div>
+              <div class="bg-green-900/20 border border-green-500/20 rounded p-2">
+                <p class="text-green-400 text-xs">Depois:</p>
+                <p class="text-neutral-400 text-xs">"Custa menos que 2 cafes por dia"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">4. Reframe Temporal</p>
+            <p class="text-neutral-300 text-sm">Muda a janela de tempo considerada.</p>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="bg-red-900/20 border border-red-500/20 rounded p-2">
+                <p class="text-red-400 text-xs">Antes:</p>
+                <p class="text-neutral-400 text-xs">"Nao tenho tempo para aprender"</p>
+              </div>
+              <div class="bg-green-900/20 border border-green-500/20 rounded p-2">
+                <p class="text-green-400 text-xs">Depois:</p>
+                <p class="text-neutral-400 text-xs">"1h por dia = 365h em 1 ano"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">5. Reframe de Identidade</p>
+            <p class="text-neutral-300 text-sm">Muda quem a pessoa acredita ser.</p>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="bg-red-900/20 border border-red-500/20 rounded p-2">
+                <p class="text-red-400 text-xs">Antes:</p>
+                <p class="text-neutral-400 text-xs">"Nao sou criativo"</p>
+              </div>
+              <div class="bg-green-900/20 border border-green-500/20 rounded p-2">
+                <p class="text-green-400 text-xs">Depois:</p>
+                <p class="text-neutral-400 text-xs">"Todos sao criativos - apenas de formas diferentes"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula de Reframe -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔧</span> Formula "Na Verdade..."
+        </h3>
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-neutral-300 mb-3">
+            <strong class="text-cyan-400">Estrutura:</strong> "[Crenca limitante]... Na verdade, [nova perspectiva]."
+          </p>
+          <div class="space-y-2 text-sm">
+            <p class="text-neutral-400"><em>"Voce acha que e tarde demais para comecar... Na verdade, cada dia que passa voce tem mais experiencia de vida para aplicar."</em></p>
+            <p class="text-neutral-400"><em>"Voce pensa que falta de seguidores e um problema... Na verdade, e uma vantagem - voce pode testar sem julgamento."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Liste as <strong class="text-white">5 maiores objecoes ou crencas limitantes</strong> do seu publico. Para cada uma, crie 3 reframes diferentes. Voce tera <strong class="text-white">15 conteudos de alto impacto</strong> prontos.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">⚡ Urgencia Real vs Artificial</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Urgencia e um dos gatilhos mais poderosos - e mais mal utilizados. A diferenca entre <strong class="text-blue-400">urgencia real e artificial</strong> determina se voce constroi confianca ou a destroi.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Urgencia real e baseada em <strong class="text-white">consequencias verdadeiras</strong> de nao agir. Urgencia artificial e criada por escassez falsa ou prazos inventados. A primeira constroi confianca e acelera decisoes genuinas. A segunda funciona uma vez mas <strong class="text-white">destroi reputacao</strong> a longo prazo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O mercado esta saturado de urgencia falsa. O publico esta <strong class="text-white">imune e cinico</strong>. Quando voce domina urgencia real, se destaca como alguem genuino. Alem disso, urgencia real nao precisa de truques - ela existe naturalmente quando voce sabe onde encontrar.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Cost of delay, Natural deadlines, Opportunity cost, Timing real, Consequencias compostas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao Real vs Artificial -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">⚖️ Urgencia Real vs Artificial</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+            <h4 class="text-green-400 font-semibold mb-3">✅ Urgencia Real</h4>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• Vagas limitadas por capacidade real</li>
+              <li>• Preco de lancamento por tempo definido</li>
+              <li>• Custo de oportunidade documentado</li>
+              <li>• Consequencias comprovadas de atraso</li>
+              <li>• Timing de mercado (tendencias, sazonalidade)</li>
+              <li>• Bonus por tempo vinculado a custos</li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <h4 class="text-red-400 font-semibold mb-3">❌ Urgencia Artificial</h4>
+            <ul class="space-y-2 text-sm text-neutral-300">
+              <li>• "Ultimas vagas" renovadas infinitamente</li>
+              <li>• Contagem regressiva que reseta</li>
+              <li>• Escassez de produto digital ilimitado</li>
+              <li>• Prazos arbitrarios sem justificativa</li>
+              <li>• "So hoje" que vira "so amanha"</li>
+              <li>• Bonus "por tempo limitado" permanentes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fontes de Urgencia Real -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔍</span> Fontes de Urgencia Real
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Cost of Delay</p>
+            <p class="text-neutral-300 text-sm">Quanto custa cada dia, semana ou mes de inacao?</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Cada mes sem otimizar = R$2.000 perdidos em trafego pago"</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Janelas de Oportunidade</p>
+            <p class="text-neutral-300 text-sm">Tendencias, mudancas de algoritmo, sazonalidade.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"O TikTok ainda favorece novatos - em 2 anos, nao mais"</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Efeito Composto</p>
+            <p class="text-neutral-300 text-sm">Como atraso agora multiplica problemas depois.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Cada ano de atraso = 7 anos a mais ate a aposentadoria"</em></p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Timing Biologico/Vital</p>
+            <p class="text-neutral-300 text-sm">Idade, energia, fases da vida que nao voltam.</p>
+            <p class="text-neutral-500 text-xs mt-2"><em>"Aos 50, voce tera metade da energia que tem hoje"</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Pesquisa sobre Urgencia
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">83% dos consumidores</strong> reconhecem urgencia falsa e perdem confianca na marca</li>
+          <li>• Urgencia real aumenta conversao em <strong class="text-white">332%</strong> vs sem urgencia</li>
+          <li>• Urgencia artificial funciona <strong class="text-white">47% menos</strong> em recompra</li>
+          <li>• <strong class="text-white">72% das pessoas</strong> pesquisam se a urgencia e verdadeira antes de comprar</li>
+        </ul>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de criar urgencia, pergunte: <strong class="text-white">"Isso e verdade? Posso provar?"</strong> Se nao puder responder sim para ambas, reformule. A regra de ouro: <strong class="text-white">nunca crie urgencia que voce nao possa defender publicamente</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Elevator de Consciencia</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-blue-400">colocar em pratica</strong>. Voce vai criar uma sequencia de conteudo que leva uma pessoa do nivel 1 (Inconsciente) ao nivel 5 (Mais Consciente).
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O Elevator de Consciencia e uma <strong class="text-white">sequencia estrategica de 5 conteudos</strong>, cada um projetado para mover a pessoa de um nivel de awareness para o proximo. E o mapa completo da jornada de transformacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ter essa sequencia pronta significa <strong class="text-white">nunca mais criar conteudo aleatorio</strong>. Cada peca tem um proposito claro na jornada do cliente. Isso maximiza conversao porque voce encontra pessoas em qualquer nivel e as leva ate o final.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content ladder, Awareness journey, Nurture sequence, Level-appropriate messaging.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Crie Seu Elevator de Consciencia
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Para o seu nicho e oferta principal, crie 1 conteudo para cada nivel de consciencia.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-bold">1</span>
+              <p class="text-red-400 font-semibold">Nivel 1: Inconsciente → Consciente do Problema</p>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">Objetivo: Fazer a pessoa perceber que tem um problema que nao sabia.</p>
+            <div class="space-y-2">
+              <p class="text-neutral-500 text-xs">Titulo/Hook do conteudo:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              <p class="text-neutral-500 text-xs">Angulo principal:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold">2</span>
+              <p class="text-orange-400 font-semibold">Nivel 2: Consciente do Problema → Consciente da Solucao</p>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">Objetivo: Mostrar que existem caminhos para resolver o problema.</p>
+            <div class="space-y-2">
+              <p class="text-neutral-500 text-xs">Titulo/Hook do conteudo:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              <p class="text-neutral-500 text-xs">Angulo principal:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-bold">3</span>
+              <p class="text-yellow-400 font-semibold">Nivel 3: Consciente da Solucao → Consciente do Produto</p>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">Objetivo: Apresentar sua solucao especifica como a melhor opcao.</p>
+            <div class="space-y-2">
+              <p class="text-neutral-500 text-xs">Titulo/Hook do conteudo:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              <p class="text-neutral-500 text-xs">Angulo principal:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold">4</span>
+              <p class="text-green-400 font-semibold">Nivel 4: Consciente do Produto → Mais Consciente</p>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">Objetivo: Eliminar objecoes e construir confianca final.</p>
+            <div class="space-y-2">
+              <p class="text-neutral-500 text-xs">Titulo/Hook do conteudo:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              <p class="text-neutral-500 text-xs">Angulo principal:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">5</span>
+              <p class="text-blue-400 font-semibold">Nivel 5: Mais Consciente → Acao</p>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">Objetivo: Oferta direta com urgencia real e facilitadores.</p>
+            <div class="space-y-2">
+              <p class="text-neutral-500 text-xs">Titulo/Hook do conteudo:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              <p class="text-neutral-500 text-xs">Angulo principal:</p>
+              <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-blue-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-blue-400">Entrega:</strong> Complete todos os 5 niveis. Depois, <strong class="text-white">produza e publique</strong> cada conteudo em sequencia ao longo de 2 semanas. Observe como pessoas diferentes respondem a conteudos diferentes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Exemplo Completo -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Exemplo: Elevator para Curso de Copywriting
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-red-400 font-semibold text-sm">Nivel 1:</p>
+            <p class="text-neutral-300 text-sm">"Por que seus posts tem curtidas mas zero vendas" (despertar o problema)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-orange-400 font-semibold text-sm">Nivel 2:</p>
+            <p class="text-neutral-300 text-sm">"3 tipos de texto que convertem: qual voce usa?" (mostrar solucoes)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-yellow-400 font-semibold text-sm">Nivel 3:</p>
+            <p class="text-neutral-300 text-sm">"O metodo AIDA adaptado para Instagram" (apresentar seu framework)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-green-400 font-semibold text-sm">Nivel 4:</p>
+            <p class="text-neutral-300 text-sm">"Como a Ana saiu de 0 para 47 vendas em 30 dias" (prova social)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-blue-400 font-semibold text-sm">Nivel 5:</p>
+            <p class="text-neutral-300 text-sm">"Ultimas 24h: Curso de Copywriting com 50% off" (oferta direta)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist de Qualidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist do Elevator
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Cada conteudo tem objetivo claro?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Transicao entre niveis e suave?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Linguagem adaptada a cada nivel?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">CTA conduz ao proximo nivel?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Urgencia real no nivel 5?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Sequencia pode ser consumida em ordem?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">5 Niveis de Consciencia</strong>
+              <span class="text-neutral-400"> - Framework de Schwartz para mapear e mover audiencias</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Despertar Problemas</strong>
+              <span class="text-neutral-400"> - Tecnicas para iluminar dores invisiveis</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Revelar Possibilidades</strong>
+              <span class="text-neutral-400"> - Vision casting e future pacing positivo</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Reframe e Perspectiva</strong>
+              <span class="text-neutral-400"> - 5 tipos de mudanca de perspectiva</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Urgencia Real</strong>
+              <span class="text-neutral-400"> - Cost of delay e consequencias genuinas</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Elevator de Consciencia</strong>
+              <span class="text-neutral-400"> - Sequencia de 5 conteudos estrategicos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-6.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-2-8.html" class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FGMD - Formacao em Gatilhos Mentais no Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="curso/trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="curso/trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-gradient-to-br from-yellow-900/20 via-dark-900 to-dark-900 py-20 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block px-4 py-1 bg-yellow-500/20 text-yellow-400 text-sm font-semibold rounded-full mb-6">
+        FORMACAO COMPLETA
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        <span class="text-yellow-400">🧠 FGMD</span>
+      </h1>
+      <p class="text-2xl sm:text-3xl font-semibold text-neutral-200 mb-4">
+        Formacao em Gatilhos Mentais no Digital
+      </p>
+      <p class="text-lg text-neutral-400 max-w-2xl mx-auto mb-8">
+        Domine a comunicacao que transforma. Aprenda os 10 gatilhos mentais que fazem a diferenca entre ser ignorado e ser impossivel de ignorar.
+      </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="bg-dark-800/50 rounded-xl p-4 border border-dark-600">
+          <div class="text-3xl font-bold text-yellow-400">22</div>
+          <div class="text-sm text-neutral-400">Modulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-xl p-4 border border-dark-600">
+          <div class="text-3xl font-bold text-yellow-400">132</div>
+          <div class="text-sm text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-xl p-4 border border-dark-600">
+          <div class="text-3xl font-bold text-yellow-400">3</div>
+          <div class="text-sm text-neutral-400">Trilhas</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-xl p-4 border border-dark-600">
+          <div class="text-3xl font-bold text-yellow-400">10</div>
+          <div class="text-sm text-neutral-400">Gatilhos</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Trilhas Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-8 text-center">Escolha sua Trilha</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Trilha 1 -->
+        <a href="curso/trilha1/index.html" class="group bg-dark-800 rounded-2xl border border-dark-600 hover:border-emerald-500/50 transition-all overflow-hidden">
+          <div class="bg-gradient-to-br from-emerald-900/40 to-dark-800 p-6">
+            <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-3">
+              TRILHA 1
+            </span>
+            <h3 class="text-xl font-bold text-emerald-400 mb-2">Fundamentos</h3>
+            <p class="text-neutral-400 text-sm">Base teorica e preparacao para dominar os gatilhos</p>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div class="text-2xl font-bold text-emerald-400">5</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-emerald-400">30</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-400">
+              <li>• O Jogo Mental do Digital</li>
+              <li>• Aplicacao por Formato</li>
+              <li>• Metricas e Diagnostico</li>
+              <li>• Fundamentos de Neurociencia</li>
+              <li>• Preparacao para a Jornada</li>
+            </ul>
+            <div class="mt-4 text-emerald-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+              Comecar Trilha →
+            </div>
+          </div>
+        </a>
+
+        <!-- Trilha 2 -->
+        <a href="curso/trilha2/index.html" class="group bg-dark-800 rounded-2xl border border-dark-600 hover:border-blue-500/50 transition-all overflow-hidden">
+          <div class="bg-gradient-to-br from-blue-900/40 to-dark-800 p-6">
+            <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-3">
+              TRILHA 2
+            </span>
+            <h3 class="text-xl font-bold text-blue-400 mb-2">Central</h3>
+            <p class="text-neutral-400 text-sm">Os 10 gatilhos mentais em profundidade</p>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div class="text-2xl font-bold text-blue-400">10</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-blue-400">60</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-400">
+              <li>• Atencao - Parar o Scroll</li>
+              <li>• Retencao - Fazer Ficar</li>
+              <li>• Compreensao - Fazer Entender</li>
+              <li>• Identificacao - Fazer Conectar</li>
+              <li>• + 6 gatilhos essenciais</li>
+            </ul>
+            <div class="mt-4 text-blue-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+              Comecar Trilha →
+            </div>
+          </div>
+        </a>
+
+        <!-- Trilha 3 -->
+        <a href="curso/trilha3/index.html" class="group bg-dark-800 rounded-2xl border border-dark-600 hover:border-purple-500/50 transition-all overflow-hidden">
+          <div class="bg-gradient-to-br from-purple-900/40 to-dark-800 p-6">
+            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-3">
+              TRILHA 3
+            </span>
+            <h3 class="text-xl font-bold text-purple-400 mb-2">Avancada</h3>
+            <p class="text-neutral-400 text-sm">Integracao, aplicacao avancada e maestria</p>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <div class="text-2xl font-bold text-purple-400">7</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-400">42</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-neutral-400">
+              <li>• Integracao dos 10 Gatilhos</li>
+              <li>• Gatilhos em Lancamentos</li>
+              <li>• Funis Evergreen</li>
+              <li>• Comunidades Pagas</li>
+              <li>• Vendas High Ticket</li>
+            </ul>
+            <div class="mt-4 text-purple-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+              Comecar Trilha →
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Os 10 Gatilhos -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-8 text-center">Os 10 Gatilhos Mentais</h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">👁️</div>
+          <div class="font-semibold text-sm">Atencao</div>
+          <div class="text-xs text-neutral-500">Parar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">⏱️</div>
+          <div class="font-semibold text-sm">Retencao</div>
+          <div class="text-xs text-neutral-500">Ficar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">💡</div>
+          <div class="font-semibold text-sm">Compreensao</div>
+          <div class="text-xs text-neutral-500">Entender</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">🪞</div>
+          <div class="font-semibold text-sm">Identificacao</div>
+          <div class="text-xs text-neutral-500">Conectar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">🎯</div>
+          <div class="font-semibold text-sm">Engajamento</div>
+          <div class="text-xs text-neutral-500">Ativar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">🏆</div>
+          <div class="font-semibold text-sm">Autoridade</div>
+          <div class="text-xs text-neutral-500">Legitimar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <div class="font-semibold text-sm">Consciencia</div>
+          <div class="text-xs text-neutral-500">Despertar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">👥</div>
+          <div class="font-semibold text-sm">Pertencimento</div>
+          <div class="text-xs text-neutral-500">Permanecer</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">🔄</div>
+          <div class="font-semibold text-sm">Transformacao</div>
+          <div class="text-xs text-neutral-500">Avancar</div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-4 border border-dark-600 text-center">
+          <div class="text-2xl mb-2">➡️</div>
+          <div class="font-semibold text-sm">CTA</div>
+          <div class="text-xs text-neutral-500">Mover</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="text-center">
+      <div class="bg-gradient-to-br from-yellow-900/30 via-dark-800 to-dark-800 rounded-2xl border border-yellow-500/30 p-8 md:p-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Pronto para dominar os gatilhos?</h2>
+        <p class="text-neutral-400 mb-8 max-w-xl mx-auto">
+          Comece pela Trilha 1 para construir uma base solida, ou va direto para a Trilha 2 se ja conhece os fundamentos.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="curso/trilha1/index.html" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">
+            Comecar pelos Fundamentos
+          </a>
+          <a href="curso/trilha2/index.html" class="px-8 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg font-semibold transition-colors">
+            Ir para os 10 Gatilhos
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

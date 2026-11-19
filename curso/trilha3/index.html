@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha 3 - Avancada | FGMD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A855F7',
+                        dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .dark body { background-color: #111827; }
+        .topic-explanation { display: none; }
+        .topic-explanation.active { display: block; }
+
+        html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+        html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+        html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+        html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+        html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+        html:not(.dark) .text-neutral-100 { color: #1f2937; }
+        html:not(.dark) .text-neutral-300 { color: #4b5563; }
+        html:not(.dark) .text-neutral-400 { color: #6b7280; }
+        html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+    <!-- Navigation Global -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <div class="flex items-center space-x-4">
+                    <a href="../../index.html" class="flex items-center space-x-2 text-purple-400 hover:text-purple-300">
+                        <span class="text-2xl">🧠</span>
+                        <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+                    </a>
+                    <span class="text-neutral-600">|</span>
+                    <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+                </div>
+
+                <div class="flex items-center space-x-1 sm:space-x-2">
+                    <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10">
+                        <span class="sm:hidden">T1</span>
+                        <span class="hidden sm:inline">Fundamentos</span>
+                    </a>
+                    <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10">
+                        <span class="sm:hidden">T2</span>
+                        <span class="hidden sm:inline">Central</span>
+                    </a>
+                    <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+                        <span class="sm:hidden">T3</span>
+                        <span class="hidden sm:inline">Avancada</span>
+                    </a>
+                    <button onclick="toggleTheme()" class="ml-2 p-2 rounded-lg hover:bg-dark-700 transition-colors">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+                TRILHA 3
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Avancada - Maestria em Gatilhos</h1>
+            <p class="text-lg text-neutral-400 max-w-3xl">
+                Domine a aplicacao estrategica dos gatilhos mentais. Combine tecnicas, escale producao, otimize resultados e monetize sua audiencia com maestria.
+            </p>
+
+            <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+                <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+                    <div class="text-xl font-bold text-purple-400">7</div>
+                    <div class="text-xs text-neutral-400">Modulos</div>
+                </div>
+                <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+                    <div class="text-xl font-bold text-purple-400">42</div>
+                    <div class="text-xs text-neutral-400">Topicos</div>
+                </div>
+                <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+                    <div class="text-xl font-bold text-purple-400">~7h</div>
+                    <div class="text-xs text-neutral-400">Duracao</div>
+                </div>
+                <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+                    <div class="text-xl font-bold text-purple-400">🎯</div>
+                    <div class="text-xs text-neutral-400">Avancado</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modulos -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Modulo 3.1 - Combinacao de Gatilhos -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.1</span>
+                    <span class="text-xs text-neutral-500">~60 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">🔗 Combinacao de Gatilhos</h3>
+                <p class="text-neutral-400 text-sm">Aprenda a combinar multiplos gatilhos para criar conteudo exponencialmente mais poderoso.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">🧬 A Ciencia da Sinergia</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como gatilhos combinados criam efeitos multiplicadores, nao apenas somativos. A neurociencia por tras da sinergia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Combinacoes estrategicas podem triplicar o impacto usando os mesmos elementos.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Efeito multiplicador, Stacking de gatilhos, Sinergia neural, Amplificacao emocional</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">🎯 Combinacoes de Alto Impacto</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">As 10 combinacoes mais poderosas de gatilhos e quando usar cada uma.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ter combinacoes prontas acelera criacao e garante impacto.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Atencao + Identificacao, Autoridade + Transformacao, Consciencia + CTA, Retencao + Engajamento</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">⚠️ Combinacoes a Evitar</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Gatilhos que se anulam ou criam confusao quando usados juntos.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evitar combinacoes toxicas e tao importante quanto usar as certas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Conflito de mensagem, Sobrecarga cognitiva, Dissonancia emocional, Cancelamento de efeito</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">🔄 Sequenciamento Temporal</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A ordem em que os gatilhos aparecem muda dramaticamente o resultado. Aprenda a sequencia ideal.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mesmos gatilhos em ordem diferente = resultados completamente diferentes.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sequencia de abertura, Meio nutritivo, Fechamento persuasivo, Timing de transicao</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">📊 Dosagem e Intensidade</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Quanto de cada gatilho usar. A diferenca entre impacto e saturacao.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Gatilhos em excesso causam fadiga; na dose certa, criam magia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Ponto de saturacao, Dose minima efetiva, Equilibrio de intensidade, Espacamento</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Matriz de Combinacao</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar sua matriz personalizada de combinacoes para seu nicho e objetivos.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma matriz pronta acelera criacao e garante consistencia de resultados.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Matriz 10x10, Combinacoes por objetivo, Templates de sinergia, Playbook pessoal</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-1')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-1.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.2 - Estrategias por Plataforma -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.2</span>
+                    <span class="text-xs text-neutral-500">~65 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">📱 Estrategias por Plataforma</h3>
+                <p class="text-neutral-400 text-sm">Adapte os gatilhos para cada rede social: Instagram, TikTok, YouTube, LinkedIn e mais.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">📸 Instagram - Feed, Stories e Reels</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Estrategias especificas para cada formato do Instagram, considerando comportamento e algoritmo.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Instagram e a plataforma mais versatil - domina-la multiplica alcance.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Carousel hooks, Stories sequencing, Reels retention, Feed aesthetics, Algorithm signals</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">🎵 TikTok - Viralidade Programada</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O algoritmo do TikTok e como otimizar gatilhos para maximizar distribuicao.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">TikTok oferece o maior potencial de alcance organico atualmente.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Watch time, Loop retention, Trend hijacking, Sound strategy, For You optimization</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">▶️ YouTube - Shorts e Long-Form</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Estrategias para Shorts virais e videos longos que constroem autoridade.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">YouTube e o segundo maior buscador do mundo e oferece monetizacao direta.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Thumbnail psychology, Title optimization, Retention graphs, Session time, Suggested videos</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">💼 LinkedIn - Autoridade B2B</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Gatilhos adaptados para contexto profissional e decisores de negocio.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">LinkedIn tem o maior valor por lead de todas as plataformas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Thought leadership, Document posts, Comment strategy, Network effects, DM funnels</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">🐦 X/Twitter e Threads</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Estrategias para plataformas baseadas em texto e conversacao.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Texto bem escrito ainda e a forma mais rapida de construir autoridade.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Thread structure, Hook tweets, Quote tweet strategy, Engagement baiting, Viral patterns</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Plano Multiplataforma</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar estrategia integrada para distribuir conteudo em multiplas plataformas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Multiplataforma multiplica alcance sem multiplicar trabalho.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content repurposing, Platform-native adaptation, Cross-promotion, Unified strategy</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-2')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-2.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.3 - Funis de Conteudo -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.3</span>
+                    <span class="text-xs text-neutral-500">~60 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">🎯 Funis de Conteudo</h3>
+                <p class="text-neutral-400 text-sm">Crie jornadas completas que levam o espectador de desconhecido a cliente.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">🔺 Arquitetura do Funil</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Os estagios do funil de conteudo: Descoberta, Consideracao, Decisao, Retencao.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem funil, voce produz conteudo aleatorio. Com funil, cada peca tem proposito.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">TOFU, MOFU, BOFU, Content mapping, Journey stages</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">🌊 Conteudo de Descoberta (TOFU)</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conteudo que atrai novos espectadores atraves de alcance e viralidade.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem TOFU, o funil seca. E a porta de entrada para novos leads.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Viral content, Broad appeal, Problem awareness, Hook-heavy, Shareable</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">🔥 Conteudo de Nutricao (MOFU)</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conteudo que aprofunda relacionamento e demonstra expertise.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">MOFU transforma seguidores em fas leais que confiam em voce.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Value-first, Deep dives, Authority building, Trust triggers, Engagement content</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">💰 Conteudo de Conversao (BOFU)</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conteudo que converte audiencia aquecida em clientes pagantes.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">BOFU e onde o trabalho anterior se monetiza.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Offer content, Objection handling, Social proof, Urgency, Direct CTA</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">🔄 Proporcoes e Frequencia</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Quanto de cada tipo de conteudo produzir e com que frequencia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Proporcoes erradas = funil quebrado. Acertar a mistura e essencial.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">70/20/10 rule, Content calendar, Batch rhythm, Seasonal adjustments</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Mapeamento do Funil</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar o mapa completo do seu funil de conteudo com pecas para cada estagio.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um funil mapeado transforma caos em estrategia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Funnel mapping, Content inventory, Gap analysis, Journey visualization</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-3')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-3.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.4 - Analise e Otimizacao -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.4</span>
+                    <span class="text-xs text-neutral-500">~55 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">📊 Analise e Otimizacao</h3>
+                <p class="text-neutral-400 text-sm">Use dados para melhorar continuamente seus resultados.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">📈 Metricas que Importam</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Separar metricas de vaidade das que realmente indicam sucesso.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Medir errado leva a otimizar para o objetivo errado.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Vanity vs actionable, Leading indicators, Lagging indicators, North star metric</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">🔍 Diagnostico de Performance</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como identificar exatamente onde e por que o conteudo esta falhando.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diagnostico preciso permite correcao cirurgica, nao tentativa e erro.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Funnel analysis, Drop-off points, Correlation mapping, Root cause</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">🧪 Framework de Testes</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Metodologia cientifica para testar hipoteses e validar melhorias.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Testes sistematicos aceleram aprendizado e reduzem desperdicio.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">A/B testing, Hypothesis-driven, Control variables, Statistical significance</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">🔄 Ciclo de Melhoria Continua</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Processo sistematico para melhorar consistentemente ao longo do tempo.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Melhoria composta cria vantagem competitiva insuruperavel.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">PDCA cycle, Iteration velocity, Kaizen, Feedback loops</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">📋 Dashboards e Rotinas</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como estruturar monitoramento para ter visibilidade sem paralisia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Bons dashboards = decisoes rapidas. Ruim = paralisia por analise.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">KPI dashboard, Weekly review, Monthly deep dive, Alert thresholds</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Auditoria de Conteudo</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Fazer auditoria completa dos ultimos 30 dias de conteudo e identificar padroes.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Auditorias revelam insights que olhadas isoladas nao mostram.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content audit, Pattern recognition, Top/flop analysis, Action plan</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-4')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-4.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.5 - Escala e Sistemas -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.5</span>
+                    <span class="text-xs text-neutral-500">~55 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">⚙️ Escala e Sistemas</h3>
+                <p class="text-neutral-400 text-sm">Produza mais conteudo de qualidade com menos esforco.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">🏭 Producao em Batch</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Produzir multiplos conteudos de uma vez para maximizar eficiencia.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Batch production pode triplicar output sem aumentar horas trabalhadas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content batching, Recording days, Editing days, Context switching cost</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">📋 Templates e SOPs</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar templates e procedimentos padronizados para cada tipo de conteudo.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">SOPs garantem qualidade consistente mesmo com escala.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Standard operating procedures, Content templates, Checklists, Quality gates</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">🤖 Automacao Inteligente</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Usar ferramentas e IA para automatizar partes do processo criativo.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automacao libera tempo para o que so voce pode fazer.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">AI assistance, Scheduling tools, Repurposing automation, Workflow automation</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">👥 Delegacao e Equipe</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como e quando contratar ajuda para escalar producao.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escalar alem de certo ponto exige equipe - saber delegar e crucial.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">VA hiring, Editor delegation, Content manager, Creator-led team</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">♻️ Reaproveitamento Estrategico</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Transformar um conteudo em multiplos formatos para diferentes plataformas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um video longo pode virar 10+ pecas de conteudo.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content atomization, Pillar content, Micro-content, Cross-platform repurposing</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Sistema de Producao</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Desenhar seu sistema completo de producao de conteudo escalavel.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sistema documentado pode ser replicado e delegado.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Production system, Workflow design, Capacity planning, Bottleneck identification</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-5')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-5.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.6 - Monetizacao Estrategica -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.6</span>
+                    <span class="text-xs text-neutral-500">~60 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">💰 Monetizacao Estrategica</h3>
+                <p class="text-neutral-400 text-sm">Transforme audiencia em receita de forma sustentavel.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">🗺️ Mapa de Monetizacao</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">As diferentes formas de monetizar audiencia: produtos, servicos, afiliados, ads, patrocinios.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diversificacao de receita cria estabilidade financeira.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Revenue streams, Product ladder, Service offerings, Passive income</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">📦 Produtos Digitais</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar e vender cursos, ebooks, templates, comunidades pagas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Produtos digitais escalam infinitamente com custo marginal zero.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Course creation, Digital products, Membership, Templates/tools</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">🎯 Lancamentos e Campanhas</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Estruturar lancamentos que convertem audiencia aquecida em compradores.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Lancamentos bem feitos podem gerar meses de receita em dias.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Launch sequence, Pre-launch content, Cart open/close, Urgency scarcity</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">🤝 Parcerias e Patrocinios</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Monetizar atraves de marcas, afiliados e parcerias estrategicas.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Parcerias podem ser mais lucrativas que produtos proprios.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Brand deals, Affiliate marketing, Strategic partnerships, Media kit</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">📊 Precificacao e Valor</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como precificar ofertas para maximizar receita e valor percebido.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Precificacao errada pode matar uma oferta excelente.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Value-based pricing, Price anchoring, Tiered pricing, ROI communication</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Plano de Monetizacao</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar plano completo de monetizacao com multiplas fontes de receita.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Plano documentado permite execucao sistematica.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Revenue plan, Product roadmap, Launch calendar, Financial projections</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-6')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-6.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modulo 3.7 - Estudos de Caso -->
+        <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+            <div class="p-6 border-b border-dark-600">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-purple-400 font-bold">3.7</span>
+                    <span class="text-xs text-neutral-500">~50 min</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">🔬 Estudos de Caso</h3>
+                <p class="text-neutral-400 text-sm">Analise profunda de cases reais de sucesso com gatilhos mentais.</p>
+            </div>
+
+            <div class="divide-y divide-dark-600">
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+                        <span class="flex-1">📱 Case: Viral no TikTok</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Analise frame-a-frame de videos que viralizaram e os gatilhos usados.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Deconstruir sucesso revela padroes replicaveis.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Viral anatomy, Hook analysis, Retention mapping, Engagement breakdown</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+                        <span class="flex-1">📈 Case: Crescimento Organico</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Perfis que cresceram de 0 a 100k+ seguidores organicamente e como fizeram.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Crescimento sustentavel requer estrategia diferente de viralidade pontual.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Growth timeline, Content evolution, Pivot points, Consistency patterns</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+                        <span class="flex-1">💰 Case: Lancamento 7 Digitos</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Anatomia de um lancamento de milhoes: pre-lancamento, abertura, fechamento.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Lancamentos de sucesso seguem padroes precisos de gatilhos.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Launch anatomy, Email sequence, Live events, Scarcity mechanics</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+                        <span class="flex-1">🏠 Case: Comunidade Engajada</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Como criadores construiram comunidades altamente engajadas e leais.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Comunidade forte e o ativo mais valioso de um criador.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Community triggers, Belonging mechanics, Ritual creation, Member journey</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+                        <span class="flex-1">⚠️ Case: Erros Caros</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Analise de falhas famosas: o que deu errado e como evitar os mesmos erros.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aprender com erros alheios e mais barato que cometer os proprios.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Failure analysis, Warning signs, Recovery strategies, Prevention protocols</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-item">
+                    <button onclick="toggleTopic(this)" class="w-full p-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+                        <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+                        <span class="flex-1">📝 Exercicio - Analise de Referencia</span>
+                    </button>
+                    <div class="topic-explanation px-4 pb-4">
+                        <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+                            <div><span class="text-purple-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Analisar um criador de referencia usando todos os frameworks aprendidos.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Praticar analise desenvolve olhar critico para aplicar em seu proprio trabalho.</p></div>
+                            <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Reference analysis, Pattern extraction, Adaptation strategy, Implementation plan</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+                <button onclick="openModal('modal-3-7')" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-neutral-200 rounded-lg text-sm font-medium transition-colors">
+                    📖 Ver em Modal
+                </button>
+                <a href="modulo-3-7.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors">
+                    📄 Ver Completo
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-dark-600 bg-dark-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a href="../trilha2/index.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors">
+                    ← Trilha 2: Central
+                </a>
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">🧠</span>
+                    <span class="font-bold text-purple-400">FGMD</span>
+                </div>
+                <a href="../../index.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-colors">
+                    Voltar ao Inicio
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-dark-600">
+                <h3 id="modal-title" class="text-lg font-bold">Modulo</h3>
+                <button onclick="closeModal()" class="p-2 hover:bg-dark-700 rounded-lg transition-colors">✕</button>
+            </div>
+            <iframe id="modal-iframe" class="w-full h-[70vh]" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        function toggleTopic(button) {
+            const topicItem = button.closest('.topic-item');
+            const explanation = topicItem.querySelector('.topic-explanation');
+            const moduleCard = button.closest('.bg-dark-800');
+            moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+                if (exp !== explanation) exp.classList.remove('active');
+            });
+            explanation.classList.toggle('active');
+        }
+
+        function openModal(modalId) {
+            const overlay = document.getElementById('modal-overlay');
+            const iframe = document.getElementById('modal-iframe');
+            const title = document.getElementById('modal-title');
+
+            const modulos = {
+                'modal-3-1': { src: 'modulo-3-1.html', title: 'Modulo 3.1 - Combinacao de Gatilhos' },
+                'modal-3-2': { src: 'modulo-3-2.html', title: 'Modulo 3.2 - Estrategias por Plataforma' },
+                'modal-3-3': { src: 'modulo-3-3.html', title: 'Modulo 3.3 - Funis de Conteudo' },
+                'modal-3-4': { src: 'modulo-3-4.html', title: 'Modulo 3.4 - Analise e Otimizacao' },
+                'modal-3-5': { src: 'modulo-3-5.html', title: 'Modulo 3.5 - Escala e Sistemas' },
+                'modal-3-6': { src: 'modulo-3-6.html', title: 'Modulo 3.6 - Monetizacao Estrategica' },
+                'modal-3-7': { src: 'modulo-3-7.html', title: 'Modulo 3.7 - Estudos de Caso' }
+            };
+
+            if (modulos[modalId]) {
+                iframe.src = modulos[modalId].src;
+                title.textContent = modulos[modalId].title;
+            }
+
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const iframe = document.getElementById('modal-iframe');
+            overlay.classList.add('hidden');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>

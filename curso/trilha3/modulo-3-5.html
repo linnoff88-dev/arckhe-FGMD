@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.5 - Escala e Sistemas | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.5</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.5
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Escala e Sistemas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Produza mais conteudo de qualidade com menos esforco. Aprenda a construir sistemas que multiplicam sua capacidade de criacao.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Estrategico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🏭 Producao em Batch</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A diferenca entre criar um conteudo por dia e criar <strong class="text-purple-400">uma semana de conteudo em um dia</strong>. Batch production e o segredo dos criadores mais produtivos do mundo.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Producao em batch e agrupar <strong class="text-white">tarefas similares</strong> em blocos concentrados. Em vez de criar, editar e postar um video por dia, voce grava 5-10 videos em um unico "recording day", edita todos em um "editing day", e agenda tudo de uma vez. O cerebro funciona melhor quando foca em <strong class="text-white">um tipo de tarefa</strong> por vez.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O custo de <strong class="text-white">context switching</strong> e brutal. Cada vez que voce troca de tarefa (criar → editar → criar → responder mensagem → criar), seu cerebro leva 15-25 minutos para voltar ao estado de foco. Batch production elimina essa perda e pode <strong class="text-white">triplicar sua producao</strong> sem trabalhar mais horas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content batching, Recording days, Editing days, Context switching cost, Deep work blocks.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Produtividade
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Context switching</strong> custa em media 23 minutos para recuperar foco total</li>
+          <li>• Criadores que usam batch production produzem <strong class="text-white">2.5x mais conteudo</strong> por hora</li>
+          <li>• <strong class="text-white">70% dos criadores full-time</strong> usam alguma forma de batching</li>
+          <li>• Um recording day bem planejado pode gerar <strong class="text-white">2-4 semanas</strong> de conteudo</li>
+        </ul>
+      </div>
+
+      <!-- Estrutura de Batch Week -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Estrutura de uma Batch Week
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Segunda - Ideacao</p>
+            <p class="text-neutral-300 text-sm">Brainstorm de ideias, pesquisa de trending topics, planejamento de pautas para o mes.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Terca - Roteiro</p>
+            <p class="text-neutral-300 text-sm">Escrita de todos os scripts, estruturacao de conteudo, hooks e CTAs.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Quarta - Gravacao</p>
+            <p class="text-neutral-300 text-sm">Recording day: gravar todos os videos de uma vez, mesma luz, mesmo setup.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Quinta - Edicao</p>
+            <p class="text-neutral-300 text-sm">Editar todos os videos em sequencia, aplicar templates, legendas, efeitos.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sexta - Agendamento</p>
+            <p class="text-neutral-300 text-sm">Upload, descricoes, hashtags, agendamento em todas as plataformas.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Fim de Semana</p>
+            <p class="text-neutral-300 text-sm">Descanso + engajamento leve. Responder comentarios, comunidade.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">Diario vs Batch: Comparacao</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Aspecto</th>
+                <th class="text-left py-2 text-red-400">Producao Diaria</th>
+                <th class="text-left py-2 text-green-400">Batch Production</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Setup de equipamento</td>
+                <td class="py-3">Todo dia</td>
+                <td class="py-3">1x por semana</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Tempo em transicao</td>
+                <td class="py-3">2-3 horas/dia</td>
+                <td class="py-3">30 min/dia</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Qualidade mental</td>
+                <td class="py-3">Fragmentada</td>
+                <td class="py-3">Focada, deep work</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Resiliencia a imprevistos</td>
+                <td class="py-3">Baixa (um dia ruim = sem conteudo)</td>
+                <td class="py-3">Alta (buffer de semanas)</td>
+              </tr>
+              <tr>
+                <td class="py-3">Escalabilidade</td>
+                <td class="py-3">Limitada</td>
+                <td class="py-3">Alta</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Comece pequeno: em vez de tentar gravar um mes de conteudo, experimente <strong class="text-white">gravar 3-5 videos em um unico dia</strong>. Voce vai sentir a diferenca imediatamente. Depois, va aumentando gradualmente. O segredo e criar o <strong class="text-white">habito de batch</strong> antes de escalar.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📋 Templates e SOPs</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Criadores amadores decidem tudo do zero toda vez. Criadores profissionais tem <strong class="text-purple-400">sistemas documentados</strong> que garantem qualidade consistente sem depender de memoria ou inspiracao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              SOPs (Standard Operating Procedures) sao <strong class="text-white">documentos que descrevem exatamente como fazer cada tarefa</strong>. Templates sao estruturas pre-prontas que voce preenche. Juntos, eles eliminam decisoes desnecessarias e garantem que cada conteudo siga seu <strong class="text-white">padrao de qualidade</strong>, nao importa como voce esteja se sentindo no dia.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem SOPs, voce e <strong class="text-white">insubstituivel</strong> (e isso e ruim). Nao pode delegar, nao pode tirar ferias, e a qualidade oscila com seu humor. SOPs permitem <strong class="text-white">escalar sem perder padrao</strong>, treinar equipe rapidamente, e manter consistencia mesmo em dias ruins.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Standard operating procedures, Content templates, Checklists, Quality gates, Documentacao de processos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de SOPs -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📁</span> SOPs Essenciais para Criadores
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">SOP de Ideacao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Como encontrar e validar ideias de conteudo.</p>
+              <p class="text-sm text-neutral-300">Inclui: fontes de pesquisa, criterios de selecao, banco de ideias, processo de validacao.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">SOP de Gravacao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Checklist completo para recording days.</p>
+              <p class="text-sm text-neutral-300">Inclui: setup de equipamento, configuracoes de camera, iluminacao, audio, organizacao de arquivos.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">SOP de Edicao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Padrao de edicao para manter consistencia visual.</p>
+              <p class="text-sm text-neutral-300">Inclui: intro/outro, fontes, cores, transicoes, musicas, legendas, exportacao.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">SOP de Publicacao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Processo de upload e distribuicao.</p>
+              <p class="text-sm text-neutral-300">Inclui: thumbnails, titulos, descricoes, hashtags, horarios, cross-posting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Template de Checklist -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">✅</span> Exemplo: Checklist Pre-Publicacao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <p class="text-white font-semibold text-sm mb-2">Qualidade do Conteudo</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Hook nos primeiros 3 segundos</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">CTA claro e especifico</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Audio limpo sem ruidos</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Legendas revisadas</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="text-white font-semibold text-sm mb-2">Otimizacao</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Thumbnail atraente</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Titulo com palavra-chave</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Descricao completa</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Hashtags relevantes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality Gates -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🚦</span> Quality Gates: Pontos de Verificacao
+        </h3>
+        <p class="text-neutral-300 mb-4">Quality gates sao <strong class="text-white">checkpoints obrigatorios</strong> antes de passar para a proxima etapa:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-2 bg-dark-700 rounded-lg text-sm border border-dark-600">
+            <span class="text-yellow-400">Gate 1:</span> <span class="text-neutral-300">Ideia validada → Pode escrever roteiro</span>
+          </span>
+          <span class="px-3 py-2 bg-dark-700 rounded-lg text-sm border border-dark-600">
+            <span class="text-yellow-400">Gate 2:</span> <span class="text-neutral-300">Roteiro aprovado → Pode gravar</span>
+          </span>
+          <span class="px-3 py-2 bg-dark-700 rounded-lg text-sm border border-dark-600">
+            <span class="text-yellow-400">Gate 3:</span> <span class="text-neutral-300">Edicao revisada → Pode publicar</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Documente enquanto faz. <strong class="text-white">Grave sua tela</strong> enquanto edita um video e use essa gravacao para criar seu SOP de edicao. E mais facil documentar um processo que voce acabou de fazer do que tentar lembrar depois.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🤖 Automacao Inteligente</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Existem tarefas que voce faz todo dia que uma <strong class="text-purple-400">maquina pode fazer em segundos</strong>. Automacao inteligente libera seu tempo para o que realmente importa: criar conteudo de qualidade.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Automacao e usar <strong class="text-white">ferramentas e tecnologia para executar tarefas repetitivas</strong> sem intervencao manual. Isso inclui agendamento de posts, geracao de legendas por IA, repurposing automatico, workflows que conectam diferentes ferramentas, e assistentes de IA para tarefas de suporte.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Tarefas repetitivas <strong class="text-white">drenam energia criativa</strong>. Cada hora gasta agendando posts e uma hora que poderia ser usada criando. Automacao bem implementada pode devolver <strong class="text-white">10-20 horas por semana</strong>, alem de reduzir erros humanos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              AI assistance, Scheduling tools, Repurposing automation, Workflow automation, No-code tools.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categorias de Automacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> Categorias de Automacao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">🗓️ Agendamento</p>
+            <p class="text-neutral-300 text-sm mb-2">Publicacao automatica em horarios otimos.</p>
+            <p class="text-neutral-500 text-xs">Ferramentas: Later, Buffer, Hootsuite, Creator Studio</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">🤖 IA Generativa</p>
+            <p class="text-neutral-300 text-sm mb-2">Assistencia em roteiros, legendas, ideias.</p>
+            <p class="text-neutral-500 text-xs">Ferramentas: ChatGPT, Claude, Jasper, Copy.ai</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">♻️ Repurposing</p>
+            <p class="text-neutral-300 text-sm mb-2">Transformar um conteudo em varios formatos.</p>
+            <p class="text-neutral-500 text-xs">Ferramentas: Opus Clip, Vidyo.ai, Descript</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">🔗 Workflows</p>
+            <p class="text-neutral-300 text-sm mb-2">Conectar ferramentas para automacoes complexas.</p>
+            <p class="text-neutral-500 text-xs">Ferramentas: Zapier, Make, n8n, IFTTT</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplos de Workflows -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🔄</span> Exemplos de Workflows Automatizados
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Workflow 1: Video → Multi-plataforma</p>
+            <p class="text-neutral-300 text-sm">Upload YouTube → Extrai clips automaticamente → Adapta para Reels/TikTok/Shorts → Agenda em cada plataforma</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Workflow 2: Podcast → Conteudo Escrito</p>
+            <p class="text-neutral-300 text-sm">Audio do podcast → Transcricao automatica → IA gera artigo de blog → IA gera thread Twitter → Agenda tudo</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Workflow 3: Engajamento Automatico</p>
+            <p class="text-neutral-300 text-sm">Novo comentario → Notificacao no Slack → Sugestao de resposta por IA → Aprovacao com um clique</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- O que Automatizar vs Nao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">O que Automatizar vs O que Manter Manual</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+            <p class="text-green-400 font-semibold mb-2">✅ Automatizar</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Agendamento de publicacao</li>
+              <li>• Geracao de legendas/transcricoes</li>
+              <li>• Repurposing basico</li>
+              <li>• Metricas e relatorios</li>
+              <li>• Backup de conteudo</li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <p class="text-red-400 font-semibold mb-2">❌ Manter Manual</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Ideias criativas principais</li>
+              <li>• Conexao genuina com comunidade</li>
+              <li>• Decisoes estrategicas</li>
+              <li>• Resposta a crises</li>
+              <li>• Tom de voz e personalidade</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de automatizar, <strong class="text-white">otimize manualmente</strong>. Nao automatize um processo quebrado - voce so vai escalar ineficiencia. Primeiro, refine o processo ate funcionar bem, depois automatize.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">👥 Delegacao e Equipe</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Em algum momento, voce vai bater no teto do que consegue fazer sozinho. A <strong class="text-purple-400">delegacao estrategica</strong> e o que separa criadores que estagnaram de criadores que construiram imperios.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Delegacao e <strong class="text-white">transferir tarefas para outras pessoas</strong> de forma estruturada. Nao e simplesmente "jogar trabalho" para alguem - e identificar o que voce <strong class="text-white">nao deveria estar fazendo</strong>, encontrar a pessoa certa, treina-la com seus SOPs, e criar sistemas de acompanhamento.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Seu tempo tem <strong class="text-white">valor exponencial</strong> quando focado em criacao. Uma hora sua criando conteudo vale muito mais do que uma hora editando. Delegar tarefas de menor valor permite <strong class="text-white">multiplicar seu impacto</strong> sem multiplicar suas horas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              VA hiring, Editor delegation, Content manager, Creator-led team, Leverage.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matriz de Delegacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Matriz de Delegacao
+        </h3>
+        <p class="text-neutral-300 mb-4">Classifique suas tarefas em 4 quadrantes:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+            <p class="text-green-400 font-semibold mb-2">Zona de Genio (MANTER)</p>
+            <p class="text-neutral-300 text-sm mb-2">Alto valor + Voce ama fazer</p>
+            <p class="text-neutral-500 text-xs">Ex: Criar conceitos, gravar, estrategia</p>
+          </div>
+          <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+            <p class="text-yellow-400 font-semibold mb-2">Zona de Excelencia (CONSIDERAR)</p>
+            <p class="text-neutral-300 text-sm mb-2">Alto valor + Voce faz bem, mas nao ama</p>
+            <p class="text-neutral-500 text-xs">Ex: Edicao avancada, planejamento</p>
+          </div>
+          <div class="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
+            <p class="text-orange-400 font-semibold mb-2">Zona de Competencia (DELEGAR)</p>
+            <p class="text-neutral-300 text-sm mb-2">Baixo valor + Voce faz bem</p>
+            <p class="text-neutral-500 text-xs">Ex: Edicao basica, thumbnails, agendamento</p>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <p class="text-red-400 font-semibold mb-2">Zona de Incompetencia (ELIMINAR/DELEGAR)</p>
+            <p class="text-neutral-300 text-sm mb-2">Baixo valor + Voce nao faz bem</p>
+            <p class="text-neutral-500 text-xs">Ex: Tarefas administrativas, financeiro</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primeiras Contratacoes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">👤</span> Ordem Recomendada de Contratacoes
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">1</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1">Editor de Video</h4>
+              <p class="text-sm text-neutral-400">Maior ROI para a maioria dos criadores. Libera 10-20 horas/semana. Custo: $300-1500/mes para iniciantes.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">2</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1">Assistente Virtual (VA)</h4>
+              <p class="text-sm text-neutral-400">Tarefas administrativas, agendamento, pesquisa, DMs. Custo: $500-1000/mes para VA dedicado.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">3</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1">Designer/Thumbnail Specialist</h4>
+              <p class="text-sm text-neutral-400">Thumbnails, artes para stories, carrosseis. Custo: $200-800/mes dependendo do volume.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">4</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1">Content Manager</h4>
+              <p class="text-sm text-neutral-400">Coordena toda a operacao de conteudo. So faz sentido com equipe maior. Custo: $1500-3000/mes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onde Encontrar -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Onde Encontrar Talento
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-white font-semibold text-sm">Upwork</p>
+            <p class="text-neutral-400 text-xs">Freelancers globais</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-white font-semibold text-sm">Fiverr</p>
+            <p class="text-neutral-400 text-xs">Projetos pontuais</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-white font-semibold text-sm">LinkedIn</p>
+            <p class="text-neutral-400 text-xs">Profissionais senior</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-white font-semibold text-sm">Sua Audiencia</p>
+            <p class="text-neutral-400 text-xs">Fas engajados</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Antes de contratar, <strong class="text-white">calcule o custo da sua hora</strong>. Se voce ganha R$10.000/mes trabalhando 200 horas, sua hora vale R$50. Qualquer tarefa que pode ser delegada por menos de R$50/hora <strong class="text-white">deve ser delegada</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">♻️ Reaproveitamento Estrategico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um video de 10 minutos pode virar <strong class="text-purple-400">20+ pecas de conteudo</strong>. Reaproveitamento estrategico multiplica seu alcance sem multiplicar seu trabalho de criacao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Reaproveitamento (ou repurposing) e <strong class="text-white">transformar um conteudo principal em multiplos formatos</strong> para diferentes plataformas. Um "pillar content" de alto valor (video longo, podcast, artigo extenso) e "atomizado" em dezenas de micro-conteudos que alimentam todos os seus canais.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criar conteudo do zero e <strong class="text-white">caro em tempo e energia</strong>. Reaproveitamento permite estar presente em multiplas plataformas sem criar conteudo original para cada uma. Alem disso, <strong class="text-white">repeticao e boa</strong> - sua audiencia precisa ouvir a mesma mensagem 7+ vezes antes de absorver.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content atomization, Pillar content, Micro-content, Cross-platform repurposing, Content multiplication.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modelo de Atomizacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">💎</span> Modelo de Atomizacao: 1 → 20+
+        </h3>
+        <p class="text-neutral-300 mb-4">De um video de YouTube de 15 minutos, voce pode extrair:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">5-10</p>
+            <p class="text-neutral-400 text-xs">Clips curtos (Reels/TikTok)</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">1</p>
+            <p class="text-neutral-400 text-xs">Artigo de blog</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">1</p>
+            <p class="text-neutral-400 text-xs">Thread Twitter/X</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">3-5</p>
+            <p class="text-neutral-400 text-xs">Posts de carrossel</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">5-10</p>
+            <p class="text-neutral-400 text-xs">Quotes para Stories</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">1</p>
+            <p class="text-neutral-400 text-xs">Episodio de podcast</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">1</p>
+            <p class="text-neutral-400 text-xs">Newsletter</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400">3-5</p>
+            <p class="text-neutral-400 text-xs">Posts LinkedIn</p>
+          </div>
+        </div>
+        <p class="text-purple-400 font-semibold text-center mt-4">= 20-35 pecas de conteudo de 1 video</p>
+      </div>
+
+      <!-- Pillar Content Strategy -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🏛️</span> Estrategia de Pillar Content
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Passo 1: Crie o Pillar</p>
+            <p class="text-neutral-300 text-sm">Conteudo longo e profundo (video 10-30min, podcast, artigo 2000+ palavras). Esse e seu "diamante bruto".</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Passo 2: Identifique os Momentos</p>
+            <p class="text-neutral-300 text-sm">Encontre os "highlight moments" - frases impactantes, explicacoes claras, momentos emocionais.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Passo 3: Adapte para Cada Plataforma</p>
+            <p class="text-neutral-300 text-sm">Cada plataforma tem seu formato ideal. Adapte o conteudo, nao apenas redimensione.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">Passo 4: Distribua Estrategicamente</p>
+            <p class="text-neutral-300 text-sm">Espacar publicacoes para maximizar alcance. Nao poste tudo no mesmo dia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Adaptacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">Matriz de Adaptacao por Plataforma</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Plataforma</th>
+                <th class="text-left py-2 text-purple-400">Formato Ideal</th>
+                <th class="text-left py-2 text-purple-400">Duracao</th>
+                <th class="text-left py-2 text-purple-400">Adaptacao</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Instagram Reels</td>
+                <td class="py-3">Vertical, legendado</td>
+                <td class="py-3">15-60s</td>
+                <td class="py-3">Clip com hook forte</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">TikTok</td>
+                <td class="py-3">Vertical, nativo</td>
+                <td class="py-3">15-60s</td>
+                <td class="py-3">Mais casual, trend-aware</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">YouTube Shorts</td>
+                <td class="py-3">Vertical</td>
+                <td class="py-3">30-60s</td>
+                <td class="py-3">Educacional, CTA para longo</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">LinkedIn</td>
+                <td class="py-3">Texto + carrossel</td>
+                <td class="py-3">1-2 min leitura</td>
+                <td class="py-3">Tom profissional, insights</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Twitter/X</td>
+                <td class="py-3">Thread</td>
+                <td class="py-3">5-15 tweets</td>
+                <td class="py-3">Pontos-chave numerados</td>
+              </tr>
+              <tr>
+                <td class="py-3">Newsletter</td>
+                <td class="py-3">Texto expandido</td>
+                <td class="py-3">5-10 min leitura</td>
+                <td class="py-3">Aprofundamento + opiniao</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie pensando em reaproveitamento desde o inicio. Quando gravar um video longo, <strong class="text-white">ja pense nos momentos que vao virar clips</strong>. Fale frases "clipaveis" - curtas, impactantes, auto-contidas. Isso facilita muito a atomizacao depois.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Sistema de Producao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">desenhar seu sistema</strong>. Voce vai criar um blueprint completo de producao de conteudo escalavel.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para criar o <strong class="text-white">blueprint do seu sistema de producao</strong>. Ao final, voce tera um documento que descreve exatamente como seu conteudo e produzido, do inicio ao fim.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistemas documentados permitem <strong class="text-white">escalar, delegar e otimizar</strong>. Sem um sistema claro, voce esta sempre improvisando. Com um sistema, voce pode identificar gargalos, treinar equipe, e melhorar continuamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Production system, Workflow design, Capacity planning, Bottleneck identification.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Blueprint do Seu Sistema de Producao
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Preencha cada secao para criar seu sistema personalizado de producao de conteudo.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Secao 1 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">1. METAS DE PRODUCAO</p>
+            <p class="text-neutral-400 text-sm mb-3">Defina seus objetivos de output semanal/mensal.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Videos longos/semana:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Reels/Shorts/semana:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Posts/semana:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Newsletters/mes:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 2 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">2. ESTRUTURA DE BATCH</p>
+            <p class="text-neutral-400 text-sm mb-3">Defina seus dias dedicados para cada tipo de tarefa.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Dia de Ideacao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Dia de Roteiro:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Dia de Gravacao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Dia de Edicao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-40">Dia de Publicacao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 3 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">3. AUTOMACOES A IMPLEMENTAR</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste as automacoes que voce vai configurar.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 4 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">4. DELEGACAO PLANEJADA</p>
+            <p class="text-neutral-400 text-sm mb-3">Quais tarefas voce vai delegar e quando?</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Primeira delegacao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Orcamento mensal:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Timeline:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 5 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">5. ESTRATEGIA DE REAPROVEITAMENTO</p>
+            <p class="text-neutral-400 text-sm mb-3">Como cada pillar content sera atomizado?</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Pillar principal:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Derivados:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Plataformas:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 6 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">6. GARGALOS IDENTIFICADOS</p>
+            <p class="text-neutral-400 text-sm mb-3">Quais sao os pontos que mais te atrasam hoje?</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Gargalo 1:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Solucao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Gargalo 2:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500 text-sm w-32">Solucao:</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Preencha todas as secoes e crie um <strong class="text-white">documento formal</strong> com seu sistema. Revise e ajuste semanalmente nas primeiras 4 semanas. Um bom sistema <strong class="text-white">evolui constantemente</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist de Implementacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Implementacao do Sistema
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <p class="text-white font-semibold text-sm mb-2">Semana 1-2</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Documentar processo atual</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Criar primeiro SOP (gravacao)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Testar primeiro batch day</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="text-white font-semibold text-sm mb-2">Semana 3-4</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Configurar primeira automacao</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Criar SOPs restantes</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Medir resultados e ajustar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Producao em Batch</strong>
+              <span class="text-neutral-400"> - Recording days, editing days, eliminar context switching</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Templates e SOPs</strong>
+              <span class="text-neutral-400"> - Documentar processos, checklists, quality gates</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Automacao Inteligente</strong>
+              <span class="text-neutral-400"> - IA, agendamento, workflows automatizados</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Delegacao e Equipe</strong>
+              <span class="text-neutral-400"> - Matriz de delegacao, ordem de contratacoes</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Reaproveitamento Estrategico</strong>
+              <span class="text-neutral-400"> - Content atomization, pillar content, cross-platform</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Sistema de Producao</strong>
+              <span class="text-neutral-400"> - Blueprint personalizado para escalar criacao</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-4.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-6.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

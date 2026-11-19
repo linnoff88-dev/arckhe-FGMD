@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.9 - Gatilho da Transformacao | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2 - Central</a>
+      <span class="mx-2">/</span>
+      <span class="text-blue-400">Modulo 2.9</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 2.9
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🦋 Gatilho da Transformacao</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Mostre o caminho claro da mudanca que seu publico busca. Aprenda a mapear jornadas de transformacao e guiar pessoas do ponto A ao ponto B.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Central</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🗺️ O Mapa da Transformacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Toda transformacao comeca com <strong class="text-blue-400">clareza de destino</strong>. O mapa da transformacao e a ferramenta que mostra exatamente onde a pessoa esta e para onde ela vai.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O Mapa da Transformacao e uma <strong class="text-white">representacao visual e narrativa</strong> do caminho entre o estado atual (ponto A) e o estado desejado (ponto B) do seu publico. Ele inclui marcos, etapas e a progressao clara que a pessoa precisa seguir. Nao e apenas mostrar o destino - e <strong class="text-white">desenhar o percurso</strong> de forma que a pessoa consiga se ver caminhando.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem um mapa claro, a transformacao parece <strong class="text-white">impossivel ou abstrata demais</strong>. Quando voce mostra exatamente o que precisa acontecer em cada etapa, remove a paralisia da incerteza. O mapa transforma um sonho vago em um <strong class="text-white">plano concreto</strong> que a pessoa acredita poder seguir.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Transformation map, Before/after, Journey visualization, Milestones.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">78% das pessoas</strong> desistem de metas por falta de clareza no caminho</li>
+          <li>• Conteudo com <strong class="text-white">antes/depois visual</strong> tem 3x mais engajamento</li>
+          <li>• Jornadas com <strong class="text-white">marcos intermediarios</strong> aumentam taxa de conclusao em 62%</li>
+          <li>• <strong class="text-white">89% dos compradores</strong> querem ver o "como" antes de comprar o "o que"</li>
+        </ul>
+      </div>
+
+      <!-- Elementos do Mapa -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧭</span> Elementos do Mapa de Transformacao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Ponto A - Estado Atual</p>
+            <p class="text-neutral-300 text-sm">Descricao vivida e especifica de onde a pessoa esta agora. Dores, frustrações, limitacoes.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Ponto B - Estado Desejado</p>
+            <p class="text-neutral-300 text-sm">Visao clara e atraente de onde a pessoa quer chegar. Resultados, sentimentos, conquistas.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Marcos Intermediarios</p>
+            <p class="text-neutral-300 text-sm">Pequenas vitorias ao longo do caminho que provam progresso e mantem motivacao.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Ponte de Conexao</p>
+            <p class="text-neutral-300 text-sm">O veiculo (seu produto, metodo, conteudo) que leva a pessoa do A ao B.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplo Pratico -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exemplo de Mapa de Transformacao
+        </h3>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex-1 bg-red-900/20 border border-red-500/30 rounded-lg p-4 text-center">
+            <p class="text-red-400 font-semibold mb-2">PONTO A</p>
+            <p class="text-neutral-300 text-sm">500 seguidores estagnados, posts sem engajamento, sem saber o que postar</p>
+          </div>
+          <div class="flex-shrink-0 text-blue-400 text-2xl">→</div>
+          <div class="flex-1 bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4 text-center">
+            <p class="text-yellow-400 font-semibold mb-2">MARCOS</p>
+            <p class="text-neutral-300 text-sm">1k seguidores → 5k → 10k com comunidade engajada</p>
+          </div>
+          <div class="flex-shrink-0 text-blue-400 text-2xl">→</div>
+          <div class="flex-1 bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-center">
+            <p class="text-green-400 font-semibold mb-2">PONTO B</p>
+            <p class="text-neutral-300 text-sm">Autoridade no nicho, audiencia engajada, monetizacao ativa</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Sempre comece descrevendo o <strong class="text-white">Ponto A em detalhes dolorosos</strong> - a pessoa precisa se reconhecer ali. Depois pinte o Ponto B de forma tao atraente que ela <strong class="text-white">sinta vontade de sair do A</strong> imediatamente.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">👤 Historias de Transformacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nada prova que a transformacao e possivel como <strong class="text-blue-400">alguem que ja fez</strong>. Historias de transformacao sao a prova social mais poderosa que existe.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Historias de transformacao sao <strong class="text-white">narrativas de pessoas reais</strong> que fizeram a jornada do ponto A ao ponto B. Elas servem como prova de que o caminho funciona e como <strong class="text-white">espelho</strong> onde o publico pode se ver. Quanto mais a pessoa se identificar com quem ja transformou, mais ela acredita que tambem pode.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Argumentos logicos convencem a mente, mas <strong class="text-white">historias convencem o coracao</strong>. Uma boa historia de transformacao remove a maior objecao: "mas sera que funciona pra mim?". Quando alguem parecido conseguiu, a pessoa <strong class="text-white">se permite acreditar</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Success stories, Case studies, Hero's journey, Relatability.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrutura da Historia -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📖</span> Estrutura da Historia de Transformacao
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">O Problema</h4>
+              <p class="text-sm text-neutral-400 mb-2">Apresente a pessoa e sua situacao inicial. Dores, frustrações, tentativas fracassadas.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Maria tinha 45 anos e achava que era tarde demais para comecar no digital..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">O Encontro</h4>
+              <p class="text-sm text-neutral-400 mb-2">O momento em que encontrou a solucao (seu metodo, produto, conteudo).</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Ate que um dia viu um video explicando que idade nao e barreira..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">A Jornada</h4>
+              <p class="text-sm text-neutral-400 mb-2">Os passos dados, obstaculos enfrentados e como superou.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Nos primeiros 30 dias, aplicou apenas uma tecnica por semana..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">A Transformacao</h4>
+              <p class="text-sm text-neutral-400 mb-2">O resultado final - numeros, sentimentos, nova realidade.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Hoje Maria tem 12k seguidores e faturou R$8k no ultimo mes vendendo consultoria..."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Historias -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🎭</span> Tipos de Historias de Transformacao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Sua Propria Historia</p>
+            <p class="text-neutral-300 text-sm">A mais poderosa - voce como prova viva do que ensina. Autenticidade maxima.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Historia de Cliente/Aluno</p>
+            <p class="text-neutral-300 text-sm">Prova social externa. Mostra que funciona para outras pessoas alem de voce.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Historia de Referencia</p>
+            <p class="text-neutral-300 text-sm">Cases publicos do seu nicho. Inspire-se em transformacoes conhecidas.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Historia Composta</p>
+            <p class="text-neutral-300 text-sm">Combinacao de elementos de varias historias reais em uma narrativa.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          A historia mais eficaz e de alguem que <strong class="text-white">comecou em situacao pior</strong> do que seu publico atual. Se "ela conseguiu partindo de la", entao <strong class="text-white">"eu tambem consigo"</strong>. Busque historias com obstaculos maiores.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎯 Primeiros Passos Claros</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A transformacao comeca com <strong class="text-blue-400">um unico passo</strong>. Definir exatamente o que fazer primeiro remove a paralisia e cria momentum.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Primeiros passos claros sao <strong class="text-white">acoes especificas, simples e imediatas</strong> que a pessoa pode executar agora mesmo para comecar sua transformacao. Nao sao conselhos vagos como "estude mais" - sao instrucoes como <strong class="text-white">"abra o bloco de notas e escreva 3 dores do seu publico"</strong>. Acoes tao simples que a barreira de entrada desaparece.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maior causa de inacao nao e falta de motivacao - e <strong class="text-white">falta de clareza</strong>. Quando a pessoa nao sabe exatamente o que fazer, ela nao faz nada. Primeiros passos claros <strong class="text-white">quebram a inercia</strong> e criam o efeito bola de neve que leva a transformacao completa.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Quick wins, First step, Entry point, Momentum creation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> A Psicologia do Primeiro Passo
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Regra dos 2 minutos:</strong> Se pode ser feito em 2 minutos, faca agora</li>
+          <li>• <strong class="text-white">Efeito Zeigarnik:</strong> Tarefas iniciadas ficam na mente ate serem concluidas</li>
+          <li>• <strong class="text-white">Quick wins</strong> liberam dopamina e criam motivacao para continuar</li>
+          <li>• <strong class="text-white">73% das pessoas</strong> completam jornadas que comecam com passos faceis</li>
+        </ul>
+      </div>
+
+      <!-- Framework -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔧</span> Framework: Primeiro Passo Perfeito
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">1. Especifico</p>
+            <p class="text-neutral-300 text-sm">Nao "crie conteudo" → "Escreva uma lista de 5 problemas do seu publico"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">2. Imediato</p>
+            <p class="text-neutral-300 text-sm">Algo que pode ser feito AGORA, nao "quando tiver tempo"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">3. Facil</p>
+            <p class="text-neutral-300 text-sm">Barreira tao baixa que seria mais dificil NAO fazer</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">4. Conectado</p>
+            <p class="text-neutral-300 text-sm">Leva naturalmente ao proximo passo da jornada</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">❌ Vago → ✅ Claro</h3>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Vago</p>
+              <p class="text-neutral-300 text-sm">"Comece a criar conteudo"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Claro</p>
+              <p class="text-neutral-300 text-sm">"Grave um video de 30 segundos respondendo a duvida mais comum do seu nicho"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Vago</p>
+              <p class="text-neutral-300 text-sm">"Estude seu publico"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Claro</p>
+              <p class="text-neutral-300 text-sm">"Entre em 3 grupos do Facebook do seu nicho e anote 5 perguntas que aparecem repetidamente"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Vago</p>
+              <p class="text-neutral-300 text-sm">"Melhore sua bio"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Claro</p>
+              <p class="text-neutral-300 text-sm">"Reescreva sua bio usando: [O que voce faz] + [Para quem] + [Resultado que entrega]"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Sempre termine seu conteudo com <strong class="text-white">UM primeiro passo</strong> claro. Nao de 10 opcoes - de uma. A clareza de "faca isso agora" e <strong class="text-white">muito mais poderosa</strong> que uma lista de possibilidades.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">⚡ Quebrando Objecoes</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Entre a pessoa e sua transformacao existem <strong class="text-blue-400">muros invisíveis</strong> - crencas limitantes que dizem "nao vai funcionar pra mim". Seu papel e demolir esses muros antes que eles parem a jornada.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Quebrar objecoes e <strong class="text-white">antecipar e resolver</strong> as razoes pelas quais a pessoa acredita que nao pode transformar. Sao os "mas eu nao...", "no meu caso...", "e diferente porque...". Cada objecao nao respondida e uma <strong class="text-white">porta de saida</strong> por onde a pessoa abandona a jornada.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A pessoa quer acreditar que pode transformar, mas o <strong class="text-white">medo de falhar</strong> e mais forte. Objecoes sao mecanismos de defesa. Quando voce as aborda proativamente, remove a desculpa e <strong class="text-white">libera a pessoa para agir</strong>. Ignorar objecoes e deixar dinheiro e impacto na mesa.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Objection handling, "Mas eu nao...", Limiting beliefs, Reframe de obstaculo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objecoes Mais Comuns -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🚧</span> As 7 Objecoes Universais
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">1</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Nao tenho tempo"</p>
+                <p class="text-neutral-300 text-sm mb-2">A objecao mais comum. Esconde priorizacao, nao falta real de tempo.</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Se voce tivesse apenas 15 minutos por dia, o que faria diferente?"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">2</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Nao tenho dinheiro"</p>
+                <p class="text-neutral-300 text-sm mb-2">Geralmente significa "nao vejo valor suficiente para priorizar isso".</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Quanto esta te custando NAO resolver isso?"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">3</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Ja tentei e nao funcionou"</p>
+                <p class="text-neutral-300 text-sm mb-2">Medo de falhar de novo. Precisa entender o que foi diferente antes.</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "O que especificamente voce tentou? Vamos identificar o que faltou."</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">4</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Meu caso e diferente"</p>
+                <p class="text-neutral-300 text-sm mb-2">Crenca de que e unico demais para solucoes "genericas".</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Conheco alguem em situacao ainda mais complicada que conseguiu..."</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">5</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Sou velho/novo demais"</p>
+                <p class="text-neutral-300 text-sm mb-2">Idade como barreira. Precisa de exemplos na mesma faixa etaria.</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Maria comecou aos 55 e hoje fatura X. Joao comecou aos 17..."</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">6</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Nao sou bom nisso"</p>
+                <p class="text-neutral-300 text-sm mb-2">Sindrome do impostor. Confunde habilidade com talento nato.</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Ninguem nasce sabendo. E uma habilidade que se aprende."</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">7</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">"Agora nao e o momento"</p>
+                <p class="text-neutral-300 text-sm mb-2">Procrastinacao disfarçada. O momento perfeito nunca chega.</p>
+                <p class="text-green-400 text-sm"><strong>Reframe:</strong> "Se nao agora, quando? O que precisa mudar para ser o momento?"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecnica de Reframe -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔄</span> Tecnica: O Reframe de Obstaculo
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Transforme o obstaculo em <strong class="text-white">razao para comecar</strong>, nao para parar:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">"Nao tenho tempo"</p>
+            <p class="text-neutral-300 text-sm">"Justamente por isso voce precisa de um metodo que funcione em 15 min/dia"</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">"Sou timido demais"</p>
+            <p class="text-neutral-300 text-sm">"Timidos frequentemente criam o melhor conteudo - sao mais reflexivos"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Aborde objecoes <strong class="text-white">ANTES</strong> que sejam levantadas. Em vez de esperar o "mas eu nao tenho tempo", diga: "Sei que voce deve estar pensando 'nao tenho tempo' - por isso <strong class="text-white">criei um metodo de 15 minutos</strong>...". Isso mostra que voce entende e ja resolveu.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🔄 Identidade Nova vs Velha</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A transformacao mais profunda nao e de <strong class="text-blue-400">comportamento</strong>, mas de <strong class="text-blue-400">identidade</strong>. Ajude a pessoa a se ver como quem ela sera depois da mudanca.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Identidade Nova vs Velha e o processo de ajudar a pessoa a <strong class="text-white">"experimentar" mentalmente</strong> quem ela sera apos a transformacao. Nao e apenas mudar o que faz, mas <strong class="text-white">mudar quem ela se ve sendo</strong>. Quando a pessoa adota a nova identidade internamente, os comportamentos fluem naturalmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Comportamentos mudam temporariamente. Identidade muda <strong class="text-white">permanentemente</strong>. Quando alguem se ve como "criador de conteudo" em vez de "alguem que tenta criar conteudo", a consistencia vem automaticamente. A identidade puxa os comportamentos, nao o contrario.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Identity shift, Future self visualization, "Imagine quando...", New self language.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Identidade Velha vs Nova -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🪞</span> Contraste de Identidade
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-red-400">Identidade Velha</th>
+                <th class="text-left py-2 text-green-400">Identidade Nova</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Eu nao sou bom com tecnologia"</td>
+                <td class="py-3">"Eu estou aprendendo a dominar ferramentas digitais"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Nao sou criativo"</td>
+                <td class="py-3">"Sou alguem que encontra formas unicas de se expressar"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Nao sirvo pra vender"</td>
+                <td class="py-3">"Sou alguem que ajuda pessoas a encontrar solucoes"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Sempre fracasso"</td>
+                <td class="py-3">"Sou alguem que aprende com cada tentativa"</td>
+              </tr>
+              <tr>
+                <td class="py-3">"Ninguem se importa com o que eu falo"</td>
+                <td class="py-3">"Minhas experiencias podem ajudar outras pessoas"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tecnica Imagine Quando -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔮</span> Tecnica: "Imagine Quando..."
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Use visualizacao do futuro para ancorar a nova identidade:
+        </p>
+        <div class="space-y-3">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm"><strong class="text-cyan-400">"Imagine quando..."</strong> voce acordar e ver notificacoes de vendas que aconteceram enquanto dormia.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm"><strong class="text-cyan-400">"Imagine quando..."</strong> alguem te mandar mensagem dizendo que seu conteudo mudou a vida dela.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm"><strong class="text-cyan-400">"Imagine quando..."</strong> voce olhar para tras e ver o quanto evoluiu em apenas 90 dias.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-neutral-300 text-sm"><strong class="text-cyan-400">"Imagine quando..."</strong> pessoas do seu nicho te reconhecerem como referencia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linguagem do Novo Eu -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">💬</span> Linguagem do Novo Eu
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Ensine seu publico a falar sobre si mesmo de forma diferente:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <p class="text-red-400 text-sm font-semibold mb-1">❌ Linguagem Velha</p>
+            <p class="text-neutral-300 text-sm">"Eu vou tentar criar conteudo"</p>
+          </div>
+          <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+            <p class="text-green-400 text-sm font-semibold mb-1">✅ Linguagem Nova</p>
+            <p class="text-neutral-300 text-sm">"Eu sou um criador de conteudo em desenvolvimento"</p>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <p class="text-red-400 text-sm font-semibold mb-1">❌ Linguagem Velha</p>
+            <p class="text-neutral-300 text-sm">"Queria conseguir vender"</p>
+          </div>
+          <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+            <p class="text-green-400 text-sm font-semibold mb-1">✅ Linguagem Nova</p>
+            <p class="text-neutral-300 text-sm">"Estou construindo meu negocio digital"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Em seu conteudo, <strong class="text-white">trate seu publico como se ja fossem</strong> quem querem ser. Nao diga "se voce quer ser empreendedor" - diga "como empreendedor, voce sabe que...". Isso <strong class="text-white">instala a nova identidade</strong> de forma sutil e poderosa.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Jornada do Heroi</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-blue-400">colocar em pratica</strong>. Voce vai mapear a jornada de transformacao do seu publico usando a estrutura classica do Heroi.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio para mapear a <strong class="text-white">jornada completa de transformacao</strong> do seu publico usando os elementos classicos da Jornada do Heroi. Voce vai definir cada etapa e seu papel como mentor nessa jornada.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A Jornada do Heroi e a <strong class="text-white">estrutura narrativa mais poderosa</strong> da humanidade. Quando voce entende essa estrutura, pode criar conteudo e ofertas que ressoam profundamente porque seguem o padrao que <strong class="text-white">nosso cerebro esta programado para reconhecer</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Hero's journey, Mentor role, Trials and rewards, Return transformed.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- A Jornada do Heroi -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🏆</span> Os 8 Estagios da Jornada do Heroi
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-500/20 flex items-center justify-center">
+              <span class="text-gray-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-gray-400 mb-1">Mundo Comum</h4>
+              <p class="text-sm text-neutral-400">A vida atual do seu publico - antes da transformacao. Rotina, frustracoes, limitacoes.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Chamado a Aventura</h4>
+              <p class="text-sm text-neutral-400">O momento em que percebem que precisam mudar. Seu conteudo pode ser esse chamado.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Recusa do Chamado</h4>
+              <p class="text-sm text-neutral-400">Resistencia inicial - medo, duvidas, objecoes. "Nao e pra mim", "Nao tenho tempo".</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Encontro com o Mentor</h4>
+              <p class="text-sm text-neutral-400">VOCE aparece como guia. Oferece ferramentas, conhecimento, encorajamento.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">5</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Cruzando o Limiar</h4>
+              <p class="text-sm text-neutral-400">O momento da decisao - comecar a jornada de verdade. Primeiro passo concreto.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">6</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Provas e Aliados</h4>
+              <p class="text-sm text-neutral-400">Desafios enfrentados, licoes aprendidas, comunidade encontrada. Crescimento atraves da dificuldade.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center">
+              <span class="text-pink-400 font-bold">7</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-pink-400 mb-1">Recompensa</h4>
+              <p class="text-sm text-neutral-400">A conquista - resultado alcancado, transformacao realizada. O premio da jornada.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">8</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Retorno Transformado</h4>
+              <p class="text-sm text-neutral-400">A pessoa volta ao "mundo comum" mas como alguem diferente. Nova identidade estabelecida.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Mapeie a Jornada do Seu Publico
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Preencha cada estagio da jornada pensando especificamente no SEU publico e na transformacao que voce oferece:
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-gray-400 font-semibold mb-2">1. Mundo Comum - Descreva a situacao atual do seu publico:</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">2. Chamado a Aventura - O que desperta neles a vontade de mudar?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">3. Recusa do Chamado - Quais medos e objecoes eles tem?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">4. Encontro com o Mentor - Como VOCE aparece para ajudar?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">5. Cruzando o Limiar - Qual e o primeiro passo que eles precisam dar?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">6. Provas e Aliados - Quais desafios irao enfrentar? Quem pode ajudar?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-pink-400 font-semibold mb-2">7. Recompensa - O que eles conquistam ao completar a jornada?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">8. Retorno Transformado - Quem eles se tornam? Como a vida muda?</p>
+            <div class="h-20 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-blue-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-blue-400">Entrega:</strong> Use este mapa como base para TODA sua comunicacao. Cada peca de conteudo pode abordar um <strong class="text-white">estagio especifico</strong> da jornada. Seu produto/servico e a <strong class="text-white">ponte</strong> que acelera essa jornada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Seu Papel como Mentor -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧙</span> Seu Papel como Mentor
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Na Jornada do Heroi, <strong class="text-white">voce nao e o heroi</strong> - seu cliente e. Voce e o mentor que:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Mostra que a transformacao e possivel</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Fornece ferramentas e conhecimento</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Encoraja nos momentos de duvida</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Ilumina o caminho a seguir</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Celebra as vitorias do heroi</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">✓</span>
+              <span class="text-neutral-300 text-sm">Deixa o heroi brilhar no final</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Mapa da Transformacao</strong>
+              <span class="text-neutral-400"> - Caminho claro do ponto A ao ponto B com marcos intermediarios</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Historias de Transformacao</strong>
+              <span class="text-neutral-400"> - Narrativas de prova social que inspiram acao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Primeiros Passos Claros</strong>
+              <span class="text-neutral-400"> - Acoes especificas e imediatas que quebram a inercia</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Quebrando Objecoes</strong>
+              <span class="text-neutral-400"> - Antecipar e resolver "mas eu nao..." antes que parem a jornada</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Identidade Nova vs Velha</strong>
+              <span class="text-neutral-400"> - Mudanca de quem a pessoa se ve sendo</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Jornada do Heroi</strong>
+              <span class="text-neutral-400"> - Framework completo para mapear e guiar transformacoes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-8.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-2-10.html" class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

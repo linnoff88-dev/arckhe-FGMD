@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.4 - Analise e Otimizacao | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.4</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.4
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📊 Analise e Otimizacao</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Use dados para melhorar continuamente seus resultados. Aprenda a medir o que importa, diagnosticar problemas e criar ciclos de melhoria que aceleram seu crescimento.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Analitico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📈 Metricas que Importam</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nem toda metrica merece sua atencao. Aprenda a distinguir entre <strong class="text-purple-400">vanity metrics</strong> que inflam ego e <strong class="text-purple-400">actionable metrics</strong> que guiam decisoes reais.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Metricas que importam sao <strong class="text-white">indicadores acionaveis</strong> que revelam a saude real do seu negocio digital. Diferente de numeros bonitos que apenas impressionam, essas metricas <strong class="text-white">direcionam decisoes</strong> e mostram exatamente onde investir seu tempo e energia.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores que focam em metricas erradas <strong class="text-white">trabalham muito e progridem pouco</strong>. Ao entender quais numeros realmente movem o ponteiro, voce para de perseguir likes vazios e comeca a construir resultados <strong class="text-white">sustentaveis e lucrativos</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Vanity vs actionable, Leading indicators, Lagging indicators, North star metric.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">73% dos criadores</strong> focam em metricas de vaidade que nao geram receita</li>
+          <li>• Criadores orientados por dados crescem <strong class="text-white">3.2x mais rapido</strong> que os demais</li>
+          <li>• <strong class="text-white">Apenas 12%</strong> dos influenciadores tem uma North Star Metric definida</li>
+          <li>• Empresas que usam leading indicators tomam decisoes <strong class="text-white">40% mais rapidas</strong></li>
+        </ul>
+      </div>
+
+      <!-- Tipos de Metricas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Tipos de Metricas
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">Vanity Metrics</p>
+            <p class="text-neutral-300 text-sm mb-2">Numeros que parecem bons mas nao direcionam acoes.</p>
+            <ul class="text-neutral-400 text-xs space-y-1">
+              <li>• Total de seguidores</li>
+              <li>• Likes absolutos</li>
+              <li>• Visualizacoes brutas</li>
+              <li>• Impressoes totais</li>
+            </ul>
+          </div>
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <p class="text-green-400 font-semibold mb-2">Actionable Metrics</p>
+            <p class="text-neutral-300 text-sm mb-2">Numeros que revelam o que melhorar e onde agir.</p>
+            <ul class="text-neutral-400 text-xs space-y-1">
+              <li>• Taxa de conversao</li>
+              <li>• Engagement rate</li>
+              <li>• Revenue per follower</li>
+              <li>• Retention rate</li>
+            </ul>
+          </div>
+          <div class="bg-blue-900/20 rounded-lg p-4 border border-blue-500/30">
+            <p class="text-blue-400 font-semibold mb-2">Leading Indicators</p>
+            <p class="text-neutral-300 text-sm mb-2">Metricas que predizem resultados futuros.</p>
+            <ul class="text-neutral-400 text-xs space-y-1">
+              <li>• Saves e shares</li>
+              <li>• Comments qualificados</li>
+              <li>• DMs recebidas</li>
+              <li>• Email open rate</li>
+            </ul>
+          </div>
+          <div class="bg-yellow-900/20 rounded-lg p-4 border border-yellow-500/30">
+            <p class="text-yellow-400 font-semibold mb-2">Lagging Indicators</p>
+            <p class="text-neutral-300 text-sm mb-2">Metricas que confirmam resultados passados.</p>
+            <ul class="text-neutral-400 text-xs space-y-1">
+              <li>• Receita total</li>
+              <li>• Numero de vendas</li>
+              <li>• Crescimento mensal</li>
+              <li>• Customer LTV</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- North Star Metric -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⭐</span> North Star Metric
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          A <strong class="text-white">North Star Metric</strong> e a unica metrica que melhor captura o valor central que seu produto/conteudo entrega. Todas as outras metricas devem contribuir para ela.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Tipo de Negocio</th>
+                <th class="text-left py-2 text-purple-400">North Star Metric</th>
+                <th class="text-left py-2 text-purple-400">Por que</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Infoprodutor</td>
+                <td class="py-3">Alunos ativos por semana</td>
+                <td class="py-3">Indica engajamento e sucesso</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Criador de conteudo</td>
+                <td class="py-3">Saves por post</td>
+                <td class="py-3">Indica valor percebido real</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Coach/Consultor</td>
+                <td class="py-3">Leads qualificados/mes</td>
+                <td class="py-3">Indica pipeline de vendas</td>
+              </tr>
+              <tr>
+                <td class="py-3">E-commerce</td>
+                <td class="py-3">Compras recorrentes</td>
+                <td class="py-3">Indica fidelidade real</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Defina sua <strong class="text-white">North Star Metric</strong> hoje. Pergunte: "Se eu pudesse melhorar apenas UM numero, qual teria o maior impacto no meu negocio?" Esse numero deve guiar <strong class="text-white">todas as suas decisoes</strong> de conteudo.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔍 Diagnostico de Performance</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Quando os resultados nao vem, voce precisa de um <strong class="text-purple-400">sistema de diagnostico</strong>. Aprenda a mapear seu funil, identificar gargalos e encontrar a causa raiz dos problemas.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Diagnostico de performance e um <strong class="text-white">processo sistematico</strong> de investigacao que identifica exatamente onde e por que voce esta perdendo resultados. E como um medico que examina sintomas para encontrar a <strong class="text-white">doenca real</strong>, nao apenas tratar a dor superficial.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem diagnostico preciso, voce <strong class="text-white">corrige o problema errado</strong>. Muitos criadores acham que precisam de mais conteudo quando o problema e conversao. Outros investem em anuncios quando o funil esta quebrado. Diagnostico <strong class="text-white">economiza tempo e dinheiro</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Funnel analysis, Drop-off points, Correlation mapping, Root cause.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funnel Analysis -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📈</span> Analise de Funil - Exemplo Pratico
+        </h3>
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <div class="w-full bg-purple-500/30 rounded-lg p-3 relative">
+              <div class="flex justify-between items-center">
+                <span class="text-white font-semibold">Impressoes</span>
+                <span class="text-purple-400">100.000</span>
+              </div>
+              <div class="absolute right-4 top-full text-neutral-500 text-xs mt-1">↓ 30% clicam</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-4/5 bg-purple-500/40 rounded-lg p-3 relative ml-auto">
+              <div class="flex justify-between items-center">
+                <span class="text-white font-semibold">Cliques</span>
+                <span class="text-purple-400">30.000</span>
+              </div>
+              <div class="absolute right-4 top-full text-neutral-500 text-xs mt-1">↓ 10% visitam bio</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-3/5 bg-purple-500/50 rounded-lg p-3 relative ml-auto">
+              <div class="flex justify-between items-center">
+                <span class="text-white font-semibold">Visitas Bio</span>
+                <span class="text-purple-400">3.000</span>
+              </div>
+              <div class="absolute right-4 top-full text-neutral-500 text-xs mt-1">↓ 33% clicam link</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-2/5 bg-purple-500/60 rounded-lg p-3 relative ml-auto">
+              <div class="flex justify-between items-center">
+                <span class="text-white font-semibold">Cliques no Link</span>
+                <span class="text-purple-400">1.000</span>
+              </div>
+              <div class="absolute right-4 top-full text-neutral-500 text-xs mt-1">↓ 5% convertem</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-1/5 bg-purple-600 rounded-lg p-3 ml-auto">
+              <div class="flex justify-between items-center">
+                <span class="text-white font-semibold">Conversoes</span>
+                <span class="text-purple-200">50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-neutral-400 text-sm mt-4">
+          <strong class="text-purple-400">Diagnostico:</strong> O maior drop-off esta entre Cliques e Visitas Bio (90% perda). Prioridade: melhorar CTA e hook para direcionar ao perfil.
+        </p>
+      </div>
+
+      <!-- Drop-off Points -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🚨</span> Drop-off Points Comuns
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">Hook para Retencao</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-white">Sintoma:</strong> Muitas impressoes, poucos views completos</p>
+            <p class="text-neutral-400 text-xs mt-1"><strong>Causa:</strong> Hook fraco ou promessa nao cumprida</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">Conteudo para Engajamento</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-white">Sintoma:</strong> Views altos, engagement baixo</p>
+            <p class="text-neutral-400 text-xs mt-1"><strong>Causa:</strong> Conteudo nao gera reacao emocional</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">Perfil para Follow</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-white">Sintoma:</strong> Muitas visitas, poucos follows</p>
+            <p class="text-neutral-400 text-xs mt-1"><strong>Causa:</strong> Bio confusa ou feed desorganizado</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">Follow para Conversao</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-white">Sintoma:</strong> Muitos seguidores, poucas vendas</p>
+            <p class="text-neutral-400 text-xs mt-1"><strong>Causa:</strong> Falta de funil de vendas estruturado</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root Cause Analysis -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Tecnica dos 5 Porques
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Para encontrar a <strong class="text-white">causa raiz</strong>, pergunte "por que?" cinco vezes consecutivas:
+        </p>
+        <div class="space-y-2 bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-neutral-300"><strong class="text-purple-400">Problema:</strong> Vendas estao baixas</p>
+          <p class="text-neutral-400 text-sm">1. Por que? → Poucas pessoas clicam no link</p>
+          <p class="text-neutral-400 text-sm">2. Por que? → O CTA nao e claro</p>
+          <p class="text-neutral-400 text-sm">3. Por que? → Nao mostro o beneficio</p>
+          <p class="text-neutral-400 text-sm">4. Por que? → Nao conheco a dor do publico</p>
+          <p class="text-neutral-400 text-sm">5. Por que? → <strong class="text-white">Nunca fiz pesquisa com clientes</strong></p>
+          <p class="text-green-400 text-sm mt-2"><strong>Acao real:</strong> Fazer pesquisa qualitativa com 10 clientes</p>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Mapeie seu funil completo uma vez por mes. Use uma planilha simples com as etapas e <strong class="text-white">taxas de conversao entre cada uma</strong>. O ponto com menor conversao e onde voce deve focar primeiro - <strong class="text-white">nao no que parece mais facil</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🧪 Framework de Testes</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Pare de adivinhar o que funciona. Aprenda a rodar <strong class="text-purple-400">testes estruturados</strong> que geram aprendizado real e resultados mensuraveis.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Framework de testes e um <strong class="text-white">processo cientifico</strong> para validar ideias e otimizar resultados. Em vez de fazer mudancas aleatorias e torcer para funcionar, voce cria hipoteses claras, testa de forma controlada e aprende com os <strong class="text-white">dados objetivos</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Intuicao falha frequentemente. O que <strong class="text-white">"parece" que vai funcionar</strong> muitas vezes nao funciona. Testes eliminam achismo e constroem conhecimento cumulativo. Cada teste te deixa <strong class="text-white">mais inteligente</strong> sobre sua audiencia.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              A/B testing, Hypothesis-driven, Control variables, Statistical significance.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrutura do Teste -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Estrutura de um Teste Valido
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Hipotese Clara</h4>
+              <p class="text-sm text-neutral-300">"Se eu mudar X, entao Y vai acontecer, porque Z"</p>
+              <p class="text-neutral-500 text-xs mt-1">Exemplo: "Se eu usar numeros no hook, o CTR aumentara porque gera curiosidade especifica"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Variavel Unica</h4>
+              <p class="text-sm text-neutral-300">Mude apenas UMA coisa por teste. Se mudar varias, nao sabera o que causou o resultado.</p>
+              <p class="text-neutral-500 text-xs mt-1">Exemplo: Mesmo conteudo, mesma thumbnail, apenas hook diferente</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Metrica de Sucesso</h4>
+              <p class="text-sm text-neutral-300">Defina ANTES qual numero dira se funcionou ou nao.</p>
+              <p class="text-neutral-500 text-xs mt-1">Exemplo: "Sucesso = retencao 3s acima de 65%"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Amostra Suficiente</h4>
+              <p class="text-sm text-neutral-300">Espere dados suficientes antes de concluir. Resultados prematuros enganam.</p>
+              <p class="text-neutral-500 text-xs mt-1">Exemplo: Minimo de 1000 impressoes ou 48 horas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Testes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Tipos de Testes para Criadores
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Tipo</th>
+                <th class="text-left py-2 text-purple-400">O que Testar</th>
+                <th class="text-left py-2 text-purple-400">Como Medir</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Hook Test</td>
+                <td class="py-3">Primeiras palavras/segundos</td>
+                <td class="py-3">Retencao inicial</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Format Test</td>
+                <td class="py-3">Carrossel vs Reels vs Static</td>
+                <td class="py-3">Engagement rate</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Timing Test</td>
+                <td class="py-3">Horario de postagem</td>
+                <td class="py-3">Reach em 1h</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">CTA Test</td>
+                <td class="py-3">Tipo de chamada para acao</td>
+                <td class="py-3">Cliques no link</td>
+              </tr>
+              <tr>
+                <td class="py-3">Topic Test</td>
+                <td class="py-3">Temas e angulos</td>
+                <td class="py-3">Saves e shares</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Significancia Estatistica -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Significancia Estatistica Simplificada
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Nem toda diferenca e real. Para confiar no resultado:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-purple-400 mb-2">1000+</p>
+            <p class="text-neutral-300 text-sm">Impressoes minimas por variante</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-purple-400 mb-2">20%+</p>
+            <p class="text-neutral-300 text-sm">Diferenca para ser relevante</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-purple-400 mb-2">3x</p>
+            <p class="text-neutral-300 text-sm">Repetir para confirmar padrao</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Mantenha um <strong class="text-white">log de testes</strong>. Anote: hipotese, variavel testada, resultado, aprendizado. Em 6 meses voce tera um <strong class="text-white">manual personalizado</strong> do que funciona para SUA audiencia - algo que nenhum guru pode te dar.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔄 Ciclo de Melhoria Continua</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Otimizacao nao e um evento, e um <strong class="text-purple-400">processo continuo</strong>. Aprenda frameworks que transformam aprendizado em melhorias constantes e compostas.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O ciclo de melhoria continua e um <strong class="text-white">sistema de iteracao</strong> onde cada acao gera aprendizado, e cada aprendizado melhora a proxima acao. Nao busca perfeicao - busca <strong class="text-white">progresso constante</strong>. Pequenas melhorias de 1% se acumulam exponencialmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores que <strong class="text-white">nao iteram</strong> ficam estagnados. O algoritmo muda, a audiencia evolui, a concorrencia aumenta. Quem tem um sistema de melhoria continua se adapta e <strong class="text-white">cresce consistentemente</strong>, enquanto outros flutuam.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              PDCA cycle, Iteration velocity, Kaizen, Feedback loops.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDCA Cycle -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Ciclo PDCA para Criadores
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-blue-900/20 rounded-lg p-4 border border-blue-500/30">
+            <div class="flex items-center mb-2">
+              <span class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center text-blue-400 font-bold mr-2">P</span>
+              <h4 class="font-semibold text-blue-400">Plan (Planejar)</h4>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Analise dados da semana anterior</li>
+              <li>• Identifique o maior gargalo</li>
+              <li>• Crie hipotese de melhoria</li>
+              <li>• Defina metrica de sucesso</li>
+            </ul>
+          </div>
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <div class="flex items-center mb-2">
+              <span class="w-8 h-8 rounded-full bg-green-500/30 flex items-center justify-center text-green-400 font-bold mr-2">D</span>
+              <h4 class="font-semibold text-green-400">Do (Executar)</h4>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Implemente a mudanca</li>
+              <li>• Mantenha outras variaveis constantes</li>
+              <li>• Documente o que fez</li>
+              <li>• Publique e colete dados</li>
+            </ul>
+          </div>
+          <div class="bg-yellow-900/20 rounded-lg p-4 border border-yellow-500/30">
+            <div class="flex items-center mb-2">
+              <span class="w-8 h-8 rounded-full bg-yellow-500/30 flex items-center justify-center text-yellow-400 font-bold mr-2">C</span>
+              <h4 class="font-semibold text-yellow-400">Check (Verificar)</h4>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Compare com baseline</li>
+              <li>• A hipotese foi confirmada?</li>
+              <li>• Resultado foi significativo?</li>
+              <li>• O que os dados revelam?</li>
+            </ul>
+          </div>
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <div class="flex items-center mb-2">
+              <span class="w-8 h-8 rounded-full bg-red-500/30 flex items-center justify-center text-red-400 font-bold mr-2">A</span>
+              <h4 class="font-semibold text-red-400">Act (Agir)</h4>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Se funcionou: padronize</li>
+              <li>• Se nao funcionou: aprenda</li>
+              <li>• Documente o aprendizado</li>
+              <li>• Inicie novo ciclo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kaizen -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🎌</span> Filosofia Kaizen - Melhorias de 1%
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          O <strong class="text-white">Kaizen</strong> (melhoria continua japonesa) ensina que pequenas melhorias diarias superam grandes mudancas ocasionais.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400 mb-1">1% melhor/dia</p>
+            <p class="text-neutral-400 text-sm">= 37x melhor em 1 ano</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400 mb-1">1% pior/dia</p>
+            <p class="text-neutral-400 text-sm">= 97% pior em 1 ano</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-2xl font-bold text-purple-400 mb-1">Consistencia</p>
+            <p class="text-neutral-400 text-sm">> Perfeicao</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Velocity -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> Velocidade de Iteracao
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Quanto mais rapido voce itera, mais rapido aprende. A <strong class="text-white">velocidade de iteracao</strong> e uma vantagem competitiva:
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Frequencia</th>
+                <th class="text-left py-2 text-purple-400">Testes/Ano</th>
+                <th class="text-left py-2 text-purple-400">Aprendizados</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">1 teste/mes</td>
+                <td class="py-3">12 testes</td>
+                <td class="py-3 text-red-400">Lento</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">1 teste/semana</td>
+                <td class="py-3">52 testes</td>
+                <td class="py-3 text-yellow-400">Moderado</td>
+              </tr>
+              <tr>
+                <td class="py-3">2-3 testes/semana</td>
+                <td class="py-3">100-150 testes</td>
+                <td class="py-3 text-green-400">Acelerado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Reserve <strong class="text-white">30 minutos por semana</strong> para o ciclo PDCA. Domingo a noite ou segunda de manha. Analise a semana, planeje a proxima. <strong class="text-white">Consistencia nessa rotina</strong> gera resultados compostos impressionantes em 6-12 meses.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📋 Dashboards e Rotinas</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Dados so geram valor se voce os <strong class="text-purple-400">consulta regularmente</strong>. Aprenda a criar dashboards eficientes e rotinas de analise que cabem na sua agenda.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Dashboards sao <strong class="text-white">paineis visuais</strong> que consolidam suas metricas mais importantes em um so lugar. Rotinas sao <strong class="text-white">momentos fixos</strong> na sua agenda para analisar esses dados. Juntos, transformam numeros em decisoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem dashboard, voce perde tempo <strong class="text-white">procurando dados</strong> em varios lugares. Sem rotina, voce <strong class="text-white">esquece de olhar</strong>. A combinacao garante que insights virem acoes antes de ser tarde demais.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              KPI dashboard, Weekly review, Monthly deep dive, Alert thresholds.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Essencial -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📊</span> Dashboard Essencial do Criador
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div class="bg-purple-500/10 rounded-lg p-4 border border-purple-500/30 text-center">
+            <p class="text-3xl font-bold text-purple-400">⭐</p>
+            <p class="text-white font-semibold">North Star</p>
+            <p class="text-neutral-400 text-xs">Sua metrica principal</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-blue-400">📈</p>
+            <p class="text-white font-semibold">Crescimento</p>
+            <p class="text-neutral-400 text-xs">Novos seguidores/semana</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-green-400">💬</p>
+            <p class="text-white font-semibold">Engajamento</p>
+            <p class="text-neutral-400 text-xs">Taxa media de engagement</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-3xl font-bold text-yellow-400">💰</p>
+            <p class="text-white font-semibold">Conversao</p>
+            <p class="text-neutral-400 text-xs">Leads ou vendas/mes</p>
+          </div>
+        </div>
+        <p class="text-neutral-400 text-sm">
+          <strong class="text-purple-400">Regra:</strong> Se uma metrica nao guia uma decisao, ela nao deveria estar no dashboard principal.
+        </p>
+      </div>
+
+      <!-- Rotinas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Rotinas de Analise
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-semibold text-green-400">Diaria (5 min)</h4>
+              <span class="text-neutral-500 text-xs">Todo dia de manha</span>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Check rapido: algo fora do normal?</li>
+              <li>• Performance do post de ontem</li>
+              <li>• Alertas criticos (quedas bruscas)</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-semibold text-blue-400">Semanal (30 min)</h4>
+              <span class="text-neutral-500 text-xs">Domingo ou segunda</span>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Comparar com semana anterior</li>
+              <li>• Top 3 posts da semana - por que funcionaram?</li>
+              <li>• Bottom 3 posts - o que deu errado?</li>
+              <li>• Planejar testes da proxima semana</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-semibold text-purple-400">Mensal (2 horas)</h4>
+              <span class="text-neutral-500 text-xs">Primeiro dia do mes</span>
+            </div>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Deep dive em todas as metricas</li>
+              <li>• Tendencias de longo prazo</li>
+              <li>• Funil completo e gargalos</li>
+              <li>• Definir metas do proximo mes</li>
+              <li>• Revisar e atualizar estrategia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alert Thresholds -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🚨</span> Alertas e Thresholds
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Configure alertas para ser notificado quando algo importante acontece:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">Alertas de Queda</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Engagement cai mais de 30%</li>
+              <li>• Reach cai por 3 dias seguidos</li>
+              <li>• Taxa de unfollow sobe 50%</li>
+            </ul>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-green-500/30">
+            <p class="text-green-400 font-semibold mb-2">Alertas de Oportunidade</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Post viraliza (2x media de views)</li>
+              <li>• Pico de DMs ou comentarios</li>
+              <li>• Mencao por perfil grande</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Comece simples. Uma <strong class="text-white">planilha Google Sheets</strong> com 5-10 metricas e um lembrete semanal no calendario ja e suficiente. Nao precisa de ferramentas caras. <strong class="text-white">Consistencia na rotina</strong> importa mais que sofisticacao do dashboard.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Auditoria de Conteudo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">colocar em pratica</strong>. Voce vai auditar seus ultimos 20 conteudos para descobrir padroes de sucesso e fracasso.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Uma <strong class="text-white">auditoria de conteudo</strong> e uma analise sistematica do que voce ja publicou. Em vez de adivinhar o que funciona, voce extrai padroes reais dos seus proprios dados - os mais <strong class="text-white">relevantes para sua audiencia</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Seus melhores insights estao <strong class="text-white">escondidos nos seus dados</strong>. A auditoria revela o que seu publico realmente quer - nao o que voce acha que quer. E a forma mais rapida de melhorar, porque parte do que <strong class="text-white">ja funcionou</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content audit, Pattern recognition, Top/flop analysis, Action plan.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Auditoria dos Ultimos 20 Posts
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Siga os passos abaixo para extrair insights valiosos do seu proprio conteudo.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Passo 1 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Passo 1: Coleta de Dados</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste seus ultimos 20 posts com as seguintes informacoes:</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead>
+                  <tr class="border-b border-dark-600">
+                    <th class="text-left py-2 text-purple-400">Post</th>
+                    <th class="text-left py-2 text-purple-400">Formato</th>
+                    <th class="text-left py-2 text-purple-400">Tema</th>
+                    <th class="text-left py-2 text-purple-400">Hook</th>
+                    <th class="text-left py-2 text-purple-400">Reach</th>
+                    <th class="text-left py-2 text-purple-400">Eng%</th>
+                    <th class="text-left py-2 text-purple-400">Saves</th>
+                  </tr>
+                </thead>
+                <tbody class="text-neutral-400">
+                  <tr class="border-b border-dark-700">
+                    <td class="py-2">1</td>
+                    <td class="py-2"><div class="w-16 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-20 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-24 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-12 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-10 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-10 h-4 bg-dark-700 rounded"></div></td>
+                  </tr>
+                  <tr class="border-b border-dark-700">
+                    <td class="py-2">2</td>
+                    <td class="py-2"><div class="w-16 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-20 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-24 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-12 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-10 h-4 bg-dark-700 rounded"></div></td>
+                    <td class="py-2"><div class="w-10 h-4 bg-dark-700 rounded"></div></td>
+                  </tr>
+                  <tr>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                    <td class="py-2">...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Passo 2: Top/Flop Analysis</p>
+            <p class="text-neutral-400 text-sm mb-3">Identifique seus 5 melhores e 5 piores posts:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-green-900/20 rounded-lg p-3 border border-green-500/30">
+                <p class="text-green-400 font-semibold text-sm mb-2">TOP 5 - O que tem em comum?</p>
+                <div class="space-y-2">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">1.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">2.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">3.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-red-900/20 rounded-lg p-3 border border-red-500/30">
+                <p class="text-red-400 font-semibold text-sm mb-2">FLOP 5 - O que tem em comum?</p>
+                <div class="space-y-2">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">1.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">2.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500 text-xs">3.</span>
+                    <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Passo 3: Reconhecimento de Padroes</p>
+            <p class="text-neutral-400 text-sm mb-3">Responda estas perguntas analisando seus dados:</p>
+            <div class="space-y-3">
+              <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+                <p class="text-neutral-300 text-sm mb-2">Qual formato performa melhor?</p>
+                <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+                <p class="text-neutral-300 text-sm mb-2">Qual tipo de hook gera mais retencao?</p>
+                <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+                <p class="text-neutral-300 text-sm mb-2">Qual tema gera mais saves (valor percebido)?</p>
+                <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+                <p class="text-neutral-300 text-sm mb-2">Qual horario/dia performa melhor?</p>
+                <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Passo 4: Plano de Acao</p>
+            <p class="text-neutral-400 text-sm mb-3">Baseado na analise, defina 3 acoes concretas:</p>
+            <div class="space-y-3">
+              <div class="flex items-start space-x-3">
+                <span class="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-sm font-bold flex-shrink-0">1</span>
+                <div class="flex-1">
+                  <p class="text-neutral-300 text-sm mb-1">FAZER MAIS:</p>
+                  <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-sm font-bold flex-shrink-0">2</span>
+                <div class="flex-1">
+                  <p class="text-neutral-300 text-sm mb-1">FAZER MENOS:</p>
+                  <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-sm font-bold flex-shrink-0">3</span>
+                <div class="flex-1">
+                  <p class="text-neutral-300 text-sm mb-1">TESTAR:</p>
+                  <div class="h-8 bg-dark-600/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Complete a auditoria e <strong class="text-white">implemente as 3 acoes</strong> nas proximas 2 semanas. Repita a auditoria mensalmente para melhoria continua.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist de Qualidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist da Auditoria
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Coletei dados dos ultimos 20 posts?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Identifiquei Top 5 e Flop 5?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Encontrei pelo menos 3 padroes?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Defini acoes especificas?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Agendei proxima auditoria?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Documentei insights para referencia?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Metricas que Importam</strong>
+              <span class="text-neutral-400"> - Vanity vs actionable, leading vs lagging, North Star</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Diagnostico de Performance</strong>
+              <span class="text-neutral-400"> - Funnel analysis, drop-off points, root cause</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Framework de Testes</strong>
+              <span class="text-neutral-400"> - A/B testing, hipoteses, significancia estatistica</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Melhoria Continua</strong>
+              <span class="text-neutral-400"> - PDCA, Kaizen, velocidade de iteracao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Dashboards e Rotinas</strong>
+              <span class="text-neutral-400"> - KPIs, weekly review, monthly deep dive</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Auditoria de Conteudo</strong>
+              <span class="text-neutral-400"> - Top/flop analysis, padroes, plano de acao</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-3.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-5.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

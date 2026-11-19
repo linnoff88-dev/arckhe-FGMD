@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.8 - Gatilho do Pertencimento | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2 - Central</a>
+      <span class="mx-2">/</span>
+      <span class="text-blue-400">Modulo 2.8</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 2.8
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏠 Gatilho do Pertencimento</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Crie comunidade e faca as pessoas quererem ficar. Aprenda a construir tribos leais que se identificam com sua marca e defendem seus valores.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Central</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🏛️ Arquitetura de Comunidade</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Comunidades fortes nao surgem por acaso. Elas sao <strong class="text-blue-400">construidas intencionalmente</strong> com elementos estruturais que criam identidade, rituais e conexao entre membros.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Arquitetura de comunidade e o <strong class="text-white">design intencional</strong> dos elementos que fazem pessoas se sentirem parte de algo maior. Inclui tres pilares fundamentais: <strong class="text-white">identidade</strong> (quem somos), <strong class="text-white">rituais</strong> (o que fazemos juntos) e <strong class="text-white">linguagem</strong> (como nos comunicamos). Quando bem construidos, esses elementos criam um senso de casa que as pessoas nao querem abandonar.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Seguidores vao e vem. <strong class="text-white">Membros de comunidade ficam</strong>. Quando voce cria pertencimento, nao precisa convencer as pessoas a cada novo conteudo ou oferta - elas ja se sentem parte do movimento. Isso reduz custo de aquisicao e <strong class="text-white">aumenta lifetime value</strong> exponencialmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Shared identity, Community rituals, Inside language, Sacred spaces.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">77% dos consumidores</strong> preferem comprar de marcas que compartilham seus valores</li>
+          <li>• Comunidades ativas tem <strong class="text-white">6x mais engajamento</strong> que audiencias passivas</li>
+          <li>• Membros de comunidades fortes tem <strong class="text-white">NPS 50% maior</strong> que clientes comuns</li>
+          <li>• <strong class="text-white">64% das pessoas</strong> citam valores compartilhados como razao principal para se juntarem a grupos</li>
+        </ul>
+      </div>
+
+      <!-- Pilares da Comunidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Os 3 Pilares Estruturais
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Identidade Compartilhada</p>
+            <p class="text-neutral-300 text-sm">Quem somos como grupo? O que nos define? O que nos diferencia dos outros? Um nome, simbolo ou declaracao que unifica.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Rituais Coletivos</p>
+            <p class="text-neutral-300 text-sm">Acoes repetidas que marcam o tempo e criam tradicao. Lives semanais, desafios mensais, celebracoes de conquistas.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Espacos Sagrados</p>
+            <p class="text-neutral-300 text-sm">Lugares (fisicos ou virtuais) onde a comunidade se encontra. Grupos privados, eventos exclusivos, canais dedicados.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplos Praticos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exemplos de Comunidades Bem Arquitetadas
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">Crossfit</p>
+            <p class="text-neutral-300 text-sm">Identidade: atletas, nao academicos. Rituais: WOD diario, competicoes. Linguagem: "Box", "AMRAP", "PR". Espacos: boxes locais como micro-comunidades.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">Apple</p>
+            <p class="text-neutral-300 text-sm">Identidade: criativos, pensadores diferentes. Rituais: keynotes, lancamentos. Linguagem: "Think Different", ecossistema. Espacos: Apple Stores como templos.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">Harley-Davidson</p>
+            <p class="text-neutral-300 text-sm">Identidade: rebeldes, espiritos livres. Rituais: passeios de grupo, rallies anuais. Linguagem: "HOG", brotherhood. Espacos: estradas, eventos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Comece definindo <strong class="text-white">um unico ritual semanal</strong> para sua comunidade. Pode ser uma live, um post de celebracao, ou um desafio. A consistencia cria expectativa e <strong class="text-white">marca o ritmo</strong> da comunidade. O ritual se torna o "bate coracao" do grupo.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🗣️ Linguagem de Tribo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Toda tribo tem sua propria linguagem. Termos, expressoes e codigos que <strong class="text-blue-400">identificam quem faz parte</strong> e quem esta de fora. Dominar esse elemento cria conexao instantanea.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Linguagem de tribo sao os <strong class="text-white">termos, expressoes e codigos</strong> que apenas membros entendem. Funciona como uma "senha" social - quando alguem usa, imediatamente se identifica como parte do grupo. Inclui jargoes, piadas internas, metaforas proprias e ate memes especificos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A linguagem cria <strong class="text-white">barreira de entrada</strong> (exclusividade) e <strong class="text-white">cola social</strong> (pertencimento). Quando alguem entende uma referencia que "so nos entendemos", o vinculo se fortalece. Alem disso, a linguagem <strong class="text-white">diferencia sua comunidade</strong> de todas as outras no mercado.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Tribe language, Inside jokes, Coined terms, Signature phrases.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Linguagem -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Tipos de Linguagem de Tribo
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Termos Inventados</h4>
+              <p class="text-sm text-neutral-400 mb-2">Palavras criadas que nomeiam conceitos proprios da comunidade.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Solopreneur" (empreendedor solo) | "Infoxicacao" (intoxicacao de informacao)</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Piadas Internas</h4>
+              <p class="text-sm text-neutral-400 mb-2">Referencias humoristicas que so quem acompanha entende.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Memes recorrentes, citacoes de momentos marcantes, bordoes do lider</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Frases Assinatura</h4>
+              <p class="text-sm text-neutral-400 mb-2">Expressoes que a comunidade repete e se identifica.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Just Do It" (Nike) | "Think Different" (Apple) | "Bora" (Neymar)</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Acronimos e Abreviacoes</h4>
+              <p class="text-sm text-neutral-400 mb-2">Siglas que economizam tempo e sinalizam conhecimento.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "CTR" (Click Through Rate) | "FOMO" (Fear Of Missing Out) | "MVP"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Como Criar Linguagem de Tribo
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Nomeie Conceitos</p>
+            <p class="text-neutral-300 text-sm">Crie termos para ideias que voce ensina frequentemente. "Efeito scroll", "Sindrome do perfeccionista", "Metodo XYZ".</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Repita Consistentemente</p>
+            <p class="text-neutral-300 text-sm">Use os termos em todo conteudo. A repeticao cria familiaridade e adocao pela comunidade.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Celebre Quem Usa</p>
+            <p class="text-neutral-300 text-sm">Quando membros usam a linguagem, destaque. Isso incentiva adocao e recompensa pertencimento.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Crie um Glossario</p>
+            <p class="text-neutral-300 text-sm">Tenha um documento com todos os termos. Facilita onboarding de novos membros.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Escolha <strong class="text-white">3 conceitos principais</strong> que voce ensina e de um nome proprio para cada um. Use esses nomes <strong class="text-white">repetidamente</strong> em todo conteudo. Em 30 dias, sua audiencia estara usando esses termos entre si - sinal de que a tribo esta se formando.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎯 Valores e Missao Compartilhados</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O que une uma comunidade alem do produto ou conteudo? Um <strong class="text-blue-400">proposito maior</strong> que faz as pessoas sentirem que estao lutando por algo importante juntas.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Valores e missao compartilhados sao o <strong class="text-white">"por que" da comunidade</strong>. Vao alem do "o que" voce vende ou ensina. E a causa maior, o inimigo comum, a visao de futuro que todos perseguem juntos. Quando as pessoas acreditam na missao, elas <strong class="text-white">defendem a comunidade</strong> como se fosse delas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Comunidades baseadas apenas em conteudo ou produto sao <strong class="text-white">facilmente substituiveis</strong>. Comunidades baseadas em valores sao praticamente <strong class="text-white">impossiveis de replicar</strong>. Quando alguem se identifica com seus valores, sair da comunidade significa abandonar parte de quem ela e.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Mission statement, Core values, Shared purpose, Movement building.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Componentes de Missao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧭</span> Componentes de uma Missao Forte
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">O Inimigo Comum</p>
+            <p class="text-neutral-300 text-sm">Contra o que a comunidade luta? Pode ser um sistema, uma mentalidade, um problema. Une as pessoas em oposicao.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: "Contra o marketing manipulativo"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">A Visao de Futuro</p>
+            <p class="text-neutral-300 text-sm">Como sera o mundo quando a comunidade vencer? A promessa coletiva que todos perseguem.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: "Um mundo onde criadores sao donos do proprio tempo"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Os Valores Inegociaveis</p>
+            <p class="text-neutral-300 text-sm">3-5 principios que guiam todas as decisoes. O que a comunidade jamais faria, mesmo se fosse lucrativo?</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: "Transparencia radical, qualidade sobre quantidade"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">A Transformacao Oferecida</p>
+            <p class="text-neutral-300 text-sm">Quem a pessoa se torna ao fazer parte? A identidade aspiracional que a comunidade oferece.</p>
+            <p class="text-neutral-500 text-xs mt-2">Ex: "De funcionario a empreendedor livre"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Exemplos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Exemplos de Missoes Poderosas
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Marca/Comunidade</th>
+                <th class="text-left py-2 text-blue-400">Missao</th>
+                <th class="text-left py-2 text-blue-400">Por que Funciona</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Patagonia</td>
+                <td class="py-3">"Salvar nosso planeta"</td>
+                <td class="py-3">Maior que roupas, une ativistas</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Tesla</td>
+                <td class="py-3">"Acelerar a transicao energetica"</td>
+                <td class="py-3">Compradores viram evangelistas</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Notion</td>
+                <td class="py-3">"Ferramentas que moldam ao seu jeito"</td>
+                <td class="py-3">Comunidade cria templates, tutoriais</td>
+              </tr>
+              <tr>
+                <td class="py-3">FGMD</td>
+                <td class="py-3">"Criadores com estrategia, nao sorte"</td>
+                <td class="py-3">Contra o achismo, a favor da ciencia</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Escreva sua missao em <strong class="text-white">uma frase</strong> e coloque em todo lugar: bio, site, emails, videos. Depois, identifique <strong class="text-white">um inimigo comum</strong> que sua comunidade combate. Pessoas se unem mais facilmente contra algo do que a favor de algo.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🌟 Reconhecimento e Status</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Seres humanos desejam ser <strong class="text-blue-400">vistos, valorizados e reconhecidos</strong>. Sistemas de status bem desenhados recompensam membros ativos e criam aspiracao nos novos.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Reconhecimento e status sao <strong class="text-white">sistemas de recompensa social</strong> que destacam membros que contribuem, engajam ou alcancam resultados. Podem ser formais (niveis, badges) ou informais (mencoes, destaques). O objetivo e fazer as pessoas <strong class="text-white">se sentirem especiais</strong> por fazer parte.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Status e um <strong class="text-white">motivador primario</strong> do comportamento humano. Quando voce cria caminhos claros para ganhar status, os membros se esforçam mais, engajam mais e permanecem mais tempo. Alem disso, membros reconhecidos se tornam <strong class="text-white">evangelistas naturais</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Member spotlight, Status levels, Badges, Public appreciation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sistemas de Status -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🏆</span> Tipos de Sistemas de Status
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Niveis de Membros</p>
+            <p class="text-neutral-300 text-sm mb-2">Progressao baseada em tempo, contribuicao ou investimento. Cada nivel desbloqueia beneficios.</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded">Iniciante</span>
+              <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">Membro</span>
+              <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">Veterano</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded">Elite</span>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Badges e Conquistas</p>
+            <p class="text-neutral-300 text-sm mb-2">Icones ou titulos ganhos por acoes especificas. Colecionar vira um jogo.</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">🎯 Primeiro Resultado</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">🔥 7 Dias Seguidos</span>
+              <span class="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">💡 Top Contribuidor</span>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Destaque Publico</p>
+            <p class="text-neutral-300 text-sm">Mencoes em conteudo, stories de resultado, membro do mes. Reconhecimento visivel para toda comunidade.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Papeis Especiais</p>
+            <p class="text-neutral-300 text-sm">Moderadores, embaixadores, mentores. Responsabilidade = status elevado e maior comprometimento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Impacto do Reconhecimento
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• Membros reconhecidos publicamente tem <strong class="text-white">3x mais chances</strong> de permanecer ativos</li>
+          <li>• <strong class="text-white">69% das pessoas</strong> trabalhariam mais se sentissem mais reconhecidas</li>
+          <li>• Sistemas de gamificacao aumentam engajamento em <strong class="text-white">ate 48%</strong></li>
+          <li>• Membros com badges visíveis geram <strong class="text-white">23% mais conteudo</strong> para a comunidade</li>
+        </ul>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Implemente o <strong class="text-white">"Membro da Semana"</strong> - toda semana destaque alguem que contribuiu, teve resultado ou ajudou outros. Custa zero e gera <strong class="text-white">impacto enorme</strong>. A pessoa reconhecida se torna defensora ferrenha, e os outros se esforçam para ser o proximo.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🚪 Exclusividade e Acesso</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O que esta disponivel apenas para membros? Espacos, conteudos e experiencias <strong class="text-blue-400">exclusivas</strong> que criam o desejo de entrar e o medo de sair.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Exclusividade e acesso sao <strong class="text-white">beneficios reservados</strong> apenas para quem faz parte da comunidade. Podem ser conteudos especiais, areas privadas, eventos fechados ou oportunidades antecipadas. O principio e simples: o que todos tem, <strong class="text-white">ninguem valoriza</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Exclusividade ativa dois gatilhos poderosos: <strong class="text-white">escassez</strong> (nem todos podem ter) e <strong class="text-white">pertencimento</strong> (eu tenho porque sou especial). Alem disso, criar areas exclusivas aumenta o <strong class="text-white">custo percebido de sair</strong> - a pessoa perde acesso a algo valioso.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              VIP access, Members-only, Early access, Behind closed doors.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Exclusividade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔐</span> Niveis de Exclusividade
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Acesso Antecipado (Early Access)</h4>
+              <p class="text-sm text-neutral-300">Membros veem/compram antes de todos. Lancamentos, vagas, conteudos.</p>
+              <p class="text-sm text-neutral-500 mt-1">Ex: "Membros tem 24h de vantagem para garantir vaga"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Conteudo Exclusivo (Members-Only)</h4>
+              <p class="text-sm text-neutral-300">Materiais que nunca serao publicados para o publico geral.</p>
+              <p class="text-sm text-neutral-500 mt-1">Ex: "Bastidores", "Erros e aprendizados", "Templates premium"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Espacos Privados (Behind Closed Doors)</h4>
+              <p class="text-sm text-neutral-300">Grupos, canais ou eventos onde apenas membros participam.</p>
+              <p class="text-sm text-neutral-500 mt-1">Ex: "Grupo VIP no Telegram", "Calls mensais ao vivo"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Experiencias Unicas (VIP Access)</h4>
+              <p class="text-sm text-neutral-300">Momentos que nao podem ser comprados, apenas ganhos.</p>
+              <p class="text-sm text-neutral-500 mt-1">Ex: "Jantar com o fundador", "Mentoria 1:1", "Viagem exclusiva"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">❌ Exclusividade Fraca vs ✅ Exclusividade Forte</h3>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ "Acesso ao grupo"</p>
+              <p class="text-neutral-300 text-sm">Vago, sem valor percebido claro</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ "Grupo com analise diaria de tendencias"</p>
+              <p class="text-neutral-300 text-sm">Especifico, valor tangivel</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ "Conteudo extra"</p>
+              <p class="text-neutral-300 text-sm">Generico, pode ser qualquer coisa</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ "Templates que uso nos meus 6 digitos"</p>
+              <p class="text-neutral-300 text-sm">Especifico, prova implicita de valor</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ "Lives exclusivas"</p>
+              <p class="text-neutral-300 text-sm">Todo mundo faz, nao diferencia</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ "Hot seats ao vivo onde analiso seu perfil"</p>
+              <p class="text-neutral-300 text-sm">Experiencia unica, personalizada</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie uma <strong class="text-white">"sala VIP" virtual</strong> mesmo que pequena. Pode ser um grupo no Telegram, canal no Discord ou lista de emails especial. O simples fato de haver uma porta fechada <strong class="text-white">aumenta o desejo de entrar</strong> e o valor percebido de estar dentro.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Blueprint de Comunidade</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-blue-400">desenhar sua comunidade</strong>. Voce vai criar o blueprint completo: nome, valores, linguagem e rituais.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para criar o <strong class="text-white">DNA da sua comunidade</strong>. Ao final, voce tera um documento completo com todos os elementos estruturais que fazem uma tribo forte e memoravel.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Comunidades criadas por acaso sao <strong class="text-white">fracas e instáveis</strong>. Comunidades desenhadas intencionalmente tem identidade clara, membros engajados e <strong class="text-white">resistem ao tempo</strong>. Este blueprint sera seu guia para construir algo duradouro.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Community canvas, Culture design, Ritual creation, Language dictionary.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Crie Seu Blueprint de Comunidade
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Preencha cada secao com detalhes especificos da sua comunidade. Seja o mais concreto possivel.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Secao 1: Identidade -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-3">1. IDENTIDADE DA COMUNIDADE</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Nome da comunidade/tribo:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Slogan ou frase de identificacao:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Como membros se chamam entre si:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 2: Valores -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-3">2. VALORES E MISSAO</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Missao em uma frase:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">3 valores inegociaveis:</p>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">O inimigo comum que combatemos:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 3: Linguagem -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">3. LINGUAGEM DE TRIBO</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">3 termos proprios que voce vai criar:</p>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Uma frase assinatura que a comunidade vai repetir:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Um emoji ou simbolo que representa o grupo:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 4: Rituais -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-3">4. RITUAIS E ROTINAS</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Ritual semanal (o que acontece toda semana):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Ritual de boas-vindas (como novos membros sao recebidos):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Ritual de celebracao (como comemoramos conquistas):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secao 5: Exclusividade -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-3">5. EXCLUSIVIDADE E STATUS</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">O que so membros tem acesso:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Niveis de membro (do iniciante ao VIP):</p>
+                <div class="grid grid-cols-4 gap-2">
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-sm mb-1">Como vamos reconhecer membros destaque:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-blue-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-blue-400">Entrega:</strong> Preencha o blueprint completo e <strong class="text-white">implemente um elemento por semana</strong>. Comece pelo ritual semanal, depois adicione a linguagem, depois o sistema de reconhecimento. Em 4 semanas, sua comunidade tera estrutura solida.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Comunidade Forte
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Membros sabem quem sao (identidade)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Ha rituais que acontecem regularmente?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Existe linguagem que so nos entendemos?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Membros ativos sao reconhecidos?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Ha algo exclusivo so para membros?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">A missao e clara e inspiradora?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Arquitetura de Comunidade</strong>
+              <span class="text-neutral-400"> - Identidade, rituais e espacos sagrados</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Linguagem de Tribo</strong>
+              <span class="text-neutral-400"> - Termos proprios, piadas internas, frases assinatura</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Valores e Missao</strong>
+              <span class="text-neutral-400"> - O proposito maior que une alem do produto</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Reconhecimento e Status</strong>
+              <span class="text-neutral-400"> - Sistemas para valorizar membros ativos</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Exclusividade e Acesso</strong>
+              <span class="text-neutral-400"> - Areas e experiencias apenas para membros</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Blueprint de Comunidade</strong>
+              <span class="text-neutral-400"> - Documento completo para construir sua tribo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-7.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-2-9.html" class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

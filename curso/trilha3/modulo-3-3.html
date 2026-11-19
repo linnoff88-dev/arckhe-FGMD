@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.3 - Funis de Conteudo | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.3</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.3
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎯 Funis de Conteudo</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Crie jornadas completas que levam o espectador de desconhecido a cliente. Domine a arte de estruturar conteudo estrategico em cada etapa do funil.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Estrategico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🔺 Arquitetura do Funil</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Entenda a estrutura completa de um funil de conteudo e como cada etapa - <strong class="text-purple-400">TOFU, MOFU e BOFU</strong> - trabalha em conjunto para transformar estranhos em clientes fieis.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O funil de conteudo e uma <strong class="text-white">estrutura estrategica</strong> que organiza seu conteudo em camadas, cada uma com objetivos especificos. TOFU (Top of Funnel) atrai, MOFU (Middle of Funnel) nutre, e BOFU (Bottom of Funnel) converte. Nao e sobre postar aleatoriamente - e sobre <strong class="text-white">orquestrar uma jornada</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores posta sem estrategia. Alguns fazem so conteudo de topo (viraliza mas nao vende), outros so fundo (vende mas nao alcanca). <strong class="text-white">O funil equilibra tudo</strong>. Voce atrai pessoas novas, constroi relacionamento e converte - de forma previsivel e escalavel.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              TOFU, MOFU, BOFU, Content mapping, Journey stages, Audience temperature, Awareness ladder.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">79% dos leads</strong> nunca convertem por falta de nurturing adequado</li>
+          <li>• Empresas com funis estruturados tem <strong class="text-white">50% mais conversoes</strong> a custo 33% menor</li>
+          <li>• O cliente medio precisa de <strong class="text-white">7-13 touchpoints</strong> antes de comprar</li>
+          <li>• Conteudo TOFU gera <strong class="text-white">3x mais trafego</strong> que conteudo BOFU</li>
+        </ul>
+      </div>
+
+      <!-- Estrutura do Funil -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🏗️</span> Estrutura Completa do Funil
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold text-sm">TOFU</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Topo do Funil - Descoberta</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Atrair atencao e gerar awareness. Publico frio, desconhecidos.</p>
+              <p class="text-sm text-neutral-300"><strong>Caracteristicas:</strong> Broad appeal, viral potential, entretenimento, educacao basica</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">MOFU</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Meio do Funil - Consideracao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Construir confianca e autoridade. Publico morno, ja te conhece.</p>
+              <p class="text-sm text-neutral-300"><strong>Caracteristicas:</strong> Deep dives, cases, metodologias, conexao pessoal</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">BOFU</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Fundo do Funil - Decisao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Converter em cliente. Publico quente, pronto para comprar.</p>
+              <p class="text-sm text-neutral-300"><strong>Caracteristicas:</strong> Ofertas, provas sociais, depoimentos, CTAs diretos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Mapping -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🗺️</span> Content Mapping - Mapeando a Jornada
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Etapa</th>
+                <th class="text-left py-2 text-purple-400">Estado do Lead</th>
+                <th class="text-left py-2 text-purple-400">Pergunta Mental</th>
+                <th class="text-left py-2 text-purple-400">Tipo de Conteudo</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3 text-green-400">TOFU</td>
+                <td class="py-3">Desconhecido</td>
+                <td class="py-3">"O que e isso?"</td>
+                <td class="py-3">Entretenimento, curiosidades</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3 text-yellow-400">MOFU</td>
+                <td class="py-3">Interessado</td>
+                <td class="py-3">"Por que me importar?"</td>
+                <td class="py-3">Tutoriais, cases, autoridade</td>
+              </tr>
+              <tr>
+                <td class="py-3 text-red-400">BOFU</td>
+                <td class="py-3">Considerando</td>
+                <td class="py-3">"Por que voce?"</td>
+                <td class="py-3">Ofertas, provas, garantias</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Analise seus ultimos 20 conteudos e classifique cada um em TOFU, MOFU ou BOFU. Se mais de <strong class="text-white">70% estiver em uma unica categoria</strong>, seu funil esta desbalanceado. A descoberta desse gap e o primeiro passo para corrigir.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🌊 Conteudo de Descoberta (TOFU)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Conteudo de topo de funil e sua <strong class="text-purple-400">maquina de atracao</strong>. E aqui que voce captura a atencao de pessoas que ainda nem sabem que precisam de voce.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conteudo TOFU e projetado para <strong class="text-white">alcance maximo</strong>. Fala com o publico mais amplo possivel, usando temas universais, formatos virais e ganchos poderosos. O objetivo nao e vender - e <strong class="text-white">ser descoberto</strong>. Pense em conteudo que pessoas compartilham naturalmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem TOFU, seu funil morre de inanicao. Voce pode ter o melhor produto do mundo, mas se ninguem novo te descobre, <strong class="text-white">vende sempre para a mesma base</strong>. TOFU alimenta o topo, trazendo fluxo constante de potenciais clientes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Viral content, Broad appeal, Problem awareness, Hook-heavy, Shareable, Reach optimization.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caracteristicas TOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> 5 Caracteristicas do Conteudo TOFU
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">1. Viral Potential</p>
+            <p class="text-neutral-300 text-sm">Formato e tema que pessoas querem compartilhar. Humor, controversia, utilidade extrema ou emocao forte.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">2. Broad Appeal</p>
+            <p class="text-neutral-300 text-sm">Tema que ressoa com muitas pessoas, nao apenas seu nicho hardcore. Dores universais, desejos comuns.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">3. Problem Awareness</p>
+            <p class="text-neutral-300 text-sm">Faz a pessoa perceber um problema que ela nem sabia que tinha. Abre os olhos para uma realidade.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">4. Hook-Heavy</p>
+            <p class="text-neutral-300 text-sm">Abertura irresistivel. Os primeiros segundos/linhas sao otimizados obsessivamente para parar o scroll.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 md:col-span-2">
+            <p class="text-green-400 font-semibold mb-2">5. Shareable</p>
+            <p class="text-neutral-300 text-sm">Conteudo que as pessoas enviam para amigos. "Voce precisa ver isso" ou "Isso me lembrou voce". O compartilhamento organico e o turbo do TOFU.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplos TOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Exemplos de Conteudo TOFU por Nicho
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Financas Pessoais</p>
+            <p class="text-neutral-300 text-sm">"5 coisas que pessoas ricas fazem que pobres acham 'frescura'" - Curiosidade universal, nao exige conhecimento previo</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Fitness</p>
+            <p class="text-neutral-300 text-sm">"O exercicio que queima mais gordura nao e o que voce pensa" - Subverte expectativa, apela para desejo comum</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Marketing Digital</p>
+            <p class="text-neutral-300 text-sm">"Como essa marca desconhecida fez R$1M em 30 dias sem anuncios" - Story hook + resultado impressionante</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Desenvolvimento Pessoal</p>
+            <p class="text-neutral-300 text-sm">"O habito de 2 minutos que mudou minha produtividade (nao e acordar cedo)" - Promessa facil + anti-cliche</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metricas TOFU -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📈</span> Metricas para Medir TOFU
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-2xl font-bold text-purple-400">Alcance</div>
+            <div class="text-xs text-neutral-400">Pessoas unicas atingidas</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-2xl font-bold text-purple-400">Shares</div>
+            <div class="text-xs text-neutral-400">Compartilhamentos</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-2xl font-bold text-purple-400">Saves</div>
+            <div class="text-xs text-neutral-400">Salvamentos</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-2xl font-bold text-purple-400">Follows</div>
+            <div class="text-xs text-neutral-400">Novos seguidores</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Para criar TOFU eficaz, pergunte: <strong class="text-white">"Alguem que nunca ouviu falar de mim entenderia e se interessaria por isso?"</strong> Se a resposta for nao, o conteudo e muito nichado para topo de funil.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🔥 Conteudo de Nutricao (MOFU)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O meio do funil e onde a <strong class="text-purple-400">magica da confianca acontece</strong>. Aqui voce transforma curiosos em fas, construindo autoridade e conexao genuina.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conteudo MOFU e <strong class="text-white">valor puro sem pedir nada em troca</strong>. E onde voce demonstra expertise, compartilha metodologias, conta historias de transformacao e cria conexao emocional. O publico ja te conhece - agora precisa <strong class="text-white">confiar em voce</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pular MOFU e o erro mais comum. Criadores atraem no TOFU e ja tentam vender (BOFU). <strong class="text-white">Resultado: rejeicao</strong>. MOFU e o aquecimento necessario. Pessoas compram de quem confiam, e confianca se constroi com tempo e valor consistente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Value-first approach, Deep dives, Authority building, Trust triggers, Relationship nurturing.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pilares MOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🏛️</span> Os 4 Pilares do Conteudo MOFU
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">V</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Value-First</h4>
+              <p class="text-sm text-neutral-400 mb-2">Entregue valor real antes de pedir qualquer coisa. Resolva problemas de verdade.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Tutorial completo, framework gratuito, checklist detalhado</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">D</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Deep Dives</h4>
+              <p class="text-sm text-neutral-400 mb-2">Conteudo aprofundado que demonstra dominio real do assunto.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Analise completa de caso, breakdown de estrategia, explicacao tecnica</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">A</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Authority Building</h4>
+              <p class="text-sm text-neutral-400 mb-2">Posicionamento como referencia atraves de resultados e conhecimento.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Cases de sucesso, numeros reais, bastidores de projetos</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">T</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Trust Triggers</h4>
+              <p class="text-sm text-neutral-400 mb-2">Elementos que ativam confianca: vulnerabilidade, consistencia, transparencia.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Confissao de erros, jornada pessoal, opinioes honestas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formatos MOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Formatos Ideais para MOFU
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Carrosseis Educacionais</p>
+            <p class="text-neutral-300 text-sm">Frameworks completos, passo a passo detalhado, comparativos profundos.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Videos Longos</p>
+            <p class="text-neutral-300 text-sm">Tutoriais completos, lives com Q&A, breakdowns detalhados.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Newsletters/Emails</p>
+            <p class="text-neutral-300 text-sm">Conteudo exclusivo, insights pessoais, atualizacoes de bastidores.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Stories/Bastidores</p>
+            <p class="text-neutral-300 text-sm">Dia a dia real, processo criativo, vulnerabilidade autentica.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dados MOFU -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Metricas de Sucesso MOFU
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-xl font-bold text-yellow-400">DMs</div>
+            <div class="text-xs text-neutral-400">Mensagens diretas</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-xl font-bold text-yellow-400">Comments</div>
+            <div class="text-xs text-neutral-400">Qualidade dos comentarios</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-xl font-bold text-yellow-400">Email Opens</div>
+            <div class="text-xs text-neutral-400">Taxa de abertura</div>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center">
+            <div class="text-xl font-bold text-yellow-400">Watch Time</div>
+            <div class="text-xs text-neutral-400">Tempo de visualizacao</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          O conteudo MOFU perfeito e aquele que a pessoa pensa: <strong class="text-white">"Se ele entrega isso de graca, imagina o que tem no pago"</strong>. Nao economize valor - a generosidade genuina constroi confianca inquebravel.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💰 Conteudo de Conversao (BOFU)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O fundo do funil e onde a <strong class="text-purple-400">conversao acontece</strong>. Aqui voce transforma seguidores aquecidos em clientes pagantes atraves de conteudo estrategico.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conteudo BOFU e <strong class="text-white">projetado para converter</strong>. Fala diretamente com quem ja te conhece, confia em voce e esta considerando comprar. Inclui ofertas, provas sociais, tratamento de objecoes e chamadas para acao claras. Nao e para todo mundo - e para <strong class="text-white">quem ja esta pronto</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muitos criadores tem medo de vender. <strong class="text-white">Resultado: audiencia engajada que nunca compra</strong>. BOFU bem feito nao e manipulacao - e facilitar a decisao de quem ja quer comprar. Voce esta ajudando, nao forcando.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Offer content, Objection handling, Social proof, Direct CTA, Urgency triggers, Risk reversal.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elementos BOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Os 4 Elementos do Conteudo BOFU
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">1. Offer Content</p>
+            <p class="text-neutral-300 text-sm">Apresentacao clara da oferta: o que e, para quem, o que inclui, quanto custa. Sem rodeios.</p>
+            <p class="text-neutral-500 text-xs mt-2"><strong>Formato:</strong> Video de vendas, pagina de oferta, post de lancamento</p>
+          </div>
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">2. Objection Handling</p>
+            <p class="text-neutral-300 text-sm">Antecipe e responda as duvidas e medos que impedem a compra. "E se nao funcionar pra mim?"</p>
+            <p class="text-neutral-500 text-xs mt-2"><strong>Formato:</strong> FAQ, video de objecoes, stories respondendo duvidas</p>
+          </div>
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">3. Social Proof</p>
+            <p class="text-neutral-300 text-sm">Depoimentos, casos de sucesso, numeros de alunos/clientes. Prova de que funciona.</p>
+            <p class="text-neutral-500 text-xs mt-2"><strong>Formato:</strong> Depoimentos em video, prints de resultado, antes/depois</p>
+          </div>
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+            <p class="text-red-400 font-semibold mb-2">4. Direct CTA</p>
+            <p class="text-neutral-300 text-sm">Chamada para acao clara e especifica. Diga exatamente o que a pessoa deve fazer agora.</p>
+            <p class="text-neutral-500 text-xs mt-2"><strong>Formato:</strong> Link na bio, swipe up, botao de compra, DM para info</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Conteudo BOFU -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Tipos de Conteudo BOFU
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Depoimentos e Cases</p>
+              <span class="text-xs text-green-400 bg-green-500/20 px-2 py-1 rounded">Alta Conversao</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Historias reais de transformacao. Quanto mais especifico e emocional, melhor.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Comparativos</p>
+              <span class="text-xs text-yellow-400 bg-yellow-500/20 px-2 py-1 rounded">Media Conversao</span>
+            </div>
+            <p class="text-neutral-300 text-sm">"Por que escolher X em vez de Y" - ajuda na decisao de quem esta entre opcoes.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Urgencia e Escassez</p>
+              <span class="text-xs text-red-400 bg-red-500/20 px-2 py-1 rounded">Use com Cuidado</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Vagas limitadas, prazo para bonus, preco promocional. Deve ser real, nunca falso.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Risk Reversal</p>
+              <span class="text-xs text-blue-400 bg-blue-500/20 px-2 py-1 rounded">Remove Objecoes</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Garantias, politica de reembolso, "teste antes de pagar". Elimina o medo de errar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela Objecoes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🛡️</span> Objecoes Mais Comuns e Como Tratar
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Objecao</th>
+                <th class="text-left py-2 text-purple-400">Tipo de Conteudo</th>
+                <th class="text-left py-2 text-purple-400">Exemplo de Abordagem</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"E muito caro"</td>
+                <td class="py-3">ROI breakdown</td>
+                <td class="py-3">Mostrar quanto ganha ou economiza com o resultado</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Nao tenho tempo"</td>
+                <td class="py-3">Case de pessoa ocupada</td>
+                <td class="py-3">Depoimento de quem conseguiu mesmo sem tempo</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">"Funciona pra mim?"</td>
+                <td class="py-3">Perfil ideal + garantia</td>
+                <td class="py-3">Descrever para quem e e oferecer reembolso</td>
+              </tr>
+              <tr>
+                <td class="py-3">"Preciso pensar"</td>
+                <td class="py-3">Escassez real</td>
+                <td class="py-3">Prazo ou vagas limitadas (se verdadeiro)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          O erro mais comum em BOFU e <strong class="text-white">mostrar para publico frio</strong>. Conteudo de venda funciona para quem ja te conhece. Se voce anuncia BOFU para estranhos, parece spam. <strong class="text-white">Reserve BOFU para sua base aquecida</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🔄 Proporcoes e Frequencia</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Qual a proporcao ideal entre TOFU, MOFU e BOFU? E com que frequencia postar cada tipo? A <strong class="text-purple-400">regra 70/20/10</strong> e o ponto de partida.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              A proporcao do funil define <strong class="text-white">quanto de cada tipo de conteudo</strong> voce deve produzir. A regra classica e 70/20/10: 70% TOFU (atracao), 20% MOFU (nutricao), 10% BOFU (conversao). Mas essa proporcao <strong class="text-white">varia conforme seu objetivo</strong> e momento do negocio.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Proporcao errada = resultados fracos. <strong class="text-white">Muito TOFU sem MOFU</strong> = audiencia que nao converte. <strong class="text-white">Muito BOFU</strong> = publico cansado de vendas. <strong class="text-white">So MOFU</strong> = crescimento lento. Equilibrar e a arte.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              70/20/10 rule, Content calendar, Batch rhythm, Launch cycles, Evergreen balance.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regra 70/20/10 -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📊</span> A Regra 70/20/10 em Detalhes
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30 text-center">
+            <div class="text-4xl font-bold text-green-400 mb-2">70%</div>
+            <div class="text-sm text-green-400 font-semibold mb-1">TOFU</div>
+            <div class="text-xs text-neutral-400">Conteudo de atracao e descoberta</div>
+          </div>
+          <div class="bg-yellow-900/20 rounded-lg p-4 border border-yellow-500/30 text-center">
+            <div class="text-4xl font-bold text-yellow-400 mb-2">20%</div>
+            <div class="text-sm text-yellow-400 font-semibold mb-1">MOFU</div>
+            <div class="text-xs text-neutral-400">Conteudo de valor e autoridade</div>
+          </div>
+          <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30 text-center">
+            <div class="text-4xl font-bold text-red-400 mb-2">10%</div>
+            <div class="text-sm text-red-400 font-semibold mb-1">BOFU</div>
+            <div class="text-xs text-neutral-400">Conteudo de conversao e venda</div>
+          </div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-neutral-300 text-sm">
+            <strong class="text-purple-400">Na pratica:</strong> Se voce posta 10x por semana, sao 7 posts TOFU, 2 posts MOFU e 1 post BOFU. Essa proporcao garante crescimento constante sem saturar a audiencia com vendas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Variacoes da Proporcao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚖️</span> Variacoes Conforme o Momento
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase de Crescimento</p>
+              <span class="text-xs text-green-400 bg-green-500/20 px-2 py-1 rounded">80/15/5</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Quando prioridade e ganhar seguidores. Mais TOFU, menos venda. Construir base primeiro.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase de Lancamento</p>
+              <span class="text-xs text-red-400 bg-red-500/20 px-2 py-1 rounded">40/30/30</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Durante lancamento de produto. Mais BOFU temporariamente. Voltar ao normal apos lancamento.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase de Autoridade</p>
+              <span class="text-xs text-yellow-400 bg-yellow-500/20 px-2 py-1 rounded">50/40/10</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Quando quer ser visto como referencia. Mais conteudo profundo e menos viral.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase de Manutencao</p>
+              <span class="text-xs text-blue-400 bg-blue-500/20 px-2 py-1 rounded">60/25/15</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Base estabelecida, vendas constantes. Equilibrio saudavel entre crescer e vender.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendario de Conteudo -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📅</span> Exemplo de Calendario Semanal (10 posts)
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-purple-500/30">
+                <th class="text-left py-2 text-purple-400">Dia</th>
+                <th class="text-left py-2 text-purple-400">Tipo</th>
+                <th class="text-left py-2 text-purple-400">Formato Sugerido</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Segunda</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Reel viral / Hook forte</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Terca</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Post educacional leve</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Quarta</td>
+                <td class="py-2"><span class="text-yellow-400">MOFU</span></td>
+                <td class="py-2">Carrossel profundo</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Quinta</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Trend do momento</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Sexta</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Entretenimento / Humor</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Sabado</td>
+                <td class="py-2"><span class="text-yellow-400">MOFU</span></td>
+                <td class="py-2">Story pessoal / Bastidores</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Domingo</td>
+                <td class="py-2"><span class="text-red-400">BOFU</span></td>
+                <td class="py-2">CTA / Depoimento / Oferta</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Segunda</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Reel viral / Hook forte</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-2">Terca</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Controversia / Opiniao</td>
+              </tr>
+              <tr>
+                <td class="py-2">Quarta</td>
+                <td class="py-2"><span class="text-green-400">TOFU</span></td>
+                <td class="py-2">Dica rapida / Hack</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Use o metodo <strong class="text-white">Batch Rhythm</strong>: produza todo conteudo TOFU em um dia, MOFU em outro, BOFU em outro. Isso mantem o <strong class="text-white">contexto mental</strong> e aumenta qualidade. Gravar 7 reels de uma vez e mais eficiente que 1 por dia.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Mapeamento do Funil</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">colocar em pratica</strong>. Voce vai mapear seu funil atual, identificar gaps e criar um plano de conteudo estrategico.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico de <strong class="text-white">diagnostico e planejamento</strong>. Voce vai analisar seu conteudo atual, classificar em TOFU/MOFU/BOFU, identificar o que esta faltando e criar um calendario equilibrado.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores nunca fez esse exercicio. Eles postam no automatico sem estrategia. <strong class="text-white">Mapear o funil</strong> revela exatamente onde voce esta perdendo oportunidades e o que precisa mudar.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Funnel mapping, Content inventory, Gap analysis, Strategic planning, Content audit.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio Parte 1 -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Parte 1: Inventario de Conteudo
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Liste seus ultimos 20 conteudos e classifique cada um em TOFU, MOFU ou BOFU.
+        </p>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 mb-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-600">
+                  <th class="text-left py-2 text-purple-400">#</th>
+                  <th class="text-left py-2 text-purple-400">Descricao do Conteudo</th>
+                  <th class="text-left py-2 text-purple-400">Tipo</th>
+                  <th class="text-left py-2 text-purple-400">Performance</th>
+                </tr>
+              </thead>
+              <tbody class="text-neutral-300">
+                <tr class="border-b border-dark-700">
+                  <td class="py-2">1</td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-48"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-20"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-16"></div></td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2">2</td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-48"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-20"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-16"></div></td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2">3</td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-48"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-20"></div></td>
+                  <td class="py-2"><div class="h-6 bg-dark-700/50 rounded border border-dark-600 w-16"></div></td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2">...</td>
+                  <td class="py-2 text-neutral-500">Continue ate o 20</td>
+                  <td class="py-2"></td>
+                  <td class="py-2"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-neutral-300 text-sm">
+            <strong class="text-purple-400">Resultado esperado:</strong> Contagem final - Ex: 12 TOFU (60%), 5 MOFU (25%), 3 BOFU (15%)
+          </p>
+        </div>
+      </div>
+
+      <!-- Exercicio Parte 2 -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔍</span> Parte 2: Gap Analysis
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Compare sua proporcao atual com a ideal (70/20/10) e identifique os gaps.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">TOFU</p>
+            <p class="text-neutral-400 text-xs mb-2">Ideal: 70%</p>
+            <p class="text-neutral-300 text-sm mb-1">Seu atual: ____%</p>
+            <p class="text-neutral-300 text-sm">Gap: ____%</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">MOFU</p>
+            <p class="text-neutral-400 text-xs mb-2">Ideal: 20%</p>
+            <p class="text-neutral-300 text-sm mb-1">Seu atual: ____%</p>
+            <p class="text-neutral-300 text-sm">Gap: ____%</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">BOFU</p>
+            <p class="text-neutral-400 text-xs mb-2">Ideal: 10%</p>
+            <p class="text-neutral-300 text-sm mb-1">Seu atual: ____%</p>
+            <p class="text-neutral-300 text-sm">Gap: ____%</p>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-purple-400 font-semibold mb-2">Diagnostico:</p>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-neutral-500">□</span>
+              <span class="text-neutral-300 text-sm">Muito TOFU, pouco MOFU (audiencia que nao engaja profundamente)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-neutral-500">□</span>
+              <span class="text-neutral-300 text-sm">Pouco TOFU (crescimento lento, base estagnada)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-neutral-500">□</span>
+              <span class="text-neutral-300 text-sm">Muito BOFU (audiencia cansada de vendas)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-neutral-500">□</span>
+              <span class="text-neutral-300 text-sm">Pouco BOFU (oportunidades de venda perdidas)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio Parte 3 -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Parte 3: Plano de Acao
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Crie seu calendario de conteudo para as proximas 2 semanas, equilibrando o funil.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">TOFU - 7 ideias de conteudo de atracao:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">6.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2 md:col-span-2">
+                <span class="text-neutral-500">7.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">MOFU - 2 ideias de conteudo de valor:</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">BOFU - 1 ideia de conteudo de conversao:</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-neutral-500">1.</span>
+              <div class="flex-1 h-6 bg-dark-700/50 rounded border border-dark-600"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Preencha todas as partes. Apos 2 semanas, refaca o inventario e compare os resultados. <strong class="text-white">O funil equilibrado gera crescimento + vendas</strong> simultaneamente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist Final -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Validacao do Funil
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho conteudo TOFU que viraliza regularmente?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Meu MOFU constroi autoridade e confianca?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho ofertas claras em BOFU?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">A proporcao esta equilibrada?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho calendario de conteudo definido?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Meco resultados de cada etapa?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Arquitetura do Funil</strong>
+              <span class="text-neutral-400"> - TOFU atrai, MOFU nutre, BOFU converte</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Conteudo TOFU</strong>
+              <span class="text-neutral-400"> - Viral, broad appeal, hook-heavy, shareable</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Conteudo MOFU</strong>
+              <span class="text-neutral-400"> - Value-first, deep dives, authority, trust triggers</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Conteudo BOFU</strong>
+              <span class="text-neutral-400"> - Ofertas, objecoes, prova social, CTA direto</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Proporcao 70/20/10</strong>
+              <span class="text-neutral-400"> - Equilibrio entre atracao, nutricao e conversao</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Mapeamento do Funil</strong>
+              <span class="text-neutral-400"> - Inventario, gap analysis, plano de acao</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-2.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-4.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

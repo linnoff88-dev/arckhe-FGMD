@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.1 - Gatilho da Atencao | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2 - Central</a>
+      <span class="mx-2">/</span>
+      <span class="text-blue-400">Modulo 2.1</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 2.1
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">👁️ Gatilho da Atencao</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Domine a arte de parar o scroll em milissegundos. Aprenda os 5 pilares da interrupcao e crie hooks impossiveis de ignorar.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Central</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎯 Anatomia do Hook Perfeito</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O que faz alguem parar o scroll em <strong class="text-blue-400">milissegundos</strong>? Entender a anatomia do hook perfeito e a diferenca entre ser visto ou ser ignorado.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O hook e o <strong class="text-white">primeiro elemento de contato</strong> entre seu conteudo e o cerebro do espectador. Em videos, sao os primeiros 1-3 segundos. Em textos, a primeira linha. Em imagens, o elemento visual dominante. O hook nao vende - ele <strong class="text-white">interrompe</strong>. Sua unica funcao e fazer o cerebro automatico pausar e dizer "espera, o que e isso?".
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem um hook eficaz, <strong class="text-white">nada mais importa</strong>. O melhor conteudo do mundo e inutil se ninguem para para ver. O algoritmo mede retencao nos primeiros segundos - se as pessoas passam, seu conteudo e <strong class="text-white">enterrado</strong>. Hooks sao a porta de entrada para tudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Interrupcao cognitiva, primeiros 3 segundos, pattern interrupt, tensao imediata, promessa implicita.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">65% das pessoas</strong> decidem continuar ou sair nos primeiros 3 segundos</li>
+          <li>• Hooks com <strong class="text-white">elemento de surpresa</strong> aumentam retencao em 47%</li>
+          <li>• Videos com hooks fracos perdem <strong class="text-white">80% da audiencia</strong> nos primeiros 10 segundos</li>
+          <li>• A taxa de scroll medio no Instagram e de <strong class="text-white">1.7 segundos por post</strong></li>
+        </ul>
+      </div>
+
+      <!-- Elementos do Hook -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Elementos do Hook Perfeito
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Elemento Visual</p>
+            <p class="text-neutral-300 text-sm">Cor, movimento, contraste ou composicao que quebra o padrao visual do feed.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Elemento Verbal</p>
+            <p class="text-neutral-300 text-sm">Primeira frase que cria tensao, curiosidade ou promessa implicita.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Elemento Emocional</p>
+            <p class="text-neutral-300 text-sm">Gatilho que ativa uma resposta emocional imediata (medo, curiosidade, raiva, esperanca).</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Elemento de Promessa</p>
+            <p class="text-neutral-300 text-sm">Indicacao implicita de que algo valioso esta por vir se a pessoa continuar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Grave/escreva <strong class="text-white">10 versoes diferentes</strong> do mesmo hook antes de escolher. O primeiro que vem a mente geralmente e o mais generico. A versao 7, 8 ou 9 costuma ser a mais original.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">⚡ Os 5 Pilares da Interrupcao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Existem 5 formas fundamentais de <strong class="text-blue-400">interromper o fluxo automatico</strong> do cerebro: Ruptura, Assimetria, Inversao, Inevitabilidade e Travessia. Dominar esses pilares e ter um arsenal infinito de hooks.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Os 5 Pilares sao <strong class="text-white">categorias fundamentais de interrupcao cognitiva</strong>. Cada pilar ataca um aspecto diferente do cerebro automatico. Nao sao formulas prontas - sao <strong class="text-white">principios</strong> que podem ser combinados e adaptados para qualquer formato ou nicho.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores usa <strong class="text-white">sempre o mesmo tipo de hook</strong> (geralmente o mais obvio do nicho). Dominar os 5 pilares permite <strong class="text-white">variar infinitamente</strong>, nunca ficar previsivel, e sempre ter opcoes quando um estilo para de funcionar.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Ruptura de padrao, assimetria cognitiva, inversao de expectativa, inevitabilidade, jornada de travessia.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Pilares Detalhados -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🏛️</span> Os 5 Pilares em Detalhes
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">R</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Ruptura</h4>
+              <p class="text-sm text-neutral-400 mb-2">Quebra abrupta do padrao esperado. O cerebro espera X, voce entrega Y.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Nao assista esse video" | "Esse e o pior conselho que voce vai ouvir hoje"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">A</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Assimetria</h4>
+              <p class="text-sm text-neutral-400 mb-2">Desbalanco que gera tensao. Algo nao fecha, nao combina, nao se encaixa.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Milionario que mora em kitnet" | "A especialista que nao segue o proprio conselho"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">I</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Inversao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Virar o mundo de cabeca para baixo. O que e bom e ruim, o que e ruim e bom.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Por que voce deveria fracassar mais" | "Procrastinacao e uma habilidade"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">I</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Inevitabilidade</h4>
+              <p class="text-sm text-neutral-400 mb-2">Algo que a pessoa nao pode ignorar porque afeta diretamente ela.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Se voce usa Instagram, isso te afeta" | "Voce ja fez isso hoje sem perceber"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">T</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Travessia</h4>
+              <p class="text-sm text-neutral-400 mb-2">Jornada de transformacao que a pessoa quer fazer. De A para B.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "De zero a 10k seguidores em 90 dias" | "Como sai do burnout para energia infinita"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela Comparativa -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Quando Usar Cada Pilar
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Pilar</th>
+                <th class="text-left py-2 text-blue-400">Melhor Para</th>
+                <th class="text-left py-2 text-blue-400">Evitar Quando</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Ruptura</td>
+                <td class="py-3">Nichos saturados, publico cansado</td>
+                <td class="py-3">Publico conservador, temas sensiveis</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Assimetria</td>
+                <td class="py-3">Storytelling, cases reais</td>
+                <td class="py-3">Conteudo muito tecnico</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Inversao</td>
+                <td class="py-3">Conteudo educacional, desmistificacao</td>
+                <td class="py-3">Quando a inversao e forcada</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Inevitabilidade</td>
+                <td class="py-3">Urgencia, awareness, alertas</td>
+                <td class="py-3">Se parece manipulativo</td>
+              </tr>
+              <tr>
+                <td class="py-3">Travessia</td>
+                <td class="py-3">Vendas, transformacao, resultados</td>
+                <td class="py-3">Sem prova social ou case</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Combine 2 pilares</strong> para hooks mais poderosos. Exemplo: Inversao + Inevitabilidade = "Quanto mais voce tenta ser produtivo, menos produz (e voce faz isso todo dia)".
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">📝 Formulas de Hook por Formato</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cada formato tem suas proprias regras. Um hook que funciona em <strong class="text-blue-400">video</strong> pode falhar em <strong class="text-blue-400">texto</strong>. Aprenda templates adaptados para cada plataforma.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Formulas de hook sao <strong class="text-white">templates testados</strong> que funcionam consistentemente em cada formato. Nao sao para copiar literalmente - sao <strong class="text-white">estruturas</strong> que voce adapta ao seu nicho e estilo. Cada formato tem regras proprias de tempo, espaco e comportamento do usuario.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ter formulas evita <strong class="text-white">bloqueio criativo</strong>. Quando voce nao sabe como comecar, pega uma formula e adapta. Alem disso, formulas testadas <strong class="text-white">reduzem risco</strong> - voce parte de algo que ja funciona em vez de inventar do zero.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Templates adaptaveis, estrutura por formato, gap de curiosidade, promessa implicita.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulas para Video -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎬</span> Formulas para Video (Reels/TikTok/Shorts)
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">1. Pergunta Provocativa</p>
+            <p class="text-neutral-300 text-sm">"Voce sabia que [fato surpreendente]?"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Voce sabia que 90% dos criadores desistem antes de ver resultado?"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">2. Promessa Direta</p>
+            <p class="text-neutral-300 text-sm">"Em [tempo], voce vai saber [resultado]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Em 60 segundos, voce vai saber exatamente por que seus reels nao viralizam"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">3. Comando + Motivo</p>
+            <p class="text-neutral-300 text-sm">"Para de [acao] - [consequencia]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Para de postar todo dia - isso ta matando seu perfil"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">4. Declaracao Controversa</p>
+            <p class="text-neutral-300 text-sm">"[Crenca popular] e mentira"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Consistencia e mentira - e isso que realmente funciona"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulas para Texto -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✍️</span> Formulas para Texto (Threads/Carrosséis/Legendas)
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">1. Historia Incompleta</p>
+            <p class="text-neutral-300 text-sm">"[Situacao] ate que [virada]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Tinha 200 seguidores ha 6 meses. Ontem bati 50k. Isso mudou tudo:"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">2. Lista Numerada</p>
+            <p class="text-neutral-300 text-sm">"[N] [coisas] que [resultado]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "7 erros de copywriting que matam suas vendas (o 5 e o mais comum)"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">3. Confissao</p>
+            <p class="text-neutral-300 text-sm">"Preciso confessar [algo vulneravel]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Preciso confessar que menti pra voces. Durante meses fingi que..."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-1">4. Comparacao</p>
+            <p class="text-neutral-300 text-sm">"[Antes] vs [Depois]"</p>
+            <p class="text-neutral-500 text-xs mt-1">Exemplo: "Eu de 2022 vs Eu de 2024. Mesma camera, mesma luz. Diferente: tudo."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulas para Audio e Imagem -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+            <span class="mr-2">🎙️</span> Formulas para Audio (Podcast)
+          </h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Teaser:</strong> "O que voce vai ouvir agora pode mudar [area]"</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Contexto:</strong> "Estava pensando em [tema] quando [insight]"</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Citacao:</strong> "Alguem me disse [frase impactante]"</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+            <span class="mr-2">🖼️</span> Formulas para Imagem (Feed)
+          </h3>
+          <div class="space-y-3">
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Contraste:</strong> Elemento visual que destoa do esperado</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Texto Bold:</strong> Frase curta e impactante em destaque</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-neutral-300 text-sm"><strong class="text-blue-400">Reacao:</strong> Expressao facial exagerada ou inusitada</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie um <strong class="text-white">arquivo swipe</strong> com hooks que funcionaram no seu nicho. Quando precisar criar, consulte o arquivo e adapte. <strong class="text-white">Nao copie</strong> - use como inspiracao e aplique os pilares.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📊 Metricas de Atencao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Como saber se seu hook esta funcionando? Existem <strong class="text-blue-400">metricas especificas</strong> que revelam a eficiencia do seu gatilho de atencao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Metricas de atencao sao <strong class="text-white">indicadores quantificaveis</strong> que mostram se seu hook esta cumprindo sua funcao de parar o scroll. Diferentes plataformas oferecem diferentes metricas, mas todas revelam <strong class="text-white">o mesmo fenomeno</strong>: a pessoa parou ou passou?
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sem medir, voce esta no <strong class="text-white">escuro</strong>. Achismo nao constroi audiencia. Quando voce sabe interpretar metricas, consegue <strong class="text-white">iterar rapidamente</strong> - testar, medir, ajustar, repetir. Isso acelera resultados exponencialmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Taxa de retencao inicial, impressoes vs alcance, tempo medio de visualizacao, taxa de scroll-through.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metricas por Plataforma -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📈</span> Metricas por Plataforma
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Plataforma</th>
+                <th class="text-left py-2 text-blue-400">Metrica-Chave</th>
+                <th class="text-left py-2 text-blue-400">Benchmark Bom</th>
+                <th class="text-left py-2 text-blue-400">O que Revela</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Instagram Reels</td>
+                <td class="py-3">Retencao 3s</td>
+                <td class="py-3">&gt; 60%</td>
+                <td class="py-3">Hook prendeu ou nao</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">TikTok</td>
+                <td class="py-3">Watch Time</td>
+                <td class="py-3">&gt; 50% do video</td>
+                <td class="py-3">Conteudo manteve atencao</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">YouTube Shorts</td>
+                <td class="py-3">Retencao curva</td>
+                <td class="py-3">Sem queda brusca</td>
+                <td class="py-3">Ponto exato de abandono</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Feed Instagram</td>
+                <td class="py-3">Alcance/Impressoes</td>
+                <td class="py-3">&gt; 0.7 ratio</td>
+                <td class="py-3">Pessoas pararam para ver</td>
+              </tr>
+              <tr>
+                <td class="py-3">LinkedIn</td>
+                <td class="py-3">Dwell Time</td>
+                <td class="py-3">&gt; 5s medio</td>
+                <td class="py-3">Texto prendeu leitura</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Como Interpretar -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Como Interpretar os Numeros
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Retencao Alta + Baixo Engajamento</p>
+            <p class="text-neutral-300 text-sm">Hook funciona, mas conteudo nao conecta. Problema esta no meio ou fim.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Retencao Baixa + Alto Engajamento</p>
+            <p class="text-neutral-300 text-sm">Quem fica ama, mas muitos saem. Hook nao filtra bem ou e fraco.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Muitas Impressoes + Baixo Alcance</p>
+            <p class="text-neutral-300 text-sm">Mesmo publico vendo varias vezes. Hook nao expande audiencia.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Queda Brusca nos 3 Primeiros Segundos</p>
+            <p class="text-neutral-300 text-sm">Hook falhou completamente. Repensar abertura urgentemente.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie uma <strong class="text-white">planilha de tracking</strong> para seus ultimos 20 conteudos. Anote: tipo de hook usado, pilar aplicado, retencao inicial, engajamento. Em 30 dias voce tera <strong class="text-white">dados suficientes</strong> para saber exatamente o que funciona para sua audiencia.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">❌ Erros Fatais de Atencao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Existem erros que <strong class="text-blue-400">destroem hooks</strong> mesmo quando a ideia e boa. Conhecer esses erros evita meses de frustacao com resultados fracos.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Erros fatais sao <strong class="text-white">padroes destrutivos</strong> que criadores repetem sem perceber. Sao armadilhas cognitivas onde caimos por instinto, preguica ou imitacao cega. Identificar esses padroes e o primeiro passo para <strong class="text-white">elimina-los</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voce pode estar cometendo esses erros <strong class="text-white">agora mesmo</strong> sem saber. Muitos criadores trabalham duro mas sabotam o proprio conteudo logo no inicio. Conhecer os erros permite <strong class="text-white">auditoria imediata</strong> do que voce ja produz.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Clickbait toxico, genericidade, promessa vazia, frontloading errado, anti-pattern.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Erros -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">🚨</span> Os 5 Erros Fatais
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">1</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Clickbait Toxico</p>
+                <p class="text-neutral-300 text-sm mb-2">Promessa exagerada que o conteudo nao entrega. Gera clique mas destroi confianca.</p>
+                <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> "Isso vai mudar sua vida PARA SEMPRE" → conteudo generico</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">2</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Hooks Genericos</p>
+                <p class="text-neutral-300 text-sm mb-2">Frases que qualquer pessoa do nicho poderia dizer. Nao tem personalidade nem especificidade.</p>
+                <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> "Voce precisa ver isso" | "Vou te contar um segredo"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">3</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Falta de Promessa</p>
+                <p class="text-neutral-300 text-sm mb-2">Hook que nao indica o que a pessoa vai ganhar se continuar. Sem incentivo para ficar.</p>
+                <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> "Entao, hoje eu queria falar sobre..." (sem direcao)</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">4</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Introducao Desnecessaria</p>
+                <p class="text-neutral-300 text-sm mb-2">Comecar com "oi gente", "bom dia", apresentacao. Desperdicar os segundos mais valiosos.</p>
+                <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> "Oi gente, tudo bem? Hoje eu vou falar sobre..." (5 segundos perdidos)</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">5</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Hook Desconectado</p>
+                <p class="text-neutral-300 text-sm mb-2">Abertura que nao tem relacao com o conteudo. Atrai publico errado ou decepciona quem fica.</p>
+                <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> Hook polemico → conteudo tecnico chato (descasamento)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao Antes/Depois -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">❌ Erro → ✅ Correcao</h3>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Generico</p>
+              <p class="text-neutral-300 text-sm">"Dicas de produtividade que voce precisa saber"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Especifico</p>
+              <p class="text-neutral-300 text-sm">"A tecnica de 2 minutos que me fez parar de procrastinar email"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Sem promessa</p>
+              <p class="text-neutral-300 text-sm">"Vou falar sobre investimentos hoje"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Com promessa</p>
+              <p class="text-neutral-300 text-sm">"O erro de investimento que me custou R$50k (e como evitar)"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Introducao longa</p>
+              <p class="text-neutral-300 text-sm">"Oi gente! Tudo bem com voces? Hoje eu queria..."</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Direto ao ponto</p>
+              <p class="text-neutral-300 text-sm">"Tres erros que estao matando seu engajamento:"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Teste de Qualidade
+        </h3>
+        <p class="text-neutral-300">
+          Antes de publicar, pergunte: <strong class="text-white">"Se eu visse esse hook scrollando, pararia?"</strong> Seja honesto. Se a resposta for "talvez", o hook precisa melhorar. <strong class="text-white">"Talvez" e "nao"</strong> no digital.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico - Banco de Hooks</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-blue-400">colocar em pratica</strong>. Voce vai criar um banco de 20 hooks usando os 5 pilares da interrupcao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para criar um <strong class="text-white">arsenal de hooks</strong> que voce podera usar nos proximos meses. Ao final, voce tera 20 hooks prontos para adaptar e usar em qualquer conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ter um banco de hooks <strong class="text-white">elimina bloqueio criativo</strong>. Quando precisar criar conteudo, voce consulta seu banco e adapta. Isso <strong class="text-white">acelera producao</strong> e garante qualidade consistente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Banco de ideias, variedade de pilares, adaptacao por formato, iteracao continua.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Crie Seu Banco de 20 Hooks
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Usando os 5 pilares, crie 4 hooks para cada pilar (total: 20 hooks). Adapte ao seu nicho.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">Pilar 1: RUPTURA (4 hooks)</p>
+            <p class="text-neutral-400 text-sm mb-3">Crie 4 hooks que quebram o padrao esperado do seu nicho.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">Pilar 2: ASSIMETRIA (4 hooks)</p>
+            <p class="text-neutral-400 text-sm mb-3">Crie 4 hooks que mostram algo que nao se encaixa, nao combina.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">6.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">7.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">8.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">Pilar 3: INVERSAO (4 hooks)</p>
+            <p class="text-neutral-400 text-sm mb-3">Crie 4 hooks que viram uma crenca popular de cabeca para baixo.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">9.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">10.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">11.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">12.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">Pilar 4: INEVITABILIDADE (4 hooks)</p>
+            <p class="text-neutral-400 text-sm mb-3">Crie 4 hooks que mostram algo que afeta diretamente a pessoa.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">13.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">14.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">15.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">16.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Pilar 5: TRAVESSIA (4 hooks)</p>
+            <p class="text-neutral-400 text-sm mb-3">Crie 4 hooks que mostram uma jornada de transformacao.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">17.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">18.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">19.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">20.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-blue-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-blue-400">Entrega:</strong> Preencha todos os 20 hooks. Depois, escolha os <strong class="text-white">5 melhores</strong> (um de cada pilar) e use nos proximos conteudos. <strong class="text-white">Meça os resultados</strong> e refine continuamente seu banco.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist de Qualidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Qualidade para Cada Hook
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">E especifico (nao generico)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Cria tensao ou curiosidade?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Tem promessa implicita?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Funciona no seu formato principal?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Voce pararia para ver?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Conecta com o conteudo que segue?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Anatomia do Hook</strong>
+              <span class="text-neutral-400"> - Visual, verbal, emocional e promessa em milissegundos</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">5 Pilares da Interrupcao</strong>
+              <span class="text-neutral-400"> - Ruptura, Assimetria, Inversao, Inevitabilidade, Travessia</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Formulas por Formato</strong>
+              <span class="text-neutral-400"> - Templates para video, texto, audio e imagem</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Metricas de Atencao</strong>
+              <span class="text-neutral-400"> - Como medir e interpretar performance de hooks</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Erros Fatais</strong>
+              <span class="text-neutral-400"> - Clickbait, genericidade, falta de promessa</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Banco de Hooks</strong>
+              <span class="text-neutral-400"> - Arsenal de 20 hooks usando os 5 pilares</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Voltar para Trilha 2
+          </a>
+          <a href="modulo-2-2.html" class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

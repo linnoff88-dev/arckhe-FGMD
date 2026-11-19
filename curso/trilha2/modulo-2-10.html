@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.10 - Gatilho do CTA | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2 - Central</a>
+      <span class="mx-2">/</span>
+      <span class="text-blue-400">Modulo 2.10</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 2.10
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎯 Gatilho do CTA</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Converta interesse em acao com chamadas irresistiveis. Domine a arte de fazer pessoas clicarem, comentarem, comprarem e agirem.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Central</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎯 Anatomia do CTA Perfeito</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O que faz alguem clicar, comentar ou comprar? Entender os <strong class="text-blue-400">elementos que convertem</strong> e a diferenca entre criar curiosidade e gerar acao real.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              CTA (Call to Action) e o <strong class="text-white">comando explicito</strong> que direciona o proximo passo da audiencia. Nao e apenas "clique aqui" - e uma <strong class="text-white">ponte estrategica</strong> entre o interesse gerado e a acao desejada. O CTA perfeito combina clareza, urgencia, beneficio claro e friccao minima para tornar a acao <strong class="text-white">irresistivel</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voce pode ter o melhor conteudo, gerar interesse intenso, mas se o CTA for fraco, <strong class="text-white">nada acontece</strong>. CTAs sao o ponto de conversao - onde interesse vira acao, seguidor vira cliente, visualizacao vira receita. Um CTA 10% melhor pode significar <strong class="text-white">10x mais resultados</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Clarity, Urgency, Benefit, Friction reduction, Single action.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• CTAs personalizados convertem <strong class="text-white">202% melhor</strong> que CTAs genericos</li>
+          <li>• Adicionar urgencia ao CTA aumenta conversoes em <strong class="text-white">33%</strong></li>
+          <li>• CTAs com beneficio claro tem <strong class="text-white">47% mais cliques</strong></li>
+          <li>• Reduzir de 2 cliques para 1 clique aumenta conversao em <strong class="text-white">62%</strong></li>
+        </ul>
+      </div>
+
+      <!-- Elementos do CTA Perfeito -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Os 4 Elementos do CTA Perfeito
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">1. Clareza Total</p>
+            <p class="text-neutral-300 text-sm">A pessoa sabe EXATAMENTE o que vai acontecer quando agir. Zero ambiguidade.</p>
+            <p class="text-neutral-500 text-xs mt-2">Exemplo: "Baixe o PDF gratuito" vs "Saiba mais"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">2. Urgencia Real</p>
+            <p class="text-neutral-300 text-sm">Razao convincente para agir AGORA, nao depois. Escassez ou deadline autentico.</p>
+            <p class="text-neutral-500 text-xs mt-2">Exemplo: "Ultimas 3 vagas" | "Oferta expira hoje"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">3. Beneficio Imediato</p>
+            <p class="text-neutral-300 text-sm">O que a pessoa GANHA ao agir. Foco no resultado, nao no processo.</p>
+            <p class="text-neutral-500 text-xs mt-2">Exemplo: "Dobre suas vendas" vs "Faca o curso"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">4. Friccao Minima</p>
+            <p class="text-neutral-300 text-sm">Menor numero possivel de passos, cliques, formularios. Caminho mais curto.</p>
+            <p class="text-neutral-500 text-xs mt-2">Exemplo: 1 clique > 2 cliques > formulario longo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula do CTA -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">🧪</span> Formula do CTA Perfeito
+        </h3>
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 mb-4">
+          <p class="text-xl text-center font-mono text-blue-400">
+            [ACAO] + [BENEFICIO] + [URGENCIA] = CTA Irresistivel
+          </p>
+        </div>
+        <div class="space-y-2 text-neutral-300">
+          <p><strong class="text-white">Exemplo fraco:</strong> "Clique aqui"</p>
+          <p><strong class="text-white">Exemplo medio:</strong> "Baixe o guia"</p>
+          <p><strong class="text-white">Exemplo forte:</strong> "Baixe o guia e triplique seu engajamento - gratis por 24h"</p>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Teste de 5 segundos:</strong> Mostre seu CTA para alguem por 5 segundos. Pergunte: "O que voce faria e por que agora?". Se a pessoa hesitar ou nao souber responder, seu CTA precisa de trabalho.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📍 Posicionamento Estrategico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Onde e quando colocar CTAs para <strong class="text-blue-400">maximizar conversao</strong>. O mesmo CTA em posicoes diferentes pode ter resultados drasticamente diferentes.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Posicionamento estrategico e a <strong class="text-white">ciencia de colocar CTAs no momento exato</strong> em que a pessoa esta mais propensa a agir. Nao e sobre quantidade - e sobre <strong class="text-white">timing e contexto</strong>. Um CTA no momento errado e ignorado; no momento certo, e irresistivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores coloca CTAs <strong class="text-white">so no final</strong> - quando metade da audiencia ja foi embora. Ou coloca cedo demais, antes de gerar interesse. Dominar posicionamento multiplica conversoes <strong class="text-white">sem mudar o CTA em si</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Timing, Placement, Multiple CTAs, Exit intent, Peak emotion.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Momentos Estrategicos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">⏰</span> Os 5 Momentos Estrategicos para CTA
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Pico de Emocao</h4>
+              <p class="text-sm text-neutral-400 mb-2">Imediatamente apos gerar uma resposta emocional forte (raiva, esperanca, medo, desejo).</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Apos contar historia de transformacao → "Voce tambem pode..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Apos Entrega de Valor</h4>
+              <p class="text-sm text-neutral-400 mb-2">Depois de dar algo valioso, quando reciprocidade esta ativa.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Gostou dessas 5 dicas? O guia completo tem 37 mais..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Ponto de Dor Intenso</h4>
+              <p class="text-sm text-neutral-400 mb-2">Quando a audiencia sente mais fortemente o problema que voce resolve.</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> Apos descrever frustracoes → "Existe um caminho diferente..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Exit Intent</h4>
+              <p class="text-sm text-neutral-400 mb-2">Quando a pessoa esta prestes a sair (final do video, scroll para baixo).</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> "Antes de sair..." | Pop-up de saida com oferta especial</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">5</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Multiplas Exposicoes</h4>
+              <p class="text-sm text-neutral-400 mb-2">Repetir CTA em diferentes formatos ao longo do conteudo (texto, botao, verbal).</p>
+              <p class="text-sm text-neutral-300"><strong>Exemplo:</strong> CTA no inicio (teaser), meio (lembrete), fim (fechamento)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Posicionamento por Formato -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Posicionamento por Formato
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Formato</th>
+                <th class="text-left py-2 text-blue-400">Posicao Ideal</th>
+                <th class="text-left py-2 text-blue-400">Quantidade</th>
+                <th class="text-left py-2 text-blue-400">Estilo</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Video Curto</td>
+                <td class="py-3">Ultimos 3-5 segundos</td>
+                <td class="py-3">1 CTA</td>
+                <td class="py-3">Direto, verbal + texto</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Video Longo</td>
+                <td class="py-3">Apos cada entrega + final</td>
+                <td class="py-3">2-3 CTAs</td>
+                <td class="py-3">Natural, contextual</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Carrossel</td>
+                <td class="py-3">Ultimo slide + legenda</td>
+                <td class="py-3">2 CTAs</td>
+                <td class="py-3">Visual + texto</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Post/Thread</td>
+                <td class="py-3">Final + P.S.</td>
+                <td class="py-3">1-2 CTAs</td>
+                <td class="py-3">Texto conversacional</td>
+              </tr>
+              <tr>
+                <td class="py-3">Stories</td>
+                <td class="py-3">Ultimo story da sequencia</td>
+                <td class="py-3">1 CTA</td>
+                <td class="py-3">Sticker + texto urgente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Regra do "E agora?":</strong> Em cada ponto do seu conteudo, pergunte "se a pessoa quisesse agir agora, ela conseguiria?". Se a resposta for nao, voce pode estar perdendo conversoes. Adicione CTAs secundarios em pontos estrategicos.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">✍️ Copywriting de CTA</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        As palavras exatas que fazem pessoas clicarem, comentarem e comprarem. <strong class="text-blue-400">Copywriting de CTA</strong> e uma habilidade que transforma interesse em acao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Copywriting de CTA e a <strong class="text-white">arte de escolher as palavras exatas</strong> que maximizam a probabilidade de acao. Cada palavra conta. A diferenca entre "Compre agora" e "Garanta o seu agora" pode ser <strong class="text-white">30% mais conversoes</strong>. Dominar essas nuances e essencial.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos CTAs e <strong class="text-white">generica e fraca</strong>. "Clique aqui", "Saiba mais", "Confira" - palavras que todo mundo usa e ninguem nota. CTAs bem escritos se destacam, criam emocao e <strong class="text-white">vencem a inercia</strong> natural de nao fazer nada.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Action verbs, Benefit-first, "Voce" language, Power words.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verbos de Acao Poderosos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> Verbos de Acao Poderosos
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2 text-sm">Para Aquisicao</p>
+            <ul class="text-neutral-300 text-xs space-y-1">
+              <li>• Garanta</li>
+              <li>• Resgate</li>
+              <li>• Desbloqueie</li>
+              <li>• Acesse</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2 text-sm">Para Descoberta</p>
+            <ul class="text-neutral-300 text-xs space-y-1">
+              <li>• Descubra</li>
+              <li>• Explore</li>
+              <li>• Revele</li>
+              <li>• Encontre</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2 text-sm">Para Transformacao</p>
+            <ul class="text-neutral-300 text-xs space-y-1">
+              <li>• Transforme</li>
+              <li>• Domine</li>
+              <li>• Conquiste</li>
+              <li>• Acelere</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2 text-sm">Para Urgencia</p>
+            <ul class="text-neutral-300 text-xs space-y-1">
+              <li>• Comece</li>
+              <li>• Aproveite</li>
+              <li>• Reserve</li>
+              <li>• Ative</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Power Words -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">🔥</span> Power Words que Aumentam Conversao
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div class="space-y-2">
+            <p class="text-neutral-400 font-semibold">Urgencia</p>
+            <ul class="text-neutral-300 space-y-1">
+              <li>• Agora</li>
+              <li>• Hoje</li>
+              <li>• Imediato</li>
+              <li>• Limitado</li>
+            </ul>
+          </div>
+          <div class="space-y-2">
+            <p class="text-neutral-400 font-semibold">Exclusividade</p>
+            <ul class="text-neutral-300 space-y-1">
+              <li>• Exclusivo</li>
+              <li>• VIP</li>
+              <li>• Secreto</li>
+              <li>• Insider</li>
+            </ul>
+          </div>
+          <div class="space-y-2">
+            <p class="text-neutral-400 font-semibold">Seguranca</p>
+            <ul class="text-neutral-300 space-y-1">
+              <li>• Garantido</li>
+              <li>• Comprovado</li>
+              <li>• Seguro</li>
+              <li>• Sem risco</li>
+            </ul>
+          </div>
+          <div class="space-y-2">
+            <p class="text-neutral-400 font-semibold">Beneficio</p>
+            <ul class="text-neutral-300 space-y-1">
+              <li>• Gratis</li>
+              <li>• Bonus</li>
+              <li>• Facil</li>
+              <li>• Rapido</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao Antes/Depois -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">❌ CTA Fraco → ✅ CTA Poderoso</h3>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Generico</p>
+              <p class="text-neutral-300 text-sm">"Clique aqui"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Especifico com beneficio</p>
+              <p class="text-neutral-300 text-sm">"Baixe seu guia gratuito agora"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Impessoal</p>
+              <p class="text-neutral-300 text-sm">"Inscreva-se no curso"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Pessoal ("voce")</p>
+              <p class="text-neutral-300 text-sm">"Garanta sua vaga e transforme seus resultados"</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <p class="text-red-400 text-sm font-semibold mb-1">❌ Sem urgencia</p>
+              <p class="text-neutral-300 text-sm">"Compre o produto"</p>
+            </div>
+            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <p class="text-green-400 text-sm font-semibold mb-1">✅ Com urgencia real</p>
+              <p class="text-neutral-300 text-sm">"Aproveite 50% OFF - so ate meia-noite"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Regra do "Eu quero...":</strong> Seu CTA deve completar a frase "Eu quero [CTA]" na mente do usuario. Se "Eu quero clicar aqui" soa estranho, mas "Eu quero descobrir o segredo" soa natural, o segundo CTA e melhor.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🚧 Removendo Friccao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Identificar e eliminar tudo que <strong class="text-blue-400">dificulta a acao</strong>. Cada obstaculo removido aumenta exponencialmente suas conversoes.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Friccao e <strong class="text-white">qualquer obstaculo entre a intencao e a acao</strong>. Pode ser fisica (muitos cliques), cognitiva (confusao sobre o que fazer), emocional (medo, duvida) ou temporal (demora para ver resultado). <strong class="text-white">Remover friccao</strong> e tao importante quanto criar desejo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voce pode gerar desejo intenso, mas se o caminho ate a acao for complicado, <strong class="text-white">a pessoa desiste</strong>. Estudos mostram que cada passo adicional no processo reduz conversoes em ate 20%. Simplicidade vence complexidade <strong class="text-white">sempre</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Friction audit, One-click, Risk reversal, Objection pre-handling.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Friccao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">🚨</span> Os 4 Tipos de Friccao (e Como Eliminar)
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">1</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Friccao Fisica</p>
+                <p class="text-neutral-300 text-sm mb-2">Muitos cliques, formularios longos, redirecionamentos, carregamento lento.</p>
+                <p class="text-green-400 text-sm"><strong>Solucao:</strong> Reduza para 1 clique. Use pre-fill. Otimize velocidade.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">2</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Friccao Cognitiva</p>
+                <p class="text-neutral-300 text-sm mb-2">Confusao sobre o que fazer, muitas opcoes, instrucoes pouco claras.</p>
+                <p class="text-green-400 text-sm"><strong>Solucao:</strong> Uma acao clara. Um botao. Uma decisao.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">3</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Friccao Emocional</p>
+                <p class="text-neutral-300 text-sm mb-2">Medo de errar, vergonha, desconfianca, incerteza sobre resultado.</p>
+                <p class="text-green-400 text-sm"><strong>Solucao:</strong> Garantias, prova social, reversao de risco, testemunhos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">4</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Friccao Temporal</p>
+                <p class="text-neutral-300 text-sm mb-2">Resultado demora, processo e longo, nao ve beneficio imediato.</p>
+                <p class="text-green-400 text-sm"><strong>Solucao:</strong> Quick wins imediatos, preview do resultado, acesso instantaneo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist de Auditoria de Friccao -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Checklist de Auditoria de Friccao
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">Quantos cliques ate a acao final?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">O CTA e visivel sem scroll?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">E claro o que acontece ao clicar?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">Precisa criar conta para acessar?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">Ha garantia de satisfacao?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">As objecoes principais foram respondidas?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">O formulario pede so o essencial?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-cyan-400">□</span>
+              <span class="text-neutral-300 text-sm">Funciona bem no celular?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecnicas de Reversao de Risco -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🛡️</span> Tecnicas de Reversao de Risco
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Garantia Incondicional</p>
+            <p class="text-neutral-300 text-sm">"Se nao gostar, devolvemos 100% do valor em ate 7 dias. Sem perguntas."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Resultado Garantido</p>
+            <p class="text-neutral-300 text-sm">"Se nao dobrar seu engajamento em 30 dias, devolvemos o valor + bonus."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Teste Antes</p>
+            <p class="text-neutral-300 text-sm">"Experimente gratis por 14 dias. Cancele quando quiser, sem cobranc."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Prova Social</p>
+            <p class="text-neutral-300 text-sm">"Mais de 10.000 alunos satisfeitos. Veja o que eles dizem:"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Teste do "avo":</strong> Peca para alguem nao-tecnico (seu avo, mae, tio) tentar completar a acao. Se eles travarem em algum ponto, e friccao que precisa ser removida. O que e obvio para voce pode ser confuso para outros.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📊 Testando e Otimizando</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Como testar variacoes e medir o que funciona. <strong class="text-blue-400">Otimizacao continua</strong> transforma CTAs bons em CTAs excelentes.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Testes de CTA sao <strong class="text-white">experimentos controlados</strong> para descobrir qual versao performa melhor. A/B testing compara duas versoes, mudando uma variavel por vez. <strong class="text-white">Dados vencem opiniao</strong> - o que voce acha que funciona pode nao ser o que realmente funciona.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pequenas melhorias em CTAs se <strong class="text-white">multiplicam ao longo do tempo</strong>. Um aumento de 10% na conversao, aplicado consistentemente, pode significar dobrar resultados em poucos meses. Sem testes, voce esta adivinhando.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              A/B testing, Conversion rate, Click-through rate, Iteration.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metricas de CTA -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📈</span> Metricas Essenciais de CTA
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-blue-400">Metrica</th>
+                <th class="text-left py-2 text-blue-400">O que Mede</th>
+                <th class="text-left py-2 text-blue-400">Benchmark Bom</th>
+                <th class="text-left py-2 text-blue-400">Como Melhorar</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3 font-semibold">CTR (Click-Through Rate)</td>
+                <td class="py-3">% que clicou no CTA</td>
+                <td class="py-3">&gt; 2-5%</td>
+                <td class="py-3">Copy, posicionamento, design</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3 font-semibold">CVR (Conversion Rate)</td>
+                <td class="py-3">% que completou a acao</td>
+                <td class="py-3">&gt; 20-30%</td>
+                <td class="py-3">Reducao de friccao, landing page</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3 font-semibold">Bounce Rate</td>
+                <td class="py-3">% que saiu sem agir</td>
+                <td class="py-3">&lt; 40%</td>
+                <td class="py-3">Relevancia, velocidade, clareza</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-semibold">Time to Action</td>
+                <td class="py-3">Tempo ate clicar</td>
+                <td class="py-3">&lt; 30s</td>
+                <td class="py-3">Urgencia, visibilidade, hook</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Elementos para Testar -->
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">🧪</span> O que Testar no CTA (Prioridade)
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">1. Copy do botao</p>
+              <p class="text-neutral-400 text-xs">"Comprar" vs "Garantir minha vaga" vs "Comecar agora"</p>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">2. Cor do botao</p>
+              <p class="text-neutral-400 text-xs">Contraste com o fundo, cores que se destacam</p>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">3. Posicionamento</p>
+              <p class="text-neutral-400 text-xs">Acima vs abaixo do fold, multiplos vs unico</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">4. Urgencia</p>
+              <p class="text-neutral-400 text-xs">Com deadline vs sem, escassez vs abundancia</p>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">5. Formato</p>
+              <p class="text-neutral-400 text-xs">Botao vs link vs imagem clicavel</p>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+              <p class="text-blue-400 font-semibold text-sm">6. Tamanho</p>
+              <p class="text-neutral-400 text-xs">Grande e impossivel de ignorar vs discreto e elegante</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Processo de Teste -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Processo de Teste em 5 Passos
+        </h3>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-4">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold text-sm">1</span>
+            <p class="text-neutral-300"><strong class="text-white">Hipotese:</strong> "CTA com beneficio tera mais cliques que CTA generico"</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold text-sm">2</span>
+            <p class="text-neutral-300"><strong class="text-white">Versoes:</strong> Criar versao A (controle) e versao B (variacao)</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold text-sm">3</span>
+            <p class="text-neutral-300"><strong class="text-white">Divisao:</strong> 50% audiencia ve A, 50% ve B (aleatorio)</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold text-sm">4</span>
+            <p class="text-neutral-300"><strong class="text-white">Medicao:</strong> Coletar dados ate ter volume estatisticamente significativo</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold text-sm">5</span>
+            <p class="text-neutral-300"><strong class="text-white">Decisao:</strong> Vencedor vira novo controle, repetir com nova variavel</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Regra do 1:</strong> Teste apenas UMA variavel por vez. Se mudar copy E cor E posicao simultaneamente, voce nao sabera qual mudanca causou o resultado. Paciencia e metodologia vencem ansiedade.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Banco de CTAs</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-blue-400">colocar em pratica</strong>. Voce vai criar uma biblioteca de CTAs para diferentes objetivos e formatos.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para criar um <strong class="text-white">banco de CTAs reutilizaveis</strong> organizados por objetivo (engajamento, venda, captura, etc.) e por formato (video, texto, stories). Seu arsenal de conversao pronto para usar.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ter um swipe file de CTAs <strong class="text-white">elimina o branco criativo</strong>. Quando precisar de um CTA, voce consulta sua biblioteca, adapta ao contexto e pronto. <strong class="text-white">Velocidade + qualidade</strong> garantidas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              CTA swipe file, Category organization, Context matching, Template library.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Crie Seu Banco de 24 CTAs
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Crie 4 CTAs para cada categoria abaixo. Use a formula: [ACAO] + [BENEFICIO] + [URGENCIA].
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">Categoria 1: ENGAJAMENTO (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para gerar comentarios, likes, saves, compartilhamentos.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Categoria 2: CAPTURA DE LEAD (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para coletar email, WhatsApp, seguidor.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">6.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">7.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">8.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Categoria 3: VENDA DIRETA (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para compra de produto, servico, curso.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">9.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">10.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">11.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">12.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">Categoria 4: AGENDAMENTO (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para agendar call, reuniao, consultoria.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">13.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">14.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">15.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">16.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">Categoria 5: CONTEUDO EXTRA (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para download, acesso a material, bonus.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">17.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">18.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">19.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">20.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">Categoria 6: COMUNIDADE (4 CTAs)</p>
+            <p class="text-neutral-400 text-sm mb-3">CTAs para entrar em grupo, comunidade, lista VIP.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">21.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">22.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">23.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">24.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-blue-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-blue-400">Entrega:</strong> Complete todos os 24 CTAs. Organize em um documento ou planilha por categoria. <strong class="text-white">Teste pelo menos 5</strong> nos proximos dias e anote os resultados para refinar sua biblioteca.
+          </p>
+        </div>
+      </div>
+
+      <!-- Exemplos por Categoria -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📋</span> Exemplos de CTAs por Categoria
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="space-y-2">
+            <p class="text-green-400 font-semibold">Engajamento:</p>
+            <p class="text-neutral-300">"Comenta 'EU QUERO' e te mando o link"</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-blue-400 font-semibold">Captura:</p>
+            <p class="text-neutral-300">"Baixe o checklist gratuito - link na bio"</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-purple-400 font-semibold">Venda:</p>
+            <p class="text-neutral-300">"Garanta sua vaga com 50% OFF - so ate hoje"</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-orange-400 font-semibold">Agendamento:</p>
+            <p class="text-neutral-300">"Reserve sua consultoria gratuita de 15min"</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-red-400 font-semibold">Conteudo Extra:</p>
+            <p class="text-neutral-300">"Acesse o template exclusivo no primeiro comentario"</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-yellow-400 font-semibold">Comunidade:</p>
+            <p class="text-neutral-300">"Entre no grupo VIP - vagas limitadas essa semana"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist de Qualidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Qualidade para Cada CTA
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Tem verbo de acao forte?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">O beneficio esta claro?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Ha elemento de urgencia?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">E especifico (nao generico)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">A acao e simples (1 passo)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-blue-400">□</span>
+              <span class="text-neutral-300 text-sm">Voce agiria se visse?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Anatomia do CTA Perfeito</strong>
+              <span class="text-neutral-400"> - Clareza, urgencia, beneficio e friccao minima</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Posicionamento Estrategico</strong>
+              <span class="text-neutral-400"> - Timing, picos de emocao, multiplas exposicoes</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Copywriting de CTA</strong>
+              <span class="text-neutral-400"> - Verbos de acao, power words, linguagem "voce"</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Removendo Friccao</strong>
+              <span class="text-neutral-400"> - Auditoria, reversao de risco, simplicidade</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Testando e Otimizando</strong>
+              <span class="text-neutral-400"> - A/B testing, metricas, iteracao continua</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Banco de CTAs</strong>
+              <span class="text-neutral-400"> - Biblioteca organizada por objetivo e formato</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-900/30 rounded-lg p-4 mb-8 border border-blue-500/20">
+          <p class="text-blue-400 font-semibold mb-2">🎉 Parabens! Voce completou a Trilha 2 - Central!</p>
+          <p class="text-neutral-300 text-sm">Voce dominou os 10 gatilhos centrais do conteudo digital. Agora e hora de avancar para a Trilha 3 - Avancada e levar suas habilidades ao proximo nivel.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-9.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="../trilha3/index.html" class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Avancar para Trilha 3 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

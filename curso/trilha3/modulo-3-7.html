@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.7 - Estudos de Caso | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.7</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.7 - FINAL
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔬 Estudos de Caso</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Analise profunda de cases reais de sucesso com gatilhos mentais. Aprenda com quem ja trilhou o caminho e decodifique os padroes que geram resultados extraordinarios.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Cases</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📱 Case: Viral no TikTok</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Analise completa de um video que atingiu <strong class="text-purple-400">50 milhoes de views</strong> em 7 dias. Decodificamos cada elemento que fez esse conteudo explodir.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Este case analisa um video de uma criadora de conteudo sobre <strong class="text-white">financas pessoais</strong> que viralizou organicamente. Sem anuncios, sem influenciadores - apenas gatilhos mentais aplicados estrategicamente. O video transformou uma conta com 3.000 seguidores em uma com <strong class="text-white">280.000 em uma semana</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que estudar:</span>
+            <p class="text-neutral-300 mt-1">
+              Virais nao sao acidentes. Sao o resultado de <strong class="text-white">elementos especificos combinados</strong> de forma precisa. Ao entender a anatomia deste viral, voce pode replicar os principios (nao o conteudo) nos seus proprios videos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Viral anatomy, Hook analysis, Retention mapping, Engagement breakdown.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Metricas do Case
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">50.2 milhoes</strong> de visualizacoes em 7 dias</li>
+          <li>• <strong class="text-white">2.3 milhoes</strong> de curtidas (4.6% de taxa)</li>
+          <li>• <strong class="text-white">187.000</strong> compartilhamentos (fator crucial)</li>
+          <li>• <strong class="text-white">89%</strong> de retencao nos primeiros 3 segundos</li>
+          <li>• <strong class="text-white">277.000</strong> novos seguidores em 7 dias</li>
+        </ul>
+      </div>
+
+      <!-- Anatomia do Viral -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔬</span> Anatomia do Viral - Segundo a Segundo
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">0-1s</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Hook Visual Chocante</h4>
+              <p class="text-sm text-neutral-300">Mostrou extrato bancario real com R$47 na conta. Elemento visual que gera identificacao instantanea e curiosidade.</p>
+              <p class="text-xs text-neutral-500 mt-2"><strong>Gatilho:</strong> Vulnerabilidade + Curiosidade + Identificacao</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold text-sm">1-3s</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Hook Verbal</h4>
+              <p class="text-sm text-neutral-300">"Essa era minha conta ha 8 meses. Hoje..." - pausa dramatica criando gap de curiosidade impossivel de ignorar.</p>
+              <p class="text-xs text-neutral-500 mt-2"><strong>Gatilho:</strong> Travessia + Loop Aberto</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">3-7s</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Revelacao + Prova</h4>
+              <p class="text-sm text-neutral-300">Mostrou novo extrato com R$23.000. A diferenca absurda cria impacto emocional e credibilidade simultaneamente.</p>
+              <p class="text-xs text-neutral-500 mt-2"><strong>Gatilho:</strong> Prova Social + Contraste + Autoridade</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold text-sm">7-15s</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Metodo em 3 Passos</h4>
+              <p class="text-sm text-neutral-300">Explicou os 3 passos simples que usou. Numeros especificos, acoes claras, sem enrolacao.</p>
+              <p class="text-xs text-neutral-500 mt-2"><strong>Gatilho:</strong> Simplicidade + Especificidade + Reciprocidade</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold text-sm">15-18s</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">CTA Natural</h4>
+              <p class="text-sm text-neutral-300">"Segue pra mais dicas que funcionam de verdade" - CTA que promete continuidade sem ser agressivo.</p>
+              <p class="text-xs text-neutral-500 mt-2"><strong>Gatilho:</strong> Compromisso + Antecipacao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Por que viralizou -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🚀</span> Por Que Viralizou - Fatores Criticos
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Compartilhabilidade Alta</p>
+            <p class="text-neutral-300 text-sm">Conteudo que as pessoas querem mostrar para amigos e familia. "Olha isso, voce precisa ver".</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Salvamentos Massivos</p>
+            <p class="text-neutral-300 text-sm">Conteudo util que as pessoas salvam para ver depois. Sinal forte para o algoritmo.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Loop de Rewatches</p>
+            <p class="text-neutral-300 text-sm">Video curto (18s) que as pessoas reassistem para anotar os passos. Aumenta watch time total.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Debate nos Comentarios</p>
+            <p class="text-neutral-300 text-sm">Pessoas questionando, defendendo, compartilhando experiencias. Engajamento organico massivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Licao Principal
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Vulnerabilidade real + Transformacao provavel + Metodo simples = Formula viral</strong>. A criadora nao vendeu nada no video. Apenas entregou valor genuino com prova real. A monetizacao veio depois, de forma natural, com uma audiencia que ja confiava nela.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📈 Case: Crescimento Organico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A jornada de um criador que foi de <strong class="text-purple-400">0 a 100.000 seguidores</strong> em 12 meses sem anuncios. Cada decisao estrategica documentada.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Este case acompanha a trajetoria de um <strong class="text-white">educador de marketing digital</strong> ao longo de 12 meses. Documentamos cada fase, cada pivot, cada decisao. O que funcionou, o que falhou, e principalmente - <strong class="text-white">o que ele faria diferente</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que estudar:</span>
+            <p class="text-neutral-300 mt-1">
+              Virais sao excecoes. <strong class="text-white">Crescimento consistente e a regra</strong>. Este case mostra como aplicar gatilhos de forma sistematica para construir audiencia solida, engajada e monetizavel ao longo do tempo.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Growth timeline, Content evolution, Pivot points, Consistency patterns.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline de Crescimento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Timeline de Crescimento
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-20 text-center">
+              <span class="text-purple-400 font-bold">Mes 1-2</span>
+              <p class="text-xs text-neutral-500">0 → 500</p>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-white mb-1">Fase de Descoberta</h4>
+              <p class="text-sm text-neutral-300">Testou 5 formatos diferentes. 3 falharam completamente. Descobriu que carrosseis educacionais geravam 3x mais saves.</p>
+              <p class="text-xs text-purple-400 mt-2">Gatilho dominante: Reciprocidade (valor gratuito)</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-20 text-center">
+              <span class="text-purple-400 font-bold">Mes 3-4</span>
+              <p class="text-xs text-neutral-500">500 → 3.000</p>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-white mb-1">Fase de Nicho</h4>
+              <p class="text-sm text-neutral-300">Focou em um sub-nicho especifico: "marketing para freelancers". Reduziu audiencia potencial mas aumentou conexao.</p>
+              <p class="text-xs text-purple-400 mt-2">Gatilho dominante: Identificacao + Especificidade</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-20 text-center">
+              <span class="text-purple-400 font-bold">Mes 5-6</span>
+              <p class="text-xs text-neutral-500">3.000 → 15.000</p>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-white mb-1">Fase de Autoridade</h4>
+              <p class="text-sm text-neutral-300">Comecou a mostrar resultados de clientes. Cada case study gerava pico de novos seguidores.</p>
+              <p class="text-xs text-purple-400 mt-2">Gatilho dominante: Prova Social + Autoridade</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-20 text-center">
+              <span class="text-purple-400 font-bold">Mes 7-9</span>
+              <p class="text-xs text-neutral-500">15.000 → 45.000</p>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-white mb-1">Fase de Comunidade</h4>
+              <p class="text-sm text-neutral-300">Lancou grupo gratuito. Membros viraram evangelistas. Compartilhamentos organicos triplicaram.</p>
+              <p class="text-xs text-purple-400 mt-2">Gatilho dominante: Pertencimento + Compromisso</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-20 text-center">
+              <span class="text-purple-400 font-bold">Mes 10-12</span>
+              <p class="text-xs text-neutral-500">45.000 → 100.000</p>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-white mb-1">Fase de Escala</h4>
+              <p class="text-sm text-neutral-300">Collabs estrategicas com criadores complementares. Cada collab gerava 2-5k novos seguidores.</p>
+              <p class="text-xs text-purple-400 mt-2">Gatilho dominante: Autoridade transferida + Novidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Padroes de Consistencia -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">🔄</span> Padroes de Consistencia
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Frequencia</p>
+            <p class="text-neutral-300 text-sm">5 posts/semana nos primeiros 6 meses. Reduziu para 3 com mais qualidade depois.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Horarios</p>
+            <p class="text-neutral-300 text-sm">Testou 8 horarios diferentes. Descobriu que 7h30 e 18h30 funcionavam melhor.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Formato Mix</p>
+            <p class="text-neutral-300 text-sm">60% carrosseis educacionais, 25% reels, 15% posts de conexao pessoal.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pontos de Pivot -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔀</span> Pontos de Pivot Criticos
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+            <p class="text-yellow-400 font-semibold mb-1">Pivot 1: De Generico para Nicho (Mes 3)</p>
+            <p class="text-neutral-300 text-sm">Estava tentando falar com "todos os empreendedores". Focou em freelancers e o engajamento triplicou.</p>
+          </div>
+          <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+            <p class="text-yellow-400 font-semibold mb-1">Pivot 2: De Teoria para Cases (Mes 5)</p>
+            <p class="text-neutral-300 text-sm">Parou de dar dicas genericas. Comecou a mostrar exatamente o que fez e os resultados. Credibilidade disparou.</p>
+          </div>
+          <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+            <p class="text-yellow-400 font-semibold mb-1">Pivot 3: De Individual para Comunidade (Mes 7)</p>
+            <p class="text-neutral-300 text-sm">Percebeu que os seguidores queriam se conectar entre si. Criou espaco para isso e a retencao disparou.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Licao Principal
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Crescimento organico nao e linear - e feito de degraus</strong>. Cada fase exige um gatilho dominante diferente. O erro mais comum e tentar usar os gatilhos da fase 5 na fase 1. Respeite o timing e domine cada fase antes de avancar.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">💰 Case: Lancamento 7 Digitos</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Anatomia completa de um lancamento que faturou <strong class="text-purple-400">R$ 2.3 milhoes em 7 dias</strong>. Cada gatilho, cada email, cada decisao estrategica.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Este case documenta um lancamento de <strong class="text-white">curso de produtividade</strong> que usou gatilhos mentais em cada ponto de contato. Lista de 35.000 emails, audiencia de 120.000 no Instagram. O produto custava R$ 997 e vendeu <strong class="text-white">2.307 unidades</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que estudar:</span>
+            <p class="text-neutral-300 mt-1">
+              Lancamentos sao a <strong class="text-white">prova de fogo dos gatilhos</strong>. Tudo precisa funcionar junto: escassez, urgencia, prova social, autoridade. Este case mostra como orquestrar multiplos gatilhos em uma campanha coordenada.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Launch anatomy, Email sequence, Live events, Scarcity mechanics.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Numeros do Lancamento
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">R$ 2.3M</p>
+            <p class="text-xs text-neutral-400">Faturamento Total</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">2.307</p>
+            <p class="text-xs text-neutral-400">Unidades Vendidas</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">6.6%</p>
+            <p class="text-xs text-neutral-400">Conversao da Lista</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">47%</p>
+            <p class="text-xs text-neutral-400">Vendas no Ultimo Dia</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anatomia do Lancamento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Anatomia do Lancamento - Fase a Fase
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase 1: Pre-Pre-Lancamento (30 dias antes)</p>
+              <span class="text-xs text-neutral-500">Gatilho: Antecipacao</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Comecou a falar sobre "algo grande vindo". Posts sobre os bastidores da criacao. Pesquisas perguntando o que a audiencia queria. Criou expectativa sem revelar nada.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase 2: Pre-Lancamento (14 dias antes)</p>
+              <span class="text-xs text-neutral-500">Gatilho: Autoridade + Prova</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Serie de 3 lives gratuitas com conteudo de alto valor. Cada live terminava com depoimentos de beta-testers. Construiu autoridade e provou que o metodo funciona.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase 3: Abertura do Carrinho (Dia 1-3)</p>
+              <span class="text-xs text-neutral-500">Gatilho: Escassez Real</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Bonus exclusivos para os primeiros 500 compradores (valor real de R$ 2.000). 500 vagas esgotaram em 4 horas. Urgencia genuina.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase 4: Meio do Lancamento (Dia 4-5)</p>
+              <span class="text-xs text-neutral-500">Gatilho: Prova Social Ao Vivo</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Depoimentos em tempo real de quem ja comprou. Lives com alunos compartilhando primeiras impressoes. Efeito manada organico.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-purple-400 font-semibold">Fase 5: Fechamento (Dia 6-7)</p>
+              <span class="text-xs text-neutral-500">Gatilho: Urgencia + Perda</span>
+            </div>
+            <p class="text-neutral-300 text-sm">Contador regressivo real. Emails lembrando o que a pessoa ia perder. 47% das vendas aconteceram nas ultimas 24 horas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sequencia de Emails -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📧</span> Sequencia de Emails - Os 12 Emails Que Venderam
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Email</th>
+                <th class="text-left py-2 text-purple-400">Objetivo</th>
+                <th class="text-left py-2 text-purple-400">Gatilho Principal</th>
+                <th class="text-left py-2 text-purple-400">Taxa Abertura</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">1. Abertura</td>
+                <td class="py-3">Anunciar que abriu</td>
+                <td class="py-3">Novidade + Urgencia</td>
+                <td class="py-3">67%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">2. Historia</td>
+                <td class="py-3">Conexao emocional</td>
+                <td class="py-3">Identificacao + Vulnerabilidade</td>
+                <td class="py-3">52%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">3. FAQ</td>
+                <td class="py-3">Quebrar objecoes</td>
+                <td class="py-3">Seguranca + Logica</td>
+                <td class="py-3">48%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">4. Depoimentos</td>
+                <td class="py-3">Prova social</td>
+                <td class="py-3">Prova Social</td>
+                <td class="py-3">51%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">5. Bonus</td>
+                <td class="py-3">Aumentar valor percebido</td>
+                <td class="py-3">Reciprocidade + Escassez</td>
+                <td class="py-3">55%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">6. Ultimo dia</td>
+                <td class="py-3">Urgencia final</td>
+                <td class="py-3">Urgencia + Perda</td>
+                <td class="py-3">71%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Licao Principal
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">47% das vendas no ultimo dia nao e acidente - e design</strong>. O lancamento foi construido para criar pico de urgencia no final. Mas isso so funciona se a escassez for REAL. Bonus que esgotam de verdade. Datas que fecham de verdade. Escassez falsa destroi lancamentos futuros.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🏠 Case: Comunidade Engajada</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Como uma comunidade de <strong class="text-purple-400">8.000 membros</strong> mantem 73% de engajamento ativo. Os segredos por tras de uma das comunidades mais engajadas do Brasil.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Este case analisa uma <strong class="text-white">comunidade paga de copywriters</strong> que cobra R$ 97/mes e tem taxa de retencao de 89% apos 12 meses. Mais impressionante: 73% dos membros interagem ativamente toda semana.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que estudar:</span>
+            <p class="text-neutral-300 mt-1">
+              Comunidades sao o <strong class="text-white">ativo mais valioso do digital</strong>. Diferente de seguidores, membros de comunidade tem conexao emocional profunda. Este case mostra como usar gatilhos para criar e manter essa conexao ao longo do tempo.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Community triggers, Belonging mechanics, Ritual creation, Member journey.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metricas da Comunidade -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Metricas da Comunidade
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">8.247</p>
+            <p class="text-xs text-neutral-400">Membros Ativos</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">73%</p>
+            <p class="text-xs text-neutral-400">Engajamento Semanal</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">89%</p>
+            <p class="text-xs text-neutral-400">Retencao 12 Meses</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-white">R$ 800k</p>
+            <p class="text-xs text-neutral-400">MRR</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mecanicas de Pertencimento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🤝</span> Mecanicas de Pertencimento
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Linguagem Propria</p>
+            <p class="text-neutral-300 text-sm">A comunidade desenvolveu termos proprios. "Copyzeiros", "Copy da Gringa", "Nocaute de Headline". Quem entende, pertence.</p>
+            <p class="text-xs text-neutral-500 mt-2">Gatilho: Identidade de Grupo</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Rituais Semanais</p>
+            <p class="text-neutral-300 text-sm">"Segunda do Desabafo", "Quarta de Feedback", "Sexta da Vitoria". Eventos recorrentes que criam habito de participacao.</p>
+            <p class="text-xs text-neutral-500 mt-2">Gatilho: Habito + Compromisso</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sistema de Niveis</p>
+            <p class="text-neutral-300 text-sm">Membros evoluem de "Novato" ate "Copy Legend" baseado em contribuicoes. Badges visiveis. Status claro.</p>
+            <p class="text-xs text-neutral-500 mt-2">Gatilho: Status + Progresso</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Celebracao Publica</p>
+            <p class="text-neutral-300 text-sm">Todo fechamento de contrato e celebrado publicamente. Membros torcem uns pelos outros.</p>
+            <p class="text-xs text-neutral-500 mt-2">Gatilho: Reconhecimento + Comunidade</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jornada do Membro -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🛤️</span> Jornada do Membro - Os 4 Estagios
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Acolhimento (Semana 1)</h4>
+              <p class="text-sm text-neutral-300">Boas-vindas personalizada. Buddy system com membro veterano. Quick win garantido (primeiro feedback em 24h).</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Integracao (Mes 1)</h4>
+              <p class="text-sm text-neutral-300">Participa do primeiro ritual. Recebe primeiro badge. Conhece pelo menos 5 outros membros pelo nome.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Contribuicao (Mes 3-6)</h4>
+              <p class="text-sm text-neutral-300">Comeca a ajudar outros membros. Compartilha proprias vitorias. Sente-se parte do grupo.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-yellow-400 mb-1">Lideranca (6+ meses)</h4>
+              <p class="text-sm text-neutral-300">Torna-se mentor de novos membros. Lidera sub-grupos. Evangeliza a comunidade externamente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Licao Principal
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">Comunidades engajadas nao acontecem - sao construidas intencionalmente</strong>. Cada ritual, cada termo, cada badge foi desenhado para ativar gatilhos de pertencimento. O segredo e fazer os membros sentirem que perderiam algo insubstituivel se saissem.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">⚠️ Case: Erros Caros</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Analise de <strong class="text-purple-400">3 fracassos documentados</strong> que custaram centenas de milhares de reais. O que deu errado e como evitar os mesmos erros.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Ninguem gosta de falar sobre fracassos, mas sao eles que ensinam mais. Este topico analisa <strong class="text-white">3 casos reais de falha</strong> onde gatilhos foram mal aplicados, resultando em perdas financeiras e de reputacao significativas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que estudar:</span>
+            <p class="text-neutral-300 mt-1">
+              <strong class="text-white">Evitar erros e tao importante quanto acertar</strong>. Estes cases mostram armadilhas comuns que parecem boas ideias mas destroem resultados. Aprender com erros alheios e mais barato que cometer os proprios.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Failure analysis, Warning signs, Recovery strategies, Prevention protocols.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Erro 1 -->
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">💀</span> Erro 1: Escassez Falsa (Perda: R$ 340.000)
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O que aconteceu:</p>
+            <p class="text-neutral-300 text-sm">Infoprodutor prometeu "ultimas 100 vagas" em lancamento. Screenshots vazaram mostrando que ele reabriu vendas 3 dias depois. A audiencia descobriu e compartilhou massivamente.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O dano:</p>
+            <p class="text-neutral-300 text-sm">Lancamento seguinte faturou 60% menos. 2.300 pessoas pediram reembolso do produto anterior. Reputacao destruida no nicho.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">A licao:</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-red-400">Escassez falsa e bomba relogio</strong>. Funciona uma vez mas destroi tudo depois. Audiencia perdoa erros, nao perdoa mentiras.</p>
+          </div>
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <p class="text-green-400 font-semibold mb-2">Como evitar:</p>
+            <p class="text-neutral-300 text-sm">Crie escassez REAL. Limite vagas de verdade. Se precisar reabrir, seja transparente sobre o motivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Erro 2 -->
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">💀</span> Erro 2: Gatilhos Sem Entrega (Perda: R$ 180.000)
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O que aconteceu:</p>
+            <p class="text-neutral-300 text-sm">Criadora usou gatilhos agressivos de transformacao: "Emagreca 10kg em 30 dias". Vendeu muito no lancamento. Produto era generico e nao entregava o prometido.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O dano:</p>
+            <p class="text-neutral-300 text-sm">Taxa de reembolso de 34%. Avaliacoes negativas viralizaram. Processo no Procon. Conta bloqueada por 6 meses.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">A licao:</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-red-400">Gatilhos amplificam, nao substituem qualidade</strong>. Produto ruim + gatilhos fortes = desastre acelerado.</p>
+          </div>
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <p class="text-green-400 font-semibold mb-2">Como evitar:</p>
+            <p class="text-neutral-300 text-sm">Primeiro crie produto que entrega resultado. Depois use gatilhos para comunicar esse resultado. Nunca o contrario.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Erro 3 -->
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">💀</span> Erro 3: Excesso de Gatilhos (Perda: R$ 95.000)
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O que aconteceu:</p>
+            <p class="text-neutral-300 text-sm">Lancamento usou TODOS os gatilhos de uma vez. Escassez + urgencia + autoridade + prova social + medo + culpa. Pagina de vendas parecia propaganda de TV anos 90.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">O dano:</p>
+            <p class="text-neutral-300 text-sm">Conversao 70% abaixo do esperado. Audiencia percebeu manipulacao e rejeitou. Posts de critica viralizaram mais que o lancamento.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-white font-semibold mb-2">A licao:</p>
+            <p class="text-neutral-300 text-sm"><strong class="text-red-400">Gatilhos demais anulam gatilhos</strong>. Quando tudo e urgente, nada e urgente. Quando tudo e escasso, nada e especial.</p>
+          </div>
+          <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <p class="text-green-400 font-semibold mb-2">Como evitar:</p>
+            <p class="text-neutral-300 text-sm">Escolha 2-3 gatilhos dominantes por campanha. Use outros como suporte sutil. Menos e mais.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Licao Principal
+        </h3>
+        <p class="text-neutral-300">
+          <strong class="text-white">O maior erro nao e usar gatilhos errados - e esquecer que do outro lado tem seres humanos</strong>. Gatilhos funcionam porque respeitam a psicologia humana. Quando voce tenta enganar, manipular ou forcar, os mesmos mecanismos que criam conexao criam rejeicao.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Analise de Referencia</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">colocar em pratica</strong> tudo que aprendeu. Voce vai analisar uma referencia real e criar seu proprio plano de implementacao.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico que vai consolidar sua capacidade de <strong class="text-white">identificar e extrair padroes</strong> de qualquer case de sucesso. Ao final, voce tera um plano de implementacao para aplicar no seu proprio projeto.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que fazer:</span>
+            <p class="text-neutral-300 mt-1">
+              A habilidade de <strong class="text-white">decodificar o sucesso alheio</strong> e a mais valiosa do marketing. Com ela, voce nunca fica sem ideias - basta olhar para quem ja esta fazendo e adaptar para sua realidade.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Reference analysis, Pattern extraction, Adaptation strategy, Implementation plan.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio Final: Analise de Referencia
+        </h3>
+
+        <p class="text-neutral-300 mb-6">
+          Escolha UM criador/empresa de sucesso no seu nicho e complete a analise abaixo. Seja especifico e detalhado.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Parte 1 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">PARTE 1: Identificacao da Referencia</p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-neutral-400 text-sm">Nome/Perfil da Referencia:</label>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Por que escolheu essa referencia?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Metricas visiveis (seguidores, engajamento, etc):</label>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parte 2 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">PARTE 2: Extracao de Padroes</p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-neutral-400 text-sm">Quais gatilhos principais essa referencia usa consistentemente?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Qual o formato de conteudo dominante?</label>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Qual o padrao de hooks que essa referencia usa?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Como ela/ele constroi autoridade?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parte 3 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">PARTE 3: Estrategia de Adaptacao</p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-neutral-400 text-sm">O que voce pode adaptar diretamente para seu contexto?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">O que precisa ser modificado para funcionar no seu caso?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">O que definitivamente NAO funciona para voce?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parte 4 -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-3">PARTE 4: Plano de Implementacao</p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-neutral-400 text-sm">3 acoes especificas para implementar nos proximos 7 dias:</label>
+                <div class="space-y-2 mt-2">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500">1.</span>
+                    <div class="flex-1 h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500">2.</span>
+                    <div class="flex-1 h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-neutral-500">3.</span>
+                    <div class="flex-1 h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="text-neutral-400 text-sm">Como voce vai medir se funcionou?</label>
+                <div class="h-20 bg-dark-700/50 rounded border border-dark-600 mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Complete todas as 4 partes. Depois, <strong class="text-white">execute pelo menos 1 acao</strong> do plano de implementacao nos proximos 7 dias. Meça os resultados e ajuste. Este exercicio marca o <strong class="text-white">fim da sua formacao teorica</strong> - agora e hora de aplicar tudo na pratica.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist Final -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Qualidade da Analise
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Escolhi referencia relevante para meu nicho?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Identifiquei pelo menos 3 gatilhos principais?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Minhas adaptacoes sao realistas?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Minhas acoes sao especificas e mensuraveis?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho prazo definido (7 dias)?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Sei como vou medir resultados?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Case Viral TikTok</strong>
+              <span class="text-neutral-400"> - Anatomia segundo a segundo de video com 50M views</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Crescimento Organico</strong>
+              <span class="text-neutral-400"> - De 0 a 100k em 12 meses sem anuncios</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Lancamento 7 Digitos</strong>
+              <span class="text-neutral-400"> - R$ 2.3M em 7 dias, cada gatilho documentado</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Comunidade Engajada</strong>
+              <span class="text-neutral-400"> - 8k membros com 73% de engajamento ativo</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Erros Caros</strong>
+              <span class="text-neutral-400"> - 3 fracassos documentados e como evitar</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Analise de Referencia</strong>
+              <span class="text-neutral-400"> - Framework para decodificar qualquer sucesso</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-6.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="../../index.html" class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-lg text-center transition-colors font-semibold">
+            🎓 Concluir Formacao →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARABENS - CONCLUSAO DO CURSO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-yellow-900/30 via-purple-900/30 to-dark-800 rounded-xl border border-yellow-500/30 p-8">
+        <div class="text-center mb-8">
+          <span class="text-6xl mb-4 block">🎓</span>
+          <h2 class="text-3xl font-bold mb-2 text-yellow-400">Parabens!</h2>
+          <p class="text-xl text-white">Voce completou a Formacao em Gatilhos Mentais no Digital</p>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-xl p-6 mb-8">
+          <h3 class="text-lg font-semibold text-purple-400 mb-4 text-center">Sua Jornada no FGMD</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
+                <span class="text-2xl">🌱</span>
+              </div>
+              <p class="text-emerald-400 font-semibold">Trilha 1 - Fundamentos</p>
+              <p class="text-neutral-400 text-sm">7 modulos sobre a base cientifica dos gatilhos</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-3">
+                <span class="text-2xl">🎯</span>
+              </div>
+              <p class="text-blue-400 font-semibold">Trilha 2 - Central</p>
+              <p class="text-neutral-400 text-sm">7 modulos sobre aplicacao pratica dos gatilhos</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-3">
+                <span class="text-2xl">🚀</span>
+              </div>
+              <p class="text-purple-400 font-semibold">Trilha 3 - Avancada</p>
+              <p class="text-neutral-400 text-sm">7 modulos sobre maestria e cases reais</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-xl p-6 mb-8">
+          <h3 class="text-lg font-semibold text-yellow-400 mb-4">O Que Voce Conquistou:</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Dominio dos fundamentos cientificos da persuasao</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Arsenal completo de gatilhos para aplicar</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Capacidade de criar hooks impossiveis de ignorar</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Habilidade de orquestrar multiplos gatilhos</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Visao estrategica sobre psicologia do consumidor</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-yellow-400">✓</span>
+              <span class="text-neutral-300">Framework para analisar e replicar sucessos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-neutral-300 mb-6">
+            Agora e hora de <strong class="text-white">aplicar tudo isso na pratica</strong>. Lembre-se: o conhecimento so vira resultado quando se transforma em acao. Comece hoje, comece pequeno, mas comece.
+          </p>
+          <a href="../../index.html" class="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-dark-900 rounded-xl font-bold text-lg transition-all transform hover:scale-105">
+            <span>🧠</span>
+            <span>Voltar para o Inicio do FGMD</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

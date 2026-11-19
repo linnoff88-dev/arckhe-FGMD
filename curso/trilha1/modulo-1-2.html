@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.2 - Aplicacao por Formato | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button onclick="toggleTheme()" class="ml-2 p-2 rounded-lg hover:bg-dark-700 transition-colors">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span class="mx-2">/</span>
+      <span class="text-emerald-400">Modulo 1.2</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 1.2
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📱 Aplicacao por Formato</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Aprenda a adaptar os gatilhos mentais para cada formato de conteudo e plataforma.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">50</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Basico</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📱 Gatilhos em Video Curto</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Reels, TikTok e Shorts exigem <strong class="text-emerald-400">maxima densidade de gatilhos</strong> em poucos segundos. Cada frame conta na batalha pela atencao.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Videos curtos sao o formato mais <strong class="text-white">competitivo</strong> do digital atual. Voce tem literalmente <strong class="text-white">1 segundo</strong> para interromper o scroll e <strong class="text-white">3 segundos</strong> para criar compromisso suficiente para a pessoa continuar assistindo. Cada segundo desperdicado e uma oportunidade perdida.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O algoritmo dessas plataformas <strong class="text-white">recompensa retencao</strong>. Se voce domina os gatilhos de video curto, o proprio algoritmo trabalha a seu favor, distribuindo seu conteudo para milhares de pessoas sem custo.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Hook imediato, densidade de valor, loops de retencao, CTA nativo, pattern interrupt visual.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Gatilhos por Tempo -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Timeline de Gatilhos em Video Curto</h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">0-1s</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Hook Visual ou Sonoro</p>
+              <p class="text-neutral-400 text-sm">Movimento brusco, som inesperado, texto impactante</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold text-sm">1-3s</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Promessa de Valor</p>
+              <p class="text-neutral-400 text-sm">"Voce vai aprender...", "Isso mudou minha vida...", "Ninguem te conta..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">3-15s</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Entrega Rapida</p>
+              <p class="text-neutral-400 text-sm">Conteudo denso, sem enrolacao, cada segundo com valor</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-8 rounded bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">Final</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">CTA + Loop</p>
+              <p class="text-neutral-400 text-sm">Chamada para acao e gancho para reassistir ou ver mais</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Assista seus videos no mudo primeiro. Se o hook visual nao funcionar sem som, <strong class="text-white">80% do publico</strong> vai passar reto - a maioria das pessoas assiste stories e reels com som desligado.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🎬 Gatilhos em Video Longo</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        YouTube e videos longos permitem usar <strong class="text-emerald-400">toda a sequencia de gatilhos</strong>, construindo autoridade profunda e relacionamento com o publico.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Videos longos (10+ minutos) funcionam como <strong class="text-white">jornadas completas</strong>. Voce tem tempo para construir contexto, desenvolver argumentos, criar conexao emocional e guiar o espectador ate a acao desejada. Mas com grande poder vem grande responsabilidade - manter a atencao por 10+ minutos exige dominio de <strong class="text-white">multiplos gatilhos de retencao</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Video longo e o formato que mais <strong class="text-white">constroi autoridade</strong>. Uma pessoa que assiste seu video de 15 minutos ate o final te conhece melhor do que alguem que viu 50 reels seus. E o YouTube recompensa videos que mantem as pessoas na plataforma.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Curva de retencao, open loops, pontos de reengajamento, estrutura em 3 atos, pattern interrupts internos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrutura de Video Longo -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Estrutura de Retencao para Video Longo</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">Ato 1: Hook (0-30s)</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Promessa clara do video</li>
+              <li>• Preview do melhor momento</li>
+              <li>• Abertura de loop principal</li>
+              <li>• "Fica ate o final porque..."</li>
+            </ul>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">Ato 2: Desenvolvimento</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Conteudo em blocos de 2-3 min</li>
+              <li>• Mini-hooks entre blocos</li>
+              <li>• Novos loops abertos</li>
+              <li>• Pattern interrupts visuais</li>
+            </ul>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">Ato 3: Conclusao</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Fechamento de todos os loops</li>
+              <li>• Recapitulacao de valor</li>
+              <li>• CTA claro e unico</li>
+              <li>• Gancho para proximo video</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl p-6 border border-blue-500/30">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📊 Metricas Criticas</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Retencao nos primeiros 30s</strong> - Se cair abaixo de 70%, refaca seu hook</li>
+          <li>• <strong class="text-white">Average View Duration</strong> - Objetivo minimo: 50% do video</li>
+          <li>• <strong class="text-white">Pontos de queda</strong> - Identifique e corrija com pattern interrupts</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">✍️ Gatilhos em Texto</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Copy, carrosseis e artigos dependem exclusivamente da <strong class="text-emerald-400">palavra escrita</strong> para gerar impacto. Cada frase precisa carregar peso.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Texto e o formato mais <strong class="text-white">versatil</strong> do digital. Funciona em qualquer plataforma, pode ser consumido em qualquer momento e nao depende de producao complexa. Mas exige <strong class="text-white">precisao cirurgica</strong> - cada palavra desperdicada e atencao perdida.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Mesmo videos e imagens dependem de texto - titulos, legendas, CTAs. Dominar gatilhos em texto <strong class="text-white">potencializa todos os outros formatos</strong>. E copy bem escrita converte melhor do que qualquer producao cara.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Headlines magneticas, scanability, power words, estrutura AIDA, bullet points estrategicos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Comparacao -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
+          <h3 class="text-lg font-semibold text-red-400 mb-4">✗ Texto Fraco</h3>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li>• "Neste post vou falar sobre..."</li>
+            <li>• Paragrafos longos e densos</li>
+            <li>• Linguagem generica e vaga</li>
+            <li>• Sem formatacao visual</li>
+            <li>• CTA no final escondido</li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl p-6 border border-emerald-500/30">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-4">✓ Texto Forte</h3>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li>• "Isso mudou minha forma de..."</li>
+            <li>• Frases curtas e impactantes</li>
+            <li>• Power words especificas</li>
+            <li>• Bullets, espacos, destaques</li>
+            <li>• CTAs claros e multiplos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Escreva sua copy, depois <strong class="text-white">corte 30% das palavras</strong>. Se ainda fizer sentido, corte mais 20%. Texto enxuto tem mais poder - cada palavra que sobra carrega mais peso.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🎙️ Gatilhos em Audio</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Podcasts e lives criam <strong class="text-emerald-400">conexao intima</strong> atraves da voz. E o formato que mais constroi relacionamento de longo prazo.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Audio puro e consumido em momentos onde video nao e possivel - academia, transito, tarefas domesticas. Isso cria uma <strong class="text-white">conexao unica</strong>: voce esta literalmente dentro da cabeca da pessoa, falando diretamente no ouvido dela por 30, 60, 90 minutos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Podcasters de sucesso tem audiencias <strong class="text-white">extremamente leais</strong>. A intimidade do audio cria um vinculo que nenhum outro formato consegue. E a barreira de entrada e baixa - um microfone e consistencia.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Tom de voz, ritmo e pausas, storytelling auditivo, chamadas de atencao, soundbites marcantes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elementos de Audio -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Gatilhos Especificos de Audio</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">🎯</span>
+              <div>
+                <p class="text-white font-medium">Variacao de Tom</p>
+                <p class="text-neutral-400 text-sm">Voz monotona mata atencao. Varie intensidade, velocidade, emocao.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">⏸️</span>
+              <div>
+                <p class="text-white font-medium">Pausas Estrategicas</p>
+                <p class="text-neutral-400 text-sm">Silencio apos ponto importante. Deixa a mensagem assentar.</p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">🔊</span>
+              <div>
+                <p class="text-white font-medium">Soundbites</p>
+                <p class="text-neutral-400 text-sm">Frases curtas e marcantes que ficam na memoria.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">📢</span>
+              <div>
+                <p class="text-white font-medium">Chamadas Diretas</p>
+                <p class="text-neutral-400 text-sm">"Presta atencao nisso...", "Anota isso...", "Para tudo..."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Grave um trecho, depois ouca como se fosse um ouvinte qualquer. Pergunte: <strong class="text-white">"Eu continuaria ouvindo isso?"</strong> Se nao, regrave. Sua voz precisa ser interessante de ouvir por longos periodos.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🎯 Adaptacao por Nicho</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O mesmo gatilho funciona diferente em nichos distintos. <strong class="text-emerald-400">Calibracao</strong> e essencial para resultados.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um gatilho de urgencia que funciona para ecommerce pode parecer <strong class="text-white">desesperado</strong> no mercado B2B. Um tom casual que engaja no entretenimento pode parecer <strong class="text-white">pouco profissional</strong> na educacao financeira. Cada nicho tem sua propria "temperatura" e nivel de sofisticacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Gatilhos mal calibrados nao apenas nao funcionam - eles <strong class="text-white">afastam</strong> seu publico ideal. Entender as nuances do seu nicho e a diferenca entre parecer amador e parecer expert.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Temperatura do publico, nivel de sofisticacao, gatilhos por persona, teste A/B, leitura de mercado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Calibracao -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6 overflow-x-auto">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Calibracao por Tipo de Nicho</h3>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-600">
+              <th class="text-left py-2 text-neutral-400">Nicho</th>
+              <th class="text-left py-2 text-neutral-400">Tom Ideal</th>
+              <th class="text-left py-2 text-neutral-400">Gatilhos Fortes</th>
+              <th class="text-left py-2 text-neutral-400">Evitar</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">B2B / Corporativo</td>
+              <td>Profissional, dados</td>
+              <td>Autoridade, ROI, casos</td>
+              <td>Urgencia exagerada</td>
+            </tr>
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">Lifestyle / Bem-estar</td>
+              <td>Empatico, aspiracional</td>
+              <td>Transformacao, pertencimento</td>
+              <td>Pressao, culpa</td>
+            </tr>
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">Ecommerce</td>
+              <td>Direto, beneficios</td>
+              <td>Escassez, prova social</td>
+              <td>Enrolacao</td>
+            </tr>
+            <tr>
+              <td class="py-3 text-white">Educacao / Cursos</td>
+              <td>Didatico, acessivel</td>
+              <td>Compreensao, autoridade</td>
+              <td>Complexidade desnecessaria</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Estude os <strong class="text-white">3 maiores players</strong> do seu nicho. Analise o tom que usam, quais gatilhos aparecem mais, como calibram a intensidade. Esse e seu benchmark - voce pode inovar, mas precisa entender o padrao primeiro.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-emerald-400">mapear seus formatos</strong> e definir prioridades de gatilhos para cada um.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio estruturado para voce <strong class="text-white">auditar sua presenca atual</strong>, identificar quais formatos usa, e definir quais gatilhos priorizar em cada um baseado no seu nicho e objetivos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Clareza sobre seu mix de formatos <strong class="text-white">direciona todo o aprendizado</strong> dos proximos modulos. Voce sabera exatamente o que focar e o que pode ignorar por enquanto.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Matriz formato x gatilho, priorizacao 80/20, plano de conteudo, quick wins.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Passo a Passo do Exercicio</h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">1</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Liste todos os formatos que voce usa</p>
+              <p class="text-neutral-400 text-sm">Stories, Reels, posts, carrosseis, YouTube, podcast, email, etc.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">2</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Classifique por frequencia e resultado</p>
+              <p class="text-neutral-400 text-sm">Qual formato voce mais usa? Qual traz mais resultado?</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">3</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Identifique os 3 gatilhos mais importantes para cada formato</p>
+              <p class="text-neutral-400 text-sm">Baseado no que aprendeu neste modulo</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">4</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Defina 1 quick win por formato</p>
+              <p class="text-neutral-400 text-sm">Uma melhoria simples que voce pode implementar hoje</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Entregavel</h3>
+        <p class="text-neutral-300">
+          Ao final deste exercicio, voce tera uma <strong class="text-white">matriz de formatos x gatilhos</strong> personalizada para seu negocio, com acoes concretas para melhorar cada um. Guarde esse documento - voce vai consultar ele durante toda a formacao.
+        </p>
+      </div>
+    </section>
+
+    <!-- Resumo -->
+    <section class="bg-dark-800 rounded-2xl p-8 border border-dark-600">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="mr-3">📝</span> Resumo do Modulo
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">O que aprendemos:</h3>
+          <ul class="space-y-2 text-neutral-300">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Videos curtos exigem hooks em 1 segundo</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Videos longos usam estrutura em 3 atos</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Texto precisa de precisao cirurgica</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Audio cria conexao intima pela voz</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Cada nicho exige calibracao especifica</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">Proximo modulo:</h3>
+          <p class="text-neutral-300 mb-4">
+            Vamos aprender a usar <strong class="text-white">metricas e diagnostico</strong> para identificar exatamente onde seu conteudo esta falhando e quais gatilhos precisam de atencao.
+          </p>
+          <a href="modulo-1-3.html" class="text-emerald-400 hover:text-emerald-300 font-medium">
+            Ir para Modulo 1.3 →
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="modulo-1-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+          ← Modulo Anterior
+        </a>
+        <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+          Proximo Modulo →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🧠</span>
+          <span class="font-bold text-emerald-400">FGMD</span>
+        </div>
+        <p class="text-neutral-400 text-sm">Formacao em Gatilhos Mentais no Digital</p>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        icon.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.getElementById('theme-icon').textContent = '☀️';
+    }
+  </script>
+</body>
+</html>

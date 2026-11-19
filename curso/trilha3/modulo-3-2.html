@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.2 - Estrategias por Plataforma | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.2</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.2
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📱 Estrategias por Plataforma</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Adapte os gatilhos para cada rede social: Instagram, TikTok, YouTube, LinkedIn e mais. Domine as particularidades de cada algoritmo.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Pratico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📸 Instagram - Feed, Stories e Reels</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Instagram tem <strong class="text-purple-400">tres formatos principais</strong>, cada um com regras proprias. Dominar os tres e ter um arsenal completo para qualquer objetivo.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O Instagram e uma <strong class="text-white">plataforma visual</strong> que prioriza conexao e entretenimento. Feed para consolidar marca, Stories para relacionamento diario, Reels para alcance explosivo. Cada formato tem <strong class="text-white">algoritmos distintos</strong> e exige estrategias especificas de gatilhos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Com <strong class="text-white">2 bilhoes de usuarios ativos</strong>, o Instagram e essencial para qualquer estrategia digital. Mas cada formato recompensa comportamentos diferentes. Quem trata tudo igual <strong class="text-white">desperdiça potencial</strong> em todos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Carousel hooks, Stories sequencing, Reels retention, Algorithm signals, Explore page.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Carousels tem 1.4x</strong> mais alcance que posts de imagem unica</li>
+          <li>• <strong class="text-white">Reels de 7-15 segundos</strong> tem a maior taxa de retencao completa</li>
+          <li>• Stories com <strong class="text-white">enquetes aumentam 40%</strong> o tempo de permanencia</li>
+          <li>• Posts com <strong class="text-white">salvar e compartilhar</strong> pesam 3x mais que curtidas no algoritmo</li>
+        </ul>
+      </div>
+
+      <!-- Estrategias por Formato -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Estrategias por Formato
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-pink-400 font-semibold mb-2">Feed - Carousel Hooks</p>
+            <p class="text-neutral-300 text-sm mb-2">O primeiro slide e tudo. Deve criar <strong class="text-white">tensao</strong> que so resolve passando.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Primeira imagem: Problema ou provocacao</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Slides 2-7: Desenvolvimento progressivo</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Ultimo slide: CTA claro + resumo</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Use "Arraste →" visual no canto</p>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">Stories - Sequencing</p>
+            <p class="text-neutral-300 text-sm mb-2">Stories funcionam em <strong class="text-white">arcos narrativos</strong>. Cada story deve fazer querer ver o proximo.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Story 1: Gancho emocional forte</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Stories 2-4: Desenvolvimento com breaks</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Enquetes/Caixinhas: Engajamento ativo</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Story final: Resolucao + proximo passo</p>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Reels - Retention Hooks</p>
+            <p class="text-neutral-300 text-sm mb-2">Reels premiam <strong class="text-white">watch time</strong>. Loop e rewatches sao os sinais mais fortes.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Primeiro segundo: Movimento + texto</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Segundos 2-3: Promessa do video</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Final que conecta ao inicio (loop)</p>
+              <p class="text-neutral-400 text-xs bg-dark-800 p-2 rounded">• Audio trending aumenta distribuicao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplo Pratico -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Exemplo Pratico - Carousel Hook
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-neutral-500 text-xs mb-1">Slide 1 (Hook)</p>
+            <p class="text-neutral-300">"Perdi 50k seguidores por causa DISSO →"</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-neutral-500 text-xs mb-1">Slide 2 (Contexto)</p>
+            <p class="text-neutral-300">"Em 2023, meu perfil estava bombando. 200k seguidores, Reels viralizando..."</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-neutral-500 text-xs mb-1">Slides 3-6 (Desenvolvimento)</p>
+            <p class="text-neutral-300">"Cometi 5 erros que destroem alcance..." (um erro por slide)</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+            <p class="text-neutral-500 text-xs mb-1">Slide 7 (CTA)</p>
+            <p class="text-neutral-300">"Salve para nao cometer os mesmos erros. Qual voce ja cometeu? Comenta!"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          No Instagram, <strong class="text-white">saves e shares</strong> sao as metricas que mais importam. Crie conteudo que as pessoas querem guardar para depois ou enviar para amigos. Pergunte-se: "Alguem enviaria isso no direct?"
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🎵 TikTok - Viralidade Programada</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O TikTok e a plataforma onde <strong class="text-purple-400">conteudo e rei</strong>. Nao importa quantos seguidores voce tem - o algoritmo distribui baseado em <strong class="text-purple-400">performance individual</strong> de cada video.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O TikTok usa um algoritmo de <strong class="text-white">interesse puro</strong>. Cada video e testado em pequenos lotes de usuarios. Se performa bem (watch time, loops, engajamento), e <strong class="text-white">distribuido para mais pessoas</strong>. Nao existe "audiencia conquistada" - cada video compete do zero.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O TikTok oferece <strong class="text-white">alcance organico massivo</strong> que outras plataformas nao oferecem mais. Um video pode sair de 0 para milhoes em horas. Mas isso exige entender <strong class="text-white">exatamente</strong> como o algoritmo decide distribuir.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Watch time, Loop retention, Trend hijacking, For You optimization, Batch testing.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados do Algoritmo TikTok
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Watch time</strong> e o fator #1 - videos assistidos ate o fim tem 10x mais chance de viralizar</li>
+          <li>• Videos com <strong class="text-white">loop seamless</strong> tem 35% mais views por pessoa</li>
+          <li>• Os primeiros <strong class="text-white">300-500 views</strong> determinam se o video vai para o For You</li>
+          <li>• <strong class="text-white">Comentarios longos</strong> pesam mais que curtidas no algoritmo</li>
+        </ul>
+      </div>
+
+      <!-- Mecanicas do Algoritmo -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚙️</span> Mecanicas do Algoritmo
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-red-400 mb-1">Watch Time Ratio</h4>
+              <p class="text-sm text-neutral-400 mb-2">Porcentagem do video assistida. Objetivo: acima de 70%.</p>
+              <p class="text-sm text-neutral-300"><strong>Como otimizar:</strong> Videos mais curtos com alta densidade de valor. Corte toda gordura.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+              <span class="text-orange-400 font-bold">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-orange-400 mb-1">Loop Retention</h4>
+              <p class="text-sm text-neutral-400 mb-2">Quantas vezes a pessoa assiste novamente. Objetivo: acima de 1.3x.</p>
+              <p class="text-sm text-neutral-300"><strong>Como otimizar:</strong> Final que conecta ao inicio, revelacao que faz querer rever.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Engagement Velocity</h4>
+              <p class="text-sm text-neutral-400 mb-2">Velocidade de interacoes nas primeiras horas. Objetivo: engajamento rapido.</p>
+              <p class="text-sm text-neutral-300"><strong>Como otimizar:</strong> CTAs de comentario, perguntas polemicas, "comenta se voce..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">4</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Share Rate</h4>
+              <p class="text-sm text-neutral-400 mb-2">Quantidade de compartilhamentos. Sinal mais forte de viralidade.</p>
+              <p class="text-sm text-neutral-300"><strong>Como otimizar:</strong> Conteudo que a pessoa quer marcar amigo ou enviar no direct.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trend Hijacking -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔥</span> Trend Hijacking - Surfando Tendencias
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Audio Trends</p>
+            <p class="text-neutral-300 text-sm">Use audios em crescimento (seta para cima no app). Adapte ao seu nicho mantendo a essencia do trend.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Format Trends</p>
+            <p class="text-neutral-300 text-sm">Copie a estrutura de videos virais. Mude o conteudo, mantenha o formato que ja provou funcionar.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Hashtag Trends</p>
+            <p class="text-neutral-300 text-sm">3-5 hashtags especificas do nicho + 1-2 hashtags trending. Evite hashtags muito amplas.</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Timing</p>
+            <p class="text-neutral-300 text-sm">Entre em trends nos primeiros 2-3 dias. Depois disso, o algoritmo ja saturou.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          No TikTok, <strong class="text-white">volume e teste</strong> vencem perfeccionismo. Poste 2-3 videos por dia em horarios diferentes. Analise quais performam melhor e <strong class="text-white">dobre a aposta</strong> nesses formatos. O algoritmo recompensa consistencia.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">▶️ YouTube - Shorts e Long-Form</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O YouTube e a plataforma de <strong class="text-purple-400">maior retencao de atencao</strong>. Usuarios passam em media 40 minutos por sessao. Isso significa oportunidade para <strong class="text-purple-400">conteudo aprofundado</strong> e monetizacao real.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O YouTube opera em dois modos distintos: <strong class="text-white">Shorts</strong> (verticais, ate 60s) para alcance e discovery, e <strong class="text-white">Long-form</strong> (horizontais, minutos a horas) para profundidade e monetizacao. A estrategia ideal <strong class="text-white">combina ambos</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Videos de YouTube tem <strong class="text-white">vida longa</strong> - podem trazer views por anos. Alem disso, o YouTube paga <strong class="text-white">significativamente mais</strong> que outras plataformas por 1000 views. E a melhor plataforma para construir autoridade duradoura.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Thumbnail psychology, Title optimization, Session time, Suggested videos, AVD (Average View Duration).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnail Psychology -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🖼️</span> Thumbnail Psychology - A Arte da Capa
+        </h3>
+        <div class="space-y-4">
+          <p class="text-neutral-300 text-sm mb-4">
+            A thumbnail e responsavel por <strong class="text-white">50% do sucesso</strong> de um video. E o primeiro gatilho visual antes de qualquer conteudo.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-red-400 font-semibold mb-2">Faces Expressivas</p>
+              <p class="text-neutral-300 text-sm">Rostos com emocoes fortes (surpresa, choque, alegria) aumentam CTR em 30%.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-yellow-400 font-semibold mb-2">Contraste Alto</p>
+              <p class="text-neutral-300 text-sm">Cores vibrantes que se destacam no feed. Evite cores apagadas ou muito similares.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-green-400 font-semibold mb-2">Texto Minimo</p>
+              <p class="text-neutral-300 text-sm">Maximo 3-4 palavras grandes. Deve ser legivel em tela de celular.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title Optimization -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✍️</span> Title Optimization - Titulos que Convertem
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Formula: [Numero] + [Beneficio] + [Timeframe]</p>
+            <p class="text-neutral-300 text-sm">"7 Habitos que Mudaram Minha Produtividade em 30 Dias"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Formula: [Como] + [Resultado Especifico]</p>
+            <p class="text-neutral-300 text-sm">"Como Consegui 100k Inscritos Sem Mostrar o Rosto"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Formula: [Por que] + [Crenca Contraria]</p>
+            <p class="text-neutral-300 text-sm">"Por que Voce Deveria Parar de Acordar as 5h da Manha"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Formula: [Curiosity Gap]</p>
+            <p class="text-neutral-300 text-sm">"O Erro que 99% dos Criadores de Conteudo Cometem (e nao sabem)"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session Time -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">⏱️</span> Session Time - O Segredo do Algoritmo
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          O YouTube quer que usuarios fiquem <strong class="text-white">o maximo de tempo possivel</strong> na plataforma. Videos que aumentam session time sao favorecidos.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Cards e End Screens</p>
+            <p class="text-neutral-300 text-sm">Direcione para outros videos seus. Mantenha o usuario no seu canal.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Playlists Sequenciais</p>
+            <p class="text-neutral-300 text-sm">Organize videos em series. Autoplay mantem pessoas assistindo.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Teasers no Final</p>
+            <p class="text-neutral-300 text-sm">"No proximo video eu mostro..." cria expectativa e retorno.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Comentarios Fixados</p>
+            <p class="text-neutral-300 text-sm">Fixe comentario com link para video relacionado. Aumenta navegacao.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie <strong class="text-white">3 versoes de thumbnail</strong> antes de publicar. Depois de 48h, troque para a versao B se o CTR estiver abaixo de 5%. O YouTube permite trocar thumbnail <strong class="text-white">a qualquer momento</strong> - use isso a seu favor.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💼 LinkedIn - Autoridade B2B</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O LinkedIn e a plataforma onde <strong class="text-purple-400">profissionais tomam decisoes</strong>. O tom muda, mas os gatilhos mentais continuam funcionando - adaptados para o contexto corporativo.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O LinkedIn e a <strong class="text-white">rede social profissional</strong> com mais de 900 milhoes de usuarios. Aqui, autoridade e credibilidade sao construidas atraves de <strong class="text-white">conteudo de valor</strong> e posicionamento estrategico. O algoritmo favorece engajamento organico e conversas genuinas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Decisores de empresas estao no LinkedIn. Um post pode gerar <strong class="text-white">leads qualificados, convites para palestras, ofertas de emprego</strong>. O alcance organico ainda e alto comparado a outras plataformas. E o lugar ideal para B2B e personal branding profissional.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Thought leadership, Document posts, Network effects, DM funnels, Creator mode.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados do LinkedIn
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• <strong class="text-white">Document posts (PDFs)</strong> tem 3x mais engajamento que posts de texto simples</li>
+          <li>• Posts com <strong class="text-white">3+ linhas de espaco</strong> antes do "ver mais" tem 40% mais cliques</li>
+          <li>• <strong class="text-white">Comentarios nos primeiros 60 minutos</strong> determinam alcance total</li>
+          <li>• Posts sem links externos tem <strong class="text-white">6x mais alcance</strong> que posts com links</li>
+        </ul>
+      </div>
+
+      <!-- Estrategias de Conteudo -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Estrategias de Conteudo
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">Thought Leadership Posts</p>
+            <p class="text-neutral-300 text-sm mb-2">Compartilhe insights originais baseados em experiencia real. Opiniao forte + dados = autoridade.</p>
+            <p class="text-neutral-500 text-xs"><strong>Estrutura:</strong> Hook controverso → Contexto pessoal → Insight principal → CTA para discussao</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">Document Posts (Carrosséis PDF)</p>
+            <p class="text-neutral-300 text-sm mb-2">PDFs com slides educacionais. O formato mais favorecido pelo algoritmo atual.</p>
+            <p class="text-neutral-500 text-xs"><strong>Estrutura:</strong> Capa impactante → Problema → 5-7 slides de solucao → CTA final</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-orange-400 font-semibold mb-2">Story Posts</p>
+            <p class="text-neutral-300 text-sm mb-2">Historias pessoais de fracasso ou sucesso. Vulnerabilidade calculada gera conexao.</p>
+            <p class="text-neutral-500 text-xs"><strong>Estrutura:</strong> Momento dificil → Virada → Licao aprendida → Reflexao universal</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Engagement Baiting (Etico)</p>
+            <p class="text-neutral-300 text-sm mb-2">Perguntas que geram discussao genuina. Evite "concorda?" - prefira debates reais.</p>
+            <p class="text-neutral-500 text-xs"><strong>Exemplo:</strong> "Qual foi a pior decisao de carreira que voce tomou? Começo: recusei oferta de startup que virou unicornio."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DM Funnels -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">💬</span> DM Funnels - Convertendo Conexoes
+        </h3>
+        <div class="space-y-3">
+          <p class="text-neutral-300 text-sm mb-4">
+            O LinkedIn permite <strong class="text-white">abordagem direta</strong> que seria invasiva em outras plataformas. Use com estrategia.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Passo 1: Valor Primeiro</p>
+              <p class="text-neutral-300 text-sm">Nunca venda na primeira mensagem. Comente posts, agregue valor, construa relacao.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Passo 2: Conexao Contextual</p>
+              <p class="text-neutral-300 text-sm">Conecte-se mencionando algo especifico do perfil ou post da pessoa.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Passo 3: Conversa Genuina</p>
+              <p class="text-neutral-300 text-sm">Faca perguntas sobre o trabalho dela. Demonstre interesse real antes de qualquer pitch.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Passo 4: Oferta Relevante</p>
+              <p class="text-neutral-300 text-sm">So apresente sua oferta se fizer sentido para a necessidade identificada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          No LinkedIn, <strong class="text-white">consistencia vence viralidade</strong>. Poste 3-5x por semana no mesmo horario. Responda TODOS os comentarios na primeira hora. O algoritmo interpreta isso como <strong class="text-white">sinal de qualidade</strong> e aumenta distribuicao.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🐦 X/Twitter e Threads</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Plataformas de <strong class="text-purple-400">texto-first</strong> onde ideias vencem producao. O X (Twitter) para conversas em tempo real, Threads para discussoes mais longas. Ambas premiam <strong class="text-purple-400">clareza e originalidade</strong>.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O X e a plataforma de <strong class="text-white">conversas publicas em tempo real</strong>. Threads e a versao da Meta focada em <strong class="text-white">discussoes mais extensas</strong> e conectada ao Instagram. Ambas favorecem texto puro, ideias originais e engajamento rapido.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores de texto tem <strong class="text-white">vantagem</strong> nessas plataformas. Nao precisa de camera, edicao ou producao. Uma boa ideia bem escrita pode viralizar. Ideal para <strong class="text-white">testar mensagens</strong> antes de adaptar para outras plataformas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Thread structure, Hook tweets, Quote tweet strategy, Engagement baiting, Character optimization.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thread Structure -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🧵</span> Thread Structure - Anatomia de uma Thread Viral
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+              <span class="text-blue-400 font-bold">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-blue-400 mb-1">Tweet 1: O Hook</h4>
+              <p class="text-sm text-neutral-400 mb-2">Este tweet decide se a pessoa le o resto. Deve criar tensao impossivel de ignorar.</p>
+              <p class="text-sm text-neutral-300 bg-dark-800 p-2 rounded">"Estudei 100+ perfis que cresceram de 0 a 100k seguidores. Encontrei 7 padroes que todos tinham. Thread:"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold">2-8</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-green-400 mb-1">Tweets 2-8: O Conteudo</h4>
+              <p class="text-sm text-neutral-400 mb-2">Um insight por tweet. Cada um deve ser valioso sozinho mas fazer querer o proximo.</p>
+              <p class="text-sm text-neutral-300 bg-dark-800 p-2 rounded">"1/ Eles postam 2-3x por dia, nao 1x. Quantidade > qualidade no inicio. Volume cria dados."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <span class="text-purple-400 font-bold">9</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-dark-600">
+              <h4 class="font-semibold text-purple-400 mb-1">Tweet Final: O CTA</h4>
+              <p class="text-sm text-neutral-400 mb-2">Recapitule, agradeca e peca acao especifica. Nao deixe no ar.</p>
+              <p class="text-sm text-neutral-300 bg-dark-800 p-2 rounded">"Resumo: [lista]. Se isso ajudou, RT o primeiro tweet. Vou continuar trazendo analises assim."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hook Tweets -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎣</span> Hook Tweets - Formulas que Funcionam
+        </h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Numero + Estudo + Descoberta</p>
+            <p class="text-neutral-300 text-sm">"Analisei 500 tweets virais. 87% tinham essa estrutura:"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Controversia Calculada</p>
+            <p class="text-neutral-300 text-sm">"Opiniao impopular: trabalhar 4h por dia e mais produtivo que 12h."</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Historia Pessoal + Licao</p>
+            <p class="text-neutral-300 text-sm">"Ha 2 anos eu estava quebrado. Hoje faturo 7 digitos. O que mudou:"</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-1">Lista de Valor Imediato</p>
+            <p class="text-neutral-300 text-sm">"10 ferramentas de IA que uso todo dia (e voce deveria tambem):"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote Tweet Strategy -->
+      <div class="bg-cyan-900/20 rounded-xl p-6 border border-cyan-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+          <span class="mr-2">💬</span> Quote Tweet Strategy
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Quote tweets sao uma forma poderosa de <strong class="text-white">surfar audiencias maiores</strong> e adicionar valor a conversas existentes.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Adicione Contexto</p>
+            <p class="text-neutral-300 text-sm">Nao so concorde - adicione um insight, exemplo ou dado que complemente o original.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Discorde com Respeito</p>
+            <p class="text-neutral-300 text-sm">Contrapontos educados geram discussao. Evite ataques pessoais.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Amplifique com Credito</p>
+            <p class="text-neutral-300 text-sm">Mostre seu trabalho aplicando o conselho de alguem. Cria relacao e visibilidade.</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">Timing Importa</p>
+            <p class="text-neutral-300 text-sm">Quote tweets nos primeiros 30min de um tweet viral tem mais chance de pegar carona.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          No X/Twitter, <strong class="text-white">o primeiro tweet de uma thread e tudo</strong>. Gaste 50% do tempo de criacao no hook. Teste diferentes versoes em horarios diferentes. Threads de domingo a noite tem menos competicao e <strong class="text-white">mais tempo de exposicao</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Plano Multiplataforma</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">colocar em pratica</strong>. Voce vai criar um plano completo de conteudo multiplataforma, adaptando uma unica ideia para 5 plataformas diferentes.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio pratico para dominar <strong class="text-white">content repurposing</strong> - a arte de transformar uma ideia em multiplos formatos nativos para cada plataforma, maximizando alcance com esforco otimizado.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores de sucesso nao criam conteudo novo para cada plataforma - eles <strong class="text-white">adaptam</strong>. Uma ideia pode virar 5+ pecas de conteudo, alcancando audiencias diferentes com o <strong class="text-white">mesmo esforco de ideacao</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content repurposing, Platform-native adaptation, Cross-promotion, Content pillars.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Plano Multiplataforma
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Escolha um tema do seu nicho e adapte-o para cada plataforma seguindo as especificidades aprendidas.
+        </p>
+
+        <div class="space-y-4">
+          <!-- Tema Central -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-purple-500/20">
+            <p class="text-purple-400 font-semibold mb-2">Tema Central (sua ideia principal)</p>
+            <div class="h-16 bg-dark-700/50 rounded border border-dark-600"></div>
+          </div>
+
+          <!-- Instagram -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-pink-400 font-semibold mb-2">📸 Instagram - 3 Formatos</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Carousel (7 slides):</p>
+                <div class="h-12 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Reels (15s):</p>
+                <div class="h-12 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Stories (5 stories):</p>
+                <div class="h-12 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TikTok -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-cyan-400 font-semibold mb-2">🎵 TikTok - Video Viral</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Hook (primeiro segundo):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Estrutura do video:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Audio/Trend a usar:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- YouTube -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">▶️ YouTube - Short + Long-form</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Titulo do video longo:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Descricao da thumbnail:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Short derivado (60s):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-blue-400 font-semibold mb-2">💼 LinkedIn - Post de Autoridade</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Hook (primeiras 3 linhas):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Insight principal:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">CTA para discussao:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- X/Twitter -->
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-sky-400 font-semibold mb-2">🐦 X/Twitter - Thread</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Tweet 1 (Hook):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Estrutura dos tweets 2-7:</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div>
+                <p class="text-neutral-400 text-xs mb-1">Tweet final (CTA):</p>
+                <div class="h-10 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Complete o plano acima. Depois, <strong class="text-white">produza o conteudo para pelo menos 3 plataformas</strong> e publique na mesma semana. Compare metricas e ajuste para a proxima rodada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cross-Promotion Strategy -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔗</span> Cross-Promotion Strategy
+        </h3>
+        <div class="space-y-4">
+          <p class="text-neutral-300 text-sm mb-4">
+            Cada plataforma pode alimentar as outras. Use esta estrategia para <strong class="text-white">crescer em todas simultaneamente</strong>.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Instagram → YouTube</p>
+              <p class="text-neutral-300 text-sm">"Video completo no YouTube - link na bio"</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">TikTok → Instagram</p>
+              <p class="text-neutral-300 text-sm">"Conteudo mais aprofundado no meu Instagram @..."</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">LinkedIn → Newsletter</p>
+              <p class="text-neutral-300 text-sm">"Analise completa na minha newsletter (link no primeiro comentario)"</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Twitter → Threads</p>
+              <p class="text-neutral-300 text-sm">"Essa thread tambem esta no Threads @... (melhor para ler depois)"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Qualidade Multiplataforma
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Cada versao e nativa da plataforma?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">O hook foi adaptado para cada formato?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">O CTA e apropriado para cada plataforma?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">A duracao/tamanho esta otimizado?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Ha cross-promotion sutil entre plataformas?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">O conteudo agrega valor em cada plataforma individualmente?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Instagram</strong>
+              <span class="text-neutral-400"> - Carousel hooks, Stories sequencing, Reels retention</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">TikTok</strong>
+              <span class="text-neutral-400"> - Watch time, loop retention, trend hijacking</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">YouTube</strong>
+              <span class="text-neutral-400"> - Thumbnail psychology, title optimization, session time</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">LinkedIn</strong>
+              <span class="text-neutral-400"> - Thought leadership, document posts, DM funnels</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">X/Twitter e Threads</strong>
+              <span class="text-neutral-400"> - Thread structure, hook tweets, quote strategy</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Plano Multiplataforma</strong>
+              <span class="text-neutral-400"> - Content repurposing e cross-promotion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-1.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-3.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

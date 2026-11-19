@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.3 - Metricas e Diagnostico | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button onclick="toggleTheme()" class="ml-2 p-2 rounded-lg hover:bg-dark-700 transition-colors">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span class="mx-2">/</span>
+      <span class="text-emerald-400">Modulo 1.3</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 1.3
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📊 Metricas e Diagnostico</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Aprenda a ler dados para identificar exatamente onde seu conteudo perde o publico.
+      </p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Inter.</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Analitico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📊 Leitura de Metricas por Gatilho</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cada gatilho tem <strong class="text-emerald-400">metricas especificas</strong> que revelam se esta funcionando ou falhando. Saber ler esses numeros e como ter raio-x do seu conteudo.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um framework para conectar <strong class="text-white">metricas especificas</strong> a cada gatilho mental. Baixo alcance? Problema de ATENCAO. Alta view mas baixa retencao? Problema de RETENCAO. Muita visualizacao mas pouco comentario? Problema de IDENTIFICACAO. Cada numero conta uma historia.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Dados objetivos <strong class="text-white">eliminam achismos</strong>. Em vez de adivinhar o que melhorar, voce sabera exatamente qual gatilho trabalhar. Isso economiza tempo e acelera resultados dramaticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              KPIs por gatilho, benchmarks de mercado, tendencias temporais, correlacoes entre metricas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa de Metricas -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6 overflow-x-auto">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Mapa: Gatilho → Metrica</h3>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-600">
+              <th class="text-left py-2 text-neutral-400">Gatilho</th>
+              <th class="text-left py-2 text-neutral-400">Metrica Principal</th>
+              <th class="text-left py-2 text-neutral-400">Sinal de Problema</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">ATENCAO</td>
+              <td>Impressoes vs Views, Thumb-stop rate</td>
+              <td class="text-red-400">Muitas impressoes, poucas views</td>
+            </tr>
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">RETENCAO</td>
+              <td>Average view duration, Curva de retencao</td>
+              <td class="text-red-400">Queda abrupta nos primeiros 30%</td>
+            </tr>
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">IDENTIFICACAO</td>
+              <td>Saves, Shares, Comentarios qualitativos</td>
+              <td class="text-red-400">Views altas mas engajamento baixo</td>
+            </tr>
+            <tr class="border-b border-dark-600/50">
+              <td class="py-3 text-white">ENGAJAMENTO</td>
+              <td>Comentarios, Replies, Tempo de sessao</td>
+              <td class="text-red-400">Likes sem comentarios</td>
+            </tr>
+            <tr>
+              <td class="py-3 text-white">CTA</td>
+              <td>Click-through rate, Conversoes</td>
+              <td class="text-red-400">Alto engajamento, baixa conversao</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Crie uma <strong class="text-white">planilha de diagnostico</strong> com essas metricas para seus ultimos 10 conteudos. Padores vao emergir - voce vai descobrir qual gatilho e seu ponto fraco consistente.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">👁️ Onde a Atencao se Perde</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Se ninguem para para ver seu conteudo, <strong class="text-emerald-400">nada mais importa</strong>. Aprender a diagnosticar problemas de atencao e o primeiro passo.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Analise dos <strong class="text-white">primeiros segundos</strong> do seu conteudo e da taxa de "thumb-stop" (quantas pessoas param o scroll). Se essa metrica esta baixa, seu hook precisa de trabalho urgente - todo o resto do conteudo e invisivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Atencao e o <strong class="text-white">primeiro filtro</strong>. Voce pode ter o melhor conteudo do mundo, mas se ninguem para para ver, e como se nao existisse. Diagnosticar e corrigir problemas de atencao tem o maior ROI de todas as melhorias.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Thumb-stop rate, impressoes vs views, hook performance, A/B testing de aberturas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sinais de Alerta -->
+      <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4">🚨 Sinais de Problema de Atencao</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-3">
+            <span class="text-red-400">•</span>
+            <span><strong class="text-white">Muitas impressoes, poucas views</strong> - Seu conteudo aparece mas ninguem para</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <span class="text-red-400">•</span>
+            <span><strong class="text-white">Views muito curtas</strong> - Pessoas clicam e saem em menos de 2 segundos</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <span class="text-red-400">•</span>
+            <span><strong class="text-white">Alcance decrescente</strong> - Algoritmo para de distribuir porque ninguem engaja</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <span class="text-red-400">•</span>
+            <span><strong class="text-white">CTR de thumbnail baixo</strong> - No YouTube, menos de 4% e critico</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Compare a performance dos seus <strong class="text-white">3 melhores hooks</strong> com os 3 piores. Identifique o padrao - o que os bons tem que os ruins nao tem? Replique a formula.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">⏱️ Onde a Retencao Quebra</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A pessoa parou para ver, mas <strong class="text-emerald-400">saiu no meio</strong>. Curvas de retencao revelam exatamente onde e por que isso acontece.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Analise da <strong class="text-white">curva de retencao</strong> - o grafico que mostra que porcentagem do publico ainda esta assistindo em cada momento do video. Pontos de queda abrupta indicam momentos problematicos que precisam de correcao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Melhorar pontos de queda tem <strong class="text-white">impacto massivo</strong> nos resultados finais. Se voce conseguir manter mais 20% do publico ate o final, seu CTA atinge muito mais pessoas. E o algoritmo recompensa videos que mantem atencao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Audience retention, drop-off points, average view duration, relative retention.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Padroes de Curva -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Padroes Comuns de Curva de Retencao</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">📉 Queda Inicial Abrupta</h4>
+            <p class="text-neutral-400 text-sm mb-2">Perda de 40%+ nos primeiros 30 segundos</p>
+            <p class="text-emerald-400 text-sm"><strong>Solucao:</strong> Hook mais forte, promessa mais clara</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">📉 Queda no Meio</h4>
+            <p class="text-neutral-400 text-sm mb-2">Perda gradual entre 30%-70% do video</p>
+            <p class="text-emerald-400 text-sm"><strong>Solucao:</strong> Pattern interrupts, mais open loops</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">📉 Queda no Final</h4>
+            <p class="text-neutral-400 text-sm mb-2">Pessoas saem antes do CTA</p>
+            <p class="text-emerald-400 text-sm"><strong>Solucao:</strong> CTA mais cedo, gancho para o final</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-white font-bold mb-2">📈 Curva Saudavel</h4>
+            <p class="text-neutral-400 text-sm mb-2">Retencao acima de 50% ate o final</p>
+            <p class="text-emerald-400 text-sm"><strong>Acao:</strong> Replicar a estrutura em novos conteudos</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          No YouTube Studio, assista seu video enquanto acompanha a curva de retencao. Quando a curva cair, <strong class="text-white">anote o que estava acontecendo naquele momento</strong>. O padrao vai revelar o problema.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💔 Sinais de Falta de Identificacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Seu conteudo tem views mas <strong class="text-emerald-400">nao ressoa</strong>. As pessoas assistem mas nao se conectam. Esse e um dos problemas mais sutis de diagnosticar.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              O gap entre <strong class="text-white">consumo passivo</strong> e conexao real. A pessoa assiste ate o final, talvez ate curte, mas nao salva, nao compartilha, nao comenta nada significativo. O conteudo foi "interessante" mas nao tocou nenhuma dor ou desejo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Views sem conexao <strong class="text-white">nao geram resultados de longo prazo</strong>. Voce pode ter milhoes de views e zero vendas, zero seguidores leais, zero autoridade. Identificacao e o que transforma espectadores em fas.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Engagement rate, save rate, share rate, qualidade dos comentarios, repeat viewers.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metricas de Identificacao -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Metricas que Revelam Conexao</h3>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-3 bg-dark-800 rounded-lg">
+            <div>
+              <p class="text-white font-medium">Save Rate</p>
+              <p class="text-neutral-400 text-sm">Pessoas salvam conteudo que ressoa</p>
+            </div>
+            <div class="text-right">
+              <p class="text-emerald-400 font-bold">Bom: >3%</p>
+              <p class="text-red-400 text-sm">Ruim: <1%</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-dark-800 rounded-lg">
+            <div>
+              <p class="text-white font-medium">Share Rate</p>
+              <p class="text-neutral-400 text-sm">Compartilham o que "precisam" que outros vejam</p>
+            </div>
+            <div class="text-right">
+              <p class="text-emerald-400 font-bold">Bom: >2%</p>
+              <p class="text-red-400 text-sm">Ruim: <0.5%</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-dark-800 rounded-lg">
+            <div>
+              <p class="text-white font-medium">Comentarios Qualitativos</p>
+              <p class="text-neutral-400 text-sm">"Isso e exatamente minha situacao", "Precisava ouvir isso"</p>
+            </div>
+            <div class="text-right">
+              <p class="text-emerald-400 font-bold">Bom: Pessoais</p>
+              <p class="text-red-400 text-sm">Ruim: Genericos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Leia seus comentarios procurando por <strong class="text-white">historias pessoais</strong>. Se as pessoas estao compartilhando suas proprias experiencias nos comentarios, seu conteudo esta gerando identificacao real.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🎭 Engajamento Real vs Vaidade</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nem toda metrica <strong class="text-emerald-400">importa igual</strong>. Diferenciar metricas de vaidade das que realmente geram resultado e fundamental.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Metricas de vaidade sao numeros que <strong class="text-white">parecem bons</strong> mas nao se traduzem em resultados reais. 1 milhao de seguidores com 0.1% de engajamento vale menos que 10 mil seguidores com 10% de engajamento. Views sem conversao e ego, nao negocio.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Otimizar para as metricas erradas <strong class="text-white">desperdica tempo e recursos</strong>. Voce pode estar celebrando "sucesso" enquanto seu negocio nao cresce. Foco nas metricas certas acelera resultados reais.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Vanity metrics, action metrics, ROI de conteudo, LTV de seguidor, custo por aquisicao.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparacao -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
+          <h3 class="text-lg font-semibold text-red-400 mb-4">🎭 Metricas de Vaidade</h3>
+          <ul class="space-y-3 text-neutral-300">
+            <li>• Numero total de seguidores</li>
+            <li>• Views brutas sem contexto</li>
+            <li>• Likes (sozinhos)</li>
+            <li>• Impressoes totais</li>
+            <li>• "Viralidade" de um post</li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl p-6 border border-emerald-500/30">
+          <h3 class="text-lg font-semibold text-emerald-400 mb-4">💰 Metricas que Importam</h3>
+          <ul class="space-y-3 text-neutral-300">
+            <li>• Engagement rate real</li>
+            <li>• Saves e Shares</li>
+            <li>• Click-through para links</li>
+            <li>• Conversoes de CTA</li>
+            <li>• Repeat viewers / Retorno</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">💡 Dica Pratica</h3>
+        <p class="text-neutral-300">
+          Para cada metrica que voce acompanha, pergunte: <strong class="text-white">"Isso se traduz em dinheiro ou oportunidade?"</strong> Se a resposta for nao, e provavelmente uma metrica de vaidade.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio Pratico</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de fazer uma <strong class="text-emerald-400">auditoria completa</strong> do seu conteudo usando dados reais.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um exercicio estruturado para analisar seus <strong class="text-white">ultimos 10-20 conteudos</strong> usando o framework de diagnostico deste modulo. Voce vai identificar padroes, descobrir seus pontos fracos e criar um plano de acao concreto.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Diagnostico baseado em dados <strong class="text-white">gera plano de acao claro</strong>. Em vez de melhorar tudo ao mesmo tempo (e nao melhorar nada), voce vai focar no gatilho que mais precisa de atencao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Template de auditoria, score por gatilho, priorizacao de melhorias, plano de 30 dias.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-dark-700/50 rounded-xl p-6 border border-dark-600 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4">Passo a Passo da Auditoria</h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">1</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Exporte dados dos ultimos 20 conteudos</p>
+              <p class="text-neutral-400 text-sm">Views, likes, comentarios, saves, shares, retencao (se disponivel)</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">2</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Calcule as metricas de diagnostico</p>
+              <p class="text-neutral-400 text-sm">Thumb-stop rate, engagement rate, save rate, share rate</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">3</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Identifique o gatilho mais fraco</p>
+              <p class="text-neutral-400 text-sm">Qual metrica esta consistentemente abaixo do esperado?</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold">4</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Crie plano de melhoria focado</p>
+              <p class="text-neutral-400 text-sm">3 acoes especificas para melhorar o gatilho mais fraco</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-3">📋 Entregavel</h3>
+        <p class="text-neutral-300">
+          Ao final, voce tera um <strong class="text-white">documento de diagnostico</strong> com seus numeros reais, gatilho prioritario identificado, e plano de acao para os proximos 30 dias. Esse documento vai guiar seu aprendizado na Trilha 2.
+        </p>
+      </div>
+    </section>
+
+    <!-- Resumo -->
+    <section class="bg-dark-800 rounded-2xl p-8 border border-dark-600">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="mr-3">📝</span> Resumo do Modulo
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">O que aprendemos:</h3>
+          <ul class="space-y-2 text-neutral-300">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Cada gatilho tem metricas especificas</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Thumb-stop rate revela problemas de atencao</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Curvas de retencao mostram onde o conteudo falha</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Saves e shares indicam identificacao real</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Metricas de vaidade vs metricas que importam</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-emerald-400 mb-3">Proximo modulo:</h3>
+          <p class="text-neutral-300 mb-4">
+            Vamos mergulhar nos <strong class="text-white">fundamentos de neurociencia</strong> - como o cerebro processa informacao e toma decisoes. A ciencia por tras dos gatilhos.
+          </p>
+          <a href="modulo-1-4.html" class="text-emerald-400 hover:text-emerald-300 font-medium">
+            Ir para Modulo 1.4 →
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+          ← Modulo Anterior
+        </a>
+        <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+          Proximo Modulo →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🧠</span>
+          <span class="font-bold text-emerald-400">FGMD</span>
+        </div>
+        <p class="text-neutral-400 text-sm">Formacao em Gatilhos Mentais no Digital</p>
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm">INEMA.CLUB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        icon.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.getElementById('theme-icon').textContent = '☀️';
+    }
+  </script>
+</body>
+</html>

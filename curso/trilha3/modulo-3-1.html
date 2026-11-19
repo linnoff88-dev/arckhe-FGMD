@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.1 - Combinacao de Gatilhos | FGMD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-100 { color: #1f2937; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation Global -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">FGMD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trilhas + Theme Toggle -->
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Central</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Avancada</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="flex text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3 - Avancada</a>
+      <span class="mx-2">/</span>
+      <span class="text-purple-400">Modulo 3.1</span>
+    </nav>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        MODULO 3.1
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔗 Combinacao de Gatilhos</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Aprenda a combinar multiplos gatilhos para criar conteudo exponencialmente mais poderoso.
+      </p>
+
+      <!-- Stats Banner -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">45</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Estrategico</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TOPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🧬 A Ciencia da Sinergia</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Por que 1 + 1 = 3 no mundo dos gatilhos mentais? Entenda o <strong class="text-purple-400">efeito multiplicador</strong> que transforma conteudo comum em conteudo impossivel de ignorar.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sinergia de gatilhos e o fenomeno onde <strong class="text-white">dois ou mais gatilhos combinados</strong> geram um impacto maior do que a soma dos impactos individuais. Nao e simplesmente usar varios gatilhos - e usa-los de forma que eles <strong class="text-white">potencializem uns aos outros</strong>, criando uma reacao em cadeia no cerebro do espectador.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Criadores medianos usam um gatilho por vez. Criadores de <strong class="text-white">alta performance</strong> dominam a arte da combinacao. Quando voce entende como gatilhos interagem, consegue criar conteudo que ativa multiplas regioes cerebrais <strong class="text-white">simultaneamente</strong>, tornando a resposta emocional irresistivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Efeito multiplicador, stacking de gatilhos, sinergia neural, amplificacao emocional, potenciacao cruzada.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box de Dados -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">📊</span> Dados de Pesquisa
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• Conteudos com <strong class="text-white">2-3 gatilhos combinados</strong> tem 340% mais engajamento que conteudos com gatilho unico</li>
+          <li>• A <strong class="text-white">memoria de longo prazo</strong> e 4x mais ativada quando multiplas emocoes sao estimuladas simultaneamente</li>
+          <li>• Anuncios que combinam escassez + autoridade tem <strong class="text-white">73% mais conversao</strong></li>
+          <li>• O cerebro processa combinacoes emocionais <strong class="text-white">200ms mais rapido</strong> que emocoes isoladas</li>
+        </ul>
+      </div>
+
+      <!-- Efeito Multiplicador -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> O Efeito Multiplicador Explicado
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-purple-400 font-semibold mb-2">Gatilho A Sozinho</p>
+            <p class="text-3xl font-bold text-white mb-2">1x</p>
+            <p class="text-neutral-400 text-sm">Impacto linear basico</p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600 text-center">
+            <p class="text-purple-400 font-semibold mb-2">A + B (Soma Simples)</p>
+            <p class="text-3xl font-bold text-white mb-2">2x</p>
+            <p class="text-neutral-400 text-sm">O que a maioria espera</p>
+          </div>
+          <div class="bg-gradient-to-br from-purple-900/40 to-dark-700/50 rounded-lg p-4 border border-purple-500/30 text-center">
+            <p class="text-purple-400 font-semibold mb-2">A + B (Sinergia)</p>
+            <p class="text-3xl font-bold text-purple-400 mb-2">3-5x</p>
+            <p class="text-neutral-400 text-sm">O que realmente acontece</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stacking de Gatilhos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔄</span> Tecnica de Stacking
+        </h3>
+        <div class="space-y-4">
+          <p class="text-neutral-300">
+            <strong class="text-white">Stacking</strong> e a tecnica de empilhar gatilhos de forma estrategica. Nao e jogar tudo de uma vez - e construir camadas que se reforcam.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Camada 1: Base</p>
+              <p class="text-neutral-300 text-sm">Gatilho primario que estabelece o tom (ex: Atencao)</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Camada 2: Amplificador</p>
+              <p class="text-neutral-300 text-sm">Gatilho que intensifica o primeiro (ex: Urgencia)</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Camada 3: Direcionador</p>
+              <p class="text-neutral-300 text-sm">Gatilho que guia a acao (ex: Escassez)</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+              <p class="text-purple-400 font-semibold mb-2">Camada 4: Fechamento</p>
+              <p class="text-neutral-300 text-sm">Gatilho que sela a decisao (ex: Prova Social)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Comece com <strong class="text-white">2 gatilhos apenas</strong>. Domine a combinacao antes de adicionar um terceiro. A maioria dos criadores erra por tentar usar muitos gatilhos de uma vez, criando <strong class="text-white">ruido</strong> em vez de sinergia.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🎯 Combinacoes de Alto Impacto</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Existem combinacoes que foram <strong class="text-purple-400">testadas e validadas</strong> por decadas de marketing e neurociencia. Conheca as 10 combinacoes mais poderosas que voce pode usar imediatamente.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Combinacoes de alto impacto sao <strong class="text-white">pares ou trios de gatilhos</strong> que, quando usados juntos, criam reacoes emocionais e comportamentais particularmente fortes. Sao combinacoes <strong class="text-white">battle-tested</strong> - usadas por decadas pelos melhores copywriters e criadores do mundo.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voce nao precisa reinventar a roda. Essas combinacoes <strong class="text-white">ja funcionam</strong>. Ao conhece-las, voce tem um repertorio pronto para aplicar. O segredo esta em <strong class="text-white">adaptar ao seu nicho e estilo</strong>, nao em criar combinacoes do zero.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Pares sinergicos, trios de conversao, combinacoes classicas, adaptacao contextual.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- As 10 Combinacoes -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🏆</span> As 10 Combinacoes Mais Poderosas
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-gradient-to-r from-purple-900/30 to-dark-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">1</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Atencao + Identificacao</p>
+                <p class="text-neutral-400 text-sm mb-2">Hook poderoso + "Isso e voce"</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Se voce acorda cansado todo dia, isso vai mudar sua vida"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-r from-purple-900/30 to-dark-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">2</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Autoridade + Transformacao</p>
+                <p class="text-neutral-400 text-sm mb-2">Credencial + Promessa de mudanca</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Em 15 anos como neurologista, descobri o segredo para eliminar ansiedade"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-r from-purple-900/30 to-dark-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">3</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Escassez + Urgencia</p>
+                <p class="text-neutral-400 text-sm mb-2">Quantidade limitada + Tempo limitado</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Ultimas 10 vagas - inscricoes encerram em 24h"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-r from-purple-900/30 to-dark-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">4</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Prova Social + Especificidade</p>
+                <p class="text-neutral-400 text-sm mb-2">Outros fizeram + Detalhes concretos</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "2.347 alunos ja aplicaram esse metodo - media de R$4.200 de faturamento extra no primeiro mes"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-r from-purple-900/30 to-dark-700/50 rounded-lg p-4 border border-purple-500/30">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">5</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Curiosidade + Exclusividade</p>
+                <p class="text-neutral-400 text-sm mb-2">Gap de informacao + Acesso restrito</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "O que os top 1% sabem sobre investimentos que nunca te contaram"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">6</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Medo + Solucao</p>
+                <p class="text-neutral-400 text-sm mb-2">Problema grave + Caminho de saida</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "90% dos negocios digitais falham em 2 anos. Aqui esta como estar nos 10%"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">7</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Reciprocidade + Compromisso</p>
+                <p class="text-neutral-400 text-sm mb-2">Valor gratuito + Pequeno passo</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Baixe o guia gratuito e faca o desafio de 7 dias"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">8</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Novidade + Familiaridade</p>
+                <p class="text-neutral-400 text-sm mb-2">Algo novo + Conexao conhecida</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "O metodo Netflix de criar conteudo (mas para Instagram)"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">9</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Historia + Emocao</p>
+                <p class="text-neutral-400 text-sm mb-2">Narrativa + Sentimento intenso</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Perdi tudo aos 35 anos. Hoje faturo 7 digitos. Isso mudou tudo:"</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-start space-x-3">
+              <span class="text-purple-400 font-bold text-lg">10</span>
+              <div class="flex-1">
+                <p class="text-white font-semibold mb-1">Pertencimento + Inimigo Comum</p>
+                <p class="text-neutral-400 text-sm mb-2">Tribo + Vilao compartilhado</p>
+                <p class="text-neutral-300 text-sm"><strong>Exemplo:</strong> "Nos, criadores de conteudo, estamos cansados do algoritmo que nos sabota"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Aplicacao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Quando Usar Cada Combinacao
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Combinacao</th>
+                <th class="text-left py-2 text-purple-400">Melhor Para</th>
+                <th class="text-left py-2 text-purple-400">Formato Ideal</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Atencao + Identificacao</td>
+                <td class="py-3">Hooks de abertura</td>
+                <td class="py-3">Reels, TikTok</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Autoridade + Transformacao</td>
+                <td class="py-3">Vendas de cursos/mentorias</td>
+                <td class="py-3">VSL, Lives</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Escassez + Urgencia</td>
+                <td class="py-3">Lancamentos, promocoes</td>
+                <td class="py-3">Stories, Email</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Prova Social + Especificidade</td>
+                <td class="py-3">Paginas de vendas</td>
+                <td class="py-3">Landing pages</td>
+              </tr>
+              <tr>
+                <td class="py-3">Historia + Emocao</td>
+                <td class="py-3">Engajamento organico</td>
+                <td class="py-3">Carrosseis, Threads</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Escolha <strong class="text-white">3 combinacoes favoritas</strong> e torne-se expert nelas antes de explorar outras. Dominar poucas combinacoes profundamente e melhor que usar muitas superficialmente.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">⚠️ Combinacoes a Evitar</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nem todas as combinacoes funcionam. Algumas criam <strong class="text-purple-400">conflito cognitivo</strong>, sobrecarga ou dissonancia que prejudica seu conteudo. Conheca as armadilhas.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Combinacoes toxicas sao <strong class="text-white">pares de gatilhos que se anulam ou conflitam</strong>. Quando usados juntos, geram confusao, desconforto ou desconfianca. O cerebro recebe sinais contraditorios e <strong class="text-white">desliga</strong> - exatamente o oposto do que queremos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muitos criadores usam combinacoes toxicas <strong class="text-white">sem perceber</strong>. Eles acham que estao sendo poderosos, mas estao criando ruido. Conhecer o que evitar e tao importante quanto saber o que fazer - <strong class="text-white">elimina erros silenciosos</strong>.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Conflito de mensagem, sobrecarga cognitiva, dissonancia emocional, contradicao implicita.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combinacoes Toxicas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center">
+          <span class="mr-2">🚨</span> Combinacoes Toxicas
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">1</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Urgencia Extrema + Autoridade Academica</p>
+                <p class="text-neutral-300 text-sm mb-2">"Cientistas de Harvard descobriram - CORRA, so hoje!" - Parece scam.</p>
+                <p class="text-neutral-500 text-xs"><strong>Por que falha:</strong> Autoridade academica requer calma e reflexao; urgencia extrema parece desespero</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">2</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Exclusividade + Prova Social Massiva</p>
+                <p class="text-neutral-300 text-sm mb-2">"Acesso exclusivo - 500.000 pessoas ja compraram!" - Contraditorio.</p>
+                <p class="text-neutral-500 text-xs"><strong>Por que falha:</strong> Se meio milhao de pessoas tem, nao e exclusivo</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">3</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Medo Intenso + Tom Alegre</p>
+                <p class="text-neutral-300 text-sm mb-2">"Voce pode estar perdendo TUDO! 😄🎉" - Bizarro.</p>
+                <p class="text-neutral-500 text-xs"><strong>Por que falha:</strong> Emocoes opostas criam dissonancia que gera desconfianca</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">4</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Gratuidade + Escassez de Preco</p>
+                <p class="text-neutral-300 text-sm mb-2">"Gratis! Mas o preco vai subir amanha!" - Nao faz sentido.</p>
+                <p class="text-neutral-500 text-xs"><strong>Por que falha:</strong> Se e gratis, nao existe preco para subir</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold text-lg">5</span>
+              <div>
+                <p class="text-red-400 font-semibold mb-1">Humildade + Autoridade Arrogante</p>
+                <p class="text-neutral-300 text-sm mb-2">"Sou so mais um cara... que faturou 10 milhoes e e melhor que voce" - Irritante.</p>
+                <p class="text-neutral-500 text-xs"><strong>Por que falha:</strong> Falsa humildade e pior que arrogancia honesta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sinais de Sobrecarga -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">🔍</span> Sinais de Sobrecarga Cognitiva
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Mais de 3 Gatilhos</p>
+            <p class="text-neutral-300 text-sm">Se voce precisa listar mais de 3 gatilhos no mesmo conteudo, provavelmente esta exagerando</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Mensagem Confusa</p>
+            <p class="text-neutral-300 text-sm">Se voce mesmo nao consegue resumir em uma frase, o publico tambem nao</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Emocoes Conflitantes</p>
+            <p class="text-neutral-300 text-sm">Se voce quer que a pessoa sinta medo E alegria ao mesmo tempo, repense</p>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Promessas Multiplas</p>
+            <p class="text-neutral-300 text-sm">Mais de 2 promessas no mesmo conteudo dilui todas elas</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Teste de Coerencia
+        </h3>
+        <p class="text-neutral-300">
+          Antes de publicar, pergunte: <strong class="text-white">"Essa combinacao faz sentido em voz alta?"</strong> Leia para alguem e veja a reacao. Se a pessoa franzir a testa ou parecer confusa, os gatilhos estao conflitando.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔄 Sequenciamento Temporal</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A <strong class="text-purple-400">ordem dos gatilhos importa</strong>. O mesmo par de gatilhos pode ter impactos completamente diferentes dependendo de qual vem primeiro.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sequenciamento temporal e a <strong class="text-white">estrategia de ordenar gatilhos</strong> ao longo do conteudo. Nao basta saber quais gatilhos usar - e preciso saber <strong class="text-white">quando</strong> cada um entra. Abertura, meio e fechamento pedem gatilhos diferentes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores joga todos os gatilhos na abertura e deixa o resto fraco. Quando voce domina sequenciamento, <strong class="text-white">cada parte do conteudo trabalha</strong> - a pessoa entra, permanece e age.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Ordem dos gatilhos, sequencia de abertura, construcao de meio, fechamento estrategico.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrutura de Sequenciamento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Estrutura de Sequenciamento
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span class="text-green-400 font-bold text-xl">1</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-green-500/30">
+              <h4 class="font-semibold text-green-400 mb-2">ABERTURA (0-20%)</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Parar e prender</p>
+              <p class="text-sm text-neutral-300"><strong>Gatilhos ideais:</strong> Atencao, Curiosidade, Identificacao</p>
+              <p class="text-sm text-neutral-500 mt-2">Exemplo: "Se voce e criador de conteudo, precisa ver isso"</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-xl">2</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-yellow-500/30">
+              <h4 class="font-semibold text-yellow-400 mb-2">MEIO (20-70%)</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Construir valor e conexao</p>
+              <p class="text-sm text-neutral-300"><strong>Gatilhos ideais:</strong> Autoridade, Historia, Prova Social, Especificidade</p>
+              <p class="text-sm text-neutral-500 mt-2">Exemplo: "Apos 5 anos testando com 10.000 alunos, descobri que..."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-xl">3</span>
+            </div>
+            <div class="flex-1 bg-dark-700/50 rounded-xl p-4 border border-red-500/30">
+              <h4 class="font-semibold text-red-400 mb-2">FECHAMENTO (70-100%)</h4>
+              <p class="text-sm text-neutral-400 mb-2">Objetivo: Gerar acao</p>
+              <p class="text-sm text-neutral-300"><strong>Gatilhos ideais:</strong> Urgencia, Escassez, CTA claro, Reciprocidade</p>
+              <p class="text-sm text-neutral-500 mt-2">Exemplo: "As inscricoes fecham hoje. Link na bio"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplos de Sequencia -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Exemplos de Sequencias Completas
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sequencia para Video de Venda</p>
+            <div class="flex flex-wrap gap-2 text-sm">
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded">Hook: Atencao</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded">Identificacao</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Autoridade</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Prova Social</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded">Escassez</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded">Urgencia</span>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sequencia para Conteudo Educacional</p>
+            <div class="flex flex-wrap gap-2 text-sm">
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded">Hook: Curiosidade</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Especificidade</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Autoridade</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Valor</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded">Reciprocidade</span>
+            </div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sequencia para Storytelling</p>
+            <div class="flex flex-wrap gap-2 text-sm">
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded">Hook: Identificacao</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Historia</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Emocao</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Transformacao</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded">Inspiracao + CTA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Crie um <strong class="text-white">"mapa de gatilhos"</strong> antes de produzir. Divida seu conteudo em 3 partes e defina qual gatilho principal vai em cada uma. Isso evita improvisar e garante <strong class="text-white">coerencia estrategica</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📊 Dosagem e Intensidade</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Gatilhos tem <strong class="text-purple-400">dose ideal</strong>. De menos e fraco, de mais e toxico. Aprenda a calibrar a intensidade para maximo impacto sem queimar sua audiencia.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Dosagem refere-se a <strong class="text-white">quantidade e intensidade</strong> de gatilhos usados em um conteudo ou ao longo do tempo. Existe um <strong class="text-white">ponto otimo</strong> - antes dele o impacto e subotimo, depois dele gera rejeicao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              A maioria dos criadores erra por <strong class="text-white">excesso</strong>, nao por falta. Usam gatilhos tao intensos que parecem desesperados ou manipuladores. Calibrar dosagem e a diferenca entre <strong class="text-white">persuasao elegante</strong> e spam irritante.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Ponto de saturacao, dose minima efetiva, equilibrio, fadiga de gatilho, calibracao por audiencia.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Espectro de Intensidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📈</span> Espectro de Intensidade
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 border border-dark-600">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-neutral-400 text-sm">Muito Fraco</span>
+              <span class="text-neutral-400 text-sm">Muito Forte</span>
+            </div>
+            <div class="h-4 bg-gradient-to-r from-gray-600 via-green-500 via-yellow-500 to-red-500 rounded-full mb-2"></div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-gray-400">Ignorado</span>
+              <span class="text-green-400">DME</span>
+              <span class="text-yellow-400">Otimo</span>
+              <span class="text-red-400">Toxico</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-900/30 rounded-lg p-4 border border-gray-500/30">
+              <p class="text-gray-400 font-semibold mb-2">Subdosagem</p>
+              <p class="text-neutral-300 text-sm">Gatilho presente mas imperceptivel. Nao gera reacao.</p>
+              <p class="text-neutral-500 text-xs mt-2">Ex: "Talvez considere ver isso um dia"</p>
+            </div>
+            <div class="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+              <p class="text-green-400 font-semibold mb-2">Dose Otima</p>
+              <p class="text-neutral-300 text-sm">Perceptivel, eficaz, nao irritante. Gera acao natural.</p>
+              <p class="text-neutral-500 text-xs mt-2">Ex: "Ultimas vagas da turma de janeiro"</p>
+            </div>
+            <div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+              <p class="text-red-400 font-semibold mb-2">Overdose</p>
+              <p class="text-neutral-300 text-sm">Exagerado, desesperado, manipulador. Gera rejeicao.</p>
+              <p class="text-neutral-500 text-xs mt-2">Ex: "ULTIMA CHANCE DA SUA VIDA!!! VAI ACABAR!!!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Calibracao -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">⚖️</span> Guia de Calibracao por Gatilho
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left py-2 text-purple-400">Gatilho</th>
+                <th class="text-left py-2 text-purple-400">Dose Fraca</th>
+                <th class="text-left py-2 text-purple-400">Dose Ideal</th>
+                <th class="text-left py-2 text-purple-400">Overdose</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Urgencia</td>
+                <td class="py-3 text-gray-400">"Em breve"</td>
+                <td class="py-3 text-green-400">"Ate sexta-feira"</td>
+                <td class="py-3 text-red-400">"AGORA OU NUNCA!!!"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Escassez</td>
+                <td class="py-3 text-gray-400">"Vagas limitadas"</td>
+                <td class="py-3 text-green-400">"Restam 12 vagas"</td>
+                <td class="py-3 text-red-400">"ULTIMA VAGA DO PLANETA"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Autoridade</td>
+                <td class="py-3 text-gray-400">"Entendo disso"</td>
+                <td class="py-3 text-green-400">"10 anos de experiencia"</td>
+                <td class="py-3 text-red-400">"Sou o maior expert"</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="py-3">Medo</td>
+                <td class="py-3 text-gray-400">"Pode nao dar certo"</td>
+                <td class="py-3 text-green-400">"80% cometem esse erro"</td>
+                <td class="py-3 text-red-400">"Voce vai FRACASSAR"</td>
+              </tr>
+              <tr>
+                <td class="py-3">Prova Social</td>
+                <td class="py-3 text-gray-400">"Alguns gostaram"</td>
+                <td class="py-3 text-green-400">"2.500 alunos"</td>
+                <td class="py-3 text-red-400">"TODO MUNDO comprou"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Ponto de Saturacao -->
+      <div class="bg-purple-900/20 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Ponto de Saturacao
+        </h3>
+        <p class="text-neutral-300 mb-4">
+          Sua audiencia desenvolve <strong class="text-white">tolerancia</strong> aos gatilhos que voce usa repetidamente. O que funcionava no mes 1 pode ser ignorado no mes 6.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Sinais de Saturacao</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Queda de engajamento com mesma formula</li>
+              <li>• Comentarios tipo "sempre a mesma coisa"</li>
+              <li>• Taxa de abertura de email caindo</li>
+            </ul>
+          </div>
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-purple-400 font-semibold mb-2">Como Evitar</p>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>• Rotacione gatilhos principais</li>
+              <li>• Varie intensidades ao longo do tempo</li>
+              <li>• Introduza novos gatilhos gradualmente</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dica Pratica -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica Pratica
+        </h3>
+        <p class="text-neutral-300">
+          Use a regra do <strong class="text-white">"amigo desconfiado"</strong>: imagine que voce esta mostrando o conteudo para um amigo cetico. Se ele reviraria os olhos, a intensidade esta muito alta. Se ele nao reagiria, esta muito baixa.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Exercicio - Matriz de Combinacao</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hora de <strong class="text-purple-400">colocar em pratica</strong>. Voce vai criar sua matriz personalizada de combinacoes de gatilhos para seu nicho.
+      </p>
+
+      <!-- Box Principal -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Uma matriz 10x10 onde voce avalia cada <strong class="text-white">combinacao de gatilhos</strong> para seu nicho especifico. Ao final, tera um mapa visual de quais combinacoes priorizar, quais evitar e quais testar.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Cada nicho e diferente. Combinacoes que funcionam para fitness podem falhar para financas. Ter sua <strong class="text-white">matriz personalizada</strong> elimina adivinhacao e acelera producao com base em dados.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Matriz de decisao, analise de compatibilidade, priorizacao estrategica, personalizacao por nicho.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercicio -->
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Exercicio: Crie Sua Matriz 10x10
+        </h3>
+
+        <p class="text-neutral-300 mb-4">
+          Use os 10 gatilhos principais e avalie cada combinacao para seu nicho.
+        </p>
+
+        <!-- Legenda -->
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 mb-6">
+          <p class="text-purple-400 font-semibold mb-2">Legenda de Avaliacao</p>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <span class="flex items-center"><span class="w-4 h-4 bg-green-500 rounded mr-2"></span><span class="text-neutral-300">Alta Sinergia (usar sempre)</span></span>
+            <span class="flex items-center"><span class="w-4 h-4 bg-yellow-500 rounded mr-2"></span><span class="text-neutral-300">Moderada (testar)</span></span>
+            <span class="flex items-center"><span class="w-4 h-4 bg-red-500 rounded mr-2"></span><span class="text-neutral-300">Baixa/Conflito (evitar)</span></span>
+            <span class="flex items-center"><span class="w-4 h-4 bg-gray-500 rounded mr-2"></span><span class="text-neutral-300">Neutro</span></span>
+          </div>
+        </div>
+
+        <!-- Matriz Simplificada -->
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 mb-6 overflow-x-auto">
+          <p class="text-purple-400 font-semibold mb-4">Os 10 Gatilhos para Sua Matriz:</p>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm text-neutral-300">
+            <div class="bg-dark-700 p-2 rounded text-center">1. Atencao</div>
+            <div class="bg-dark-700 p-2 rounded text-center">2. Identificacao</div>
+            <div class="bg-dark-700 p-2 rounded text-center">3. Autoridade</div>
+            <div class="bg-dark-700 p-2 rounded text-center">4. Prova Social</div>
+            <div class="bg-dark-700 p-2 rounded text-center">5. Escassez</div>
+            <div class="bg-dark-700 p-2 rounded text-center">6. Urgencia</div>
+            <div class="bg-dark-700 p-2 rounded text-center">7. Curiosidade</div>
+            <div class="bg-dark-700 p-2 rounded text-center">8. Historia</div>
+            <div class="bg-dark-700 p-2 rounded text-center">9. Transformacao</div>
+            <div class="bg-dark-700 p-2 rounded text-center">10. Reciprocidade</div>
+          </div>
+        </div>
+
+        <!-- Template de Preenchimento -->
+        <div class="space-y-4">
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-green-400 font-semibold mb-2">Top 5 Combinacoes para Seu Nicho</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste as 5 combinacoes com maior potencial de sinergia no seu nicho.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-red-400 font-semibold mb-2">5 Combinacoes a Evitar no Seu Nicho</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste as 5 combinacoes que criariam conflito ou pareceriam forcadas.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+            <p class="text-yellow-400 font-semibold mb-2">5 Combinacoes para Testar</p>
+            <p class="text-neutral-400 text-sm mb-3">Liste 5 combinacoes que podem funcionar mas precisam validacao.</p>
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">1.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">2.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">3.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">4.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-neutral-500">5.</span>
+                <div class="flex-1 h-8 bg-dark-700/50 rounded border border-dark-600"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-dark-800/50 rounded-lg border border-purple-500/20">
+          <p class="text-neutral-300">
+            <strong class="text-purple-400">Entrega:</strong> Preencha sua matriz completa. Guarde esse documento - ele sera sua <strong class="text-white">referencia estrategica</strong> para os proximos meses de producao de conteudo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist de Qualidade -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">✅</span> Checklist de Validacao da Matriz
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Considerei as especificidades do meu nicho?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Avaliei com base em dados, nao achismo?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Identifiquei combinacoes toxicas?</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Tenho combinacoes para diferentes objetivos?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">A matriz reflete meu estilo de comunicacao?</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-purple-400">□</span>
+              <span class="text-neutral-300 text-sm">Defini prioridades claras de teste?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO DO MODULO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">📝</span> Resumo do Modulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Ciencia da Sinergia</strong>
+              <span class="text-neutral-400"> - Efeito multiplicador, stacking e amplificacao emocional</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Combinacoes de Alto Impacto</strong>
+              <span class="text-neutral-400"> - As 10 combinacoes mais poderosas e testadas</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Combinacoes a Evitar</strong>
+              <span class="text-neutral-400"> - Conflitos, sobrecarga e dissonancia emocional</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Sequenciamento Temporal</strong>
+              <span class="text-neutral-400"> - Ordem dos gatilhos em abertura, meio e fechamento</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Dosagem e Intensidade</strong>
+              <span class="text-neutral-400"> - Ponto de saturacao, dose ideal e equilibrio</span>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div>
+              <strong class="text-white">Matriz de Combinacao</strong>
+              <span class="text-neutral-400"> - Sua ferramenta personalizada de combinacoes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="../trilha2/modulo-2-10.html" class="flex-1 px-6 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-300 rounded-lg text-center transition-colors">
+            ← Modulo Anterior
+          </a>
+          <a href="modulo-3-2.html" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-center transition-colors font-semibold">
+            Proximo Modulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>FGMD - Formacao em Gatilhos Mentais no Digital</p>
+      <p class="mt-2">
+        <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    // Set initial icon
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>
