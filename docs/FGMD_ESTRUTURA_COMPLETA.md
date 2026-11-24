@@ -566,7 +566,7 @@ Conceitos-chave:
 ### Elementos Obrigatorios
 
 ```html
-[🧠 FGMD] | [INEMA.CLUB]
+[🧠 FGMD] | [ARCKHÉ AI]
 [Fundamentos] [Central] [Avancada] [🌙 Theme]
 ```
 
@@ -575,7 +575,7 @@ Conceitos-chave:
 | Elemento | Cor |
 |----------|-----|
 | Logo FGMD | `text-yellow-400` |
-| INEMA.CLUB | `text-sky-400` |
+| ARCKHÉ AI | `text-sky-400` |
 | Trilha 1 Ativa | `text-emerald-400 bg-emerald-500/10` |
 | Trilha 2 Ativa | `text-blue-400 bg-blue-500/10` |
 | Trilha 3 Ativa | `text-purple-400 bg-purple-500/10` |
@@ -589,7 +589,7 @@ Conceitos-chave:
 - [ ] 22 modulos criados
 - [ ] 6 topicos por modulo
 - [ ] 3 secoes por topico (O que e, Por que aprender, Conceitos-chave)
-- [ ] Navigation com INEMA.CLUB
+- [ ] Navigation com ARCKHÉ AI
 - [ ] Cores corretas por trilha
 
 ### Conteudo
