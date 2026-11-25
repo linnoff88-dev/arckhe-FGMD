@@ -1,17 +1,17 @@
 # MANUAL PRÁTICO DE GATILHOS DE AUTORIDADE NO DIGITAL
 
-## Introdução
-Autoridade não é fama.
-Autoridade não é título.
-Autoridade não é número de seguidores.
+## Introduçêo
+Autoridade nêo é fama.
+Autoridade nêo é título.
+Autoridade nêo é número de seguidores.
 
 Autoridade é quando o cérebro do outro pensa:
 > **“Essa pessoa sabe do que está falando.”**
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-Identificação faz conectar.
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+Identificaçêo faz conectar.
 Engajamento faz ativar.
 **Autoridade faz legitimar.**
 
@@ -19,7 +19,7 @@ Engajamento faz ativar.
 
 ## 1. O que é Autoridade (a verdade)
 
-Autoridade não se declara.
+Autoridade nêo se declara.
 Autoridade se **percebe**.
 
 Ela nasce quando existe coerência entre:
@@ -36,7 +36,7 @@ Sem autoridade, todo CTA parece propaganda.
 Depois de engajar, o cérebro avalia:
 > “Por que eu deveria ouvir você?”
 
-Se essa pergunta não é respondida, a confiança não se forma.
+Se essa pergunta nêo é respondida, a confiança nêo se forma.
 
 ---
 
@@ -53,7 +53,7 @@ Autoridade reduz atrito.
 
 ## 4. Os 5 Tipos de Autoridade
 
-Autoridade não é única. Ela se manifesta de formas diferentes.
+Autoridade nêo é única. Ela se manifesta de formas diferentes.
 
 ### 4.1 Autoridade Vivida
 Baseada em experiência real.
@@ -77,7 +77,7 @@ Exemplos:
 Baseada em acesso ao que poucos veem.
 
 Exemplos:
-- “Isso não aparece no resultado final.”
+- “Isso nêo aparece no resultado final.”
 - “Pouca gente olha para essa parte.”
 
 ---
@@ -91,7 +91,7 @@ Exemplos:
 
 ---
 
-### 4.5 Autoridade de Tradução
+### 4.5 Autoridade de Traduçêo
 Baseada em tornar o complexo simples.
 
 Exemplos:
@@ -102,7 +102,7 @@ Exemplos:
 
 ## 5. Gatilhos de Autoridade Vivida
 
-Use fatos, não autoelogio.
+Use fatos, nêo autoelogio.
 
 Exemplos:
 - “No começo eu errei nisso.”
@@ -127,7 +127,7 @@ Mostrar processo vale mais que mostrar resultado.
 
 ## 7. Gatilhos de Coerência
 
-Autoridade cai quando há contradição.
+Autoridade cai quando há contradiçêo.
 
 Mantenha coerência entre:
 - discurso
@@ -136,13 +136,13 @@ Mantenha coerência entre:
 
 ---
 
-## 8. Gatilhos de Limite (dizer não)
+## 8. Gatilhos de Limite (dizer nêo)
 
-Quem diz sim para tudo não tem autoridade.
+Quem diz sim para tudo nêo tem autoridade.
 
 Exemplos:
-- “Isso não funciona.”
-- “Esse caminho não é o correto.”
+- “Isso nêo funciona.”
+- “Esse caminho nêo é o correto.”
 
 Limite gera respeito.
 
@@ -150,30 +150,30 @@ Limite gera respeito.
 
 ## 9. Estrutura de Conteúdo com Autoridade
 
-1. Afirmação clara
+1. Afirmaçêo clara
 2. Experiência ou processo
-3. Demonstração
-4. Conclusão segura
+3. Demonstraçêo
+4. Conclusêo segura
 
 ---
 
 ## 10. Erros que Destroem Autoridade
 
-- autoafirmação excessiva
+- autoafirmaçêo excessiva
 - promessas irreais
 - copiar discurso alheio
-- mudar de opinião sem contexto
+- mudar de opiniêo sem contexto
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Autoridade não se constrói gritando.
+Autoridade nêo se constrói gritando.
 Se constrói mostrando.
 
 Quem legitima:
-- não precisa convencer
-- não precisa prometer
-- não precisa implorar
+- nêo precisa convencer
+- nêo precisa prometer
+- nêo precisa implorar
 
 Autoridade é silêncio seguro em meio ao r

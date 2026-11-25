@@ -1,28 +1,28 @@
-# MANUAL PRÁTICO DE GATILHOS DE TRANSFORMAÇÃO NO DIGITAL
+# MANUAL PRÁTICO DE GATILHOS DE TRANSFORMAÇêO NO DIGITAL
 
-## Introdução
-Transformação é o momento em que a pessoa deixa de apenas **entender** e passa a **se ver mudando**.
+## Introduçêo
+Transformaçêo é o momento em que a pessoa deixa de apenas **entender** e passa a **se ver mudando**.
 
-Não é promessa.
-Não é motivação.
-É **visualização de caminho possível**.
+Nêo é promessa.
+Nêo é motivaçêo.
+É **visualizaçêo de caminho possível**.
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-Identificação faz conectar.
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+Identificaçêo faz conectar.
 Engajamento faz ativar.
 Autoridade faz legitimar.
 Consciência faz despertar.
 Pertencimento faz permanecer.
-**Transformação faz avançar.**
+**Transformaçêo faz avançar.**
 
 ---
 
-## 1. O que é Transformação (a verdade)
+## 1. O que é Transformaçêo (a verdade)
 
-Transformação não é o resultado final.
-Transformação é a percepção clara de que:
+Transformaçêo nêo é o resultado final.
+Transformaçêo é a percepçêo clara de que:
 > **“Eu sei por onde começar.”**
 
 O cérebro só se move quando enxerga um caminho.
@@ -30,16 +30,16 @@ Sem caminho, surge paralisia.
 
 ---
 
-## 2. A Pergunta Mental da Transformação
+## 2. A Pergunta Mental da Transformaçêo
 
 Depois de pertencer, o cérebro pergunta:
 > **“Como eu saio de onde estou para onde quero chegar?”**
 
-Se essa pergunta não é respondida, a pessoa permanece estagnada — mesmo consciente.
+Se essa pergunta nêo é respondida, a pessoa permanece estagnada — mesmo consciente.
 
 ---
 
-## 3. Por que Transformação é um Gatilho
+## 3. Por que Transformaçêo é um Gatilho
 
 O cérebro humano evita o desconhecido.
 
@@ -48,19 +48,19 @@ Mostrar o caminho reduz:
 - incerteza
 - resistência
 
-Transformação converte intenção em movimento.
+Transformaçêo converte intençêo em movimento.
 
 ---
 
-## 4. Os 5 Pilares da Transformação
+## 4. Os 5 Pilares da Transformaçêo
 
-Todo gatilho de transformação trabalha pelo menos **2 desses pilares**:
+Todo gatilho de transformaçêo trabalha pelo menos **2 desses pilares**:
 
 1. **Antes e Depois** – contraste claro
 2. **Caminho Visível** – etapas possíveis
 3. **Progresso Acessível** – primeiros passos simples
-4. **Redução de Risco** – erro controlável
-5. **Acompanhamento** – não estar sozinho
+4. **Reduçêo de Risco** – erro controlável
+5. **Acompanhamento** – nêo estar sozinho
 
 ---
 
@@ -70,9 +70,9 @@ Mostre mudança realista.
 
 Exemplos:
 - “Antes era assim. Depois ficou assim.”
-- “O problema não some. Ele muda de forma.”
+- “O problema nêo some. Ele muda de forma.”
 
-Transformação real não é perfeita.
+Transformaçêo real nêo é perfeita.
 
 ---
 
@@ -83,7 +83,7 @@ Quebre a jornada em etapas.
 Exemplos:
 - “Primeiro você entende isso.”
 - “Depois você ajusta aquilo.”
-- “Só então você acelera.”
+- “Só entêo você acelera.”
 
 Caminho claro reduz ansiedade.
 
@@ -101,7 +101,7 @@ Pequeno avanço vence medo grande.
 
 ---
 
-## 8. Gatilhos de Redução de Risco
+## 8. Gatilhos de Reduçêo de Risco
 
 Mostre que errar faz parte do processo.
 
@@ -109,16 +109,16 @@ Exemplos:
 - “Você pode testar sem se expor.”
 - “Nada aqui é irreversível.”
 
-Segurança acelera ação.
+Segurança acelera açêo.
 
 ---
 
 ## 9. Gatilhos de Acompanhamento
 
-Transformação isolada assusta.
+Transformaçêo isolada assusta.
 
 Exemplos:
-- “Você não faz isso sozinho.”
+- “Você nêo faz isso sozinho.”
 - “Aqui a gente caminha junto.”
 
 Acompanhamento sustenta avanço.
@@ -137,28 +137,28 @@ Isso normaliza o processo.
 
 ---
 
-## 11. Estrutura de Conteúdo de Transformação
+## 11. Estrutura de Conteúdo de Transformaçêo
 
-1. Situação atual
-2. Visão de mudança possível
+1. Situaçêo atual
+2. Visêo de mudança possível
 3. Etapas do caminho
 4. Primeiro passo acessível
 5. Convite à continuidade
 
 ---
 
-## 12. Erros que Destroem Transformação
+## 12. Erros que Destroem Transformaçêo
 
 - prometer resultado final
 - pular etapas
 - caminho genérico
-- pressão excessiva
+- pressêo excessiva
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Transformação não é empurrão.
+Transformaçêo nêo é empurrêo.
 É clareza.
 
 Quem enxerga o caminho:
@@ -166,5 +166,5 @@ Quem enxerga o caminho:
 - começa
 - continua
 
-Transformação é o gatilho que transforma consciência em movimento.
+Transformaçêo é o gatilho que transforma consciência em movimento.
 

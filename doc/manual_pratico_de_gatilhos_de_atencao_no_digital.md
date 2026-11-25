@@ -1,23 +1,23 @@
-# MANUAL PRÁTICO DE GATILHOS DE ATENÇÃO NO DIGITAL
+# MANUAL PRÁTICO DE GATILHOS DE ATENÇêO NO DIGITAL
 
-## Introdução
-Este documento foi criado para ensinar, de forma clara e prática, **como despertar atenção real no digital**. Não é sobre likes. Não é sobre viralizar por acaso. É sobre **fazer a pessoa parar**, prestar atenção e **continuar**.
+## Introduçêo
+Este documento foi criado para ensinar, de forma clara e prática, **como despertar atençêo real no digital**. Nêo é sobre likes. Nêo é sobre viralizar por acaso. É sobre **fazer a pessoa parar**, prestar atençêo e **continuar**.
 
-Aqui você vai aprender **gatilhos de atenção**, aqueles que atuam nos primeiros segundos e decidem se um conteúdo vive ou morre.
+Aqui você vai aprender **gatilhos de atençêo**, aqueles que atuam nos primeiros segundos e decidem se um conteúdo vive ou morre.
 
 ---
 
-## 1. O que é Atenção no Digital (verdade nua)
+## 1. O que é Atençêo no Digital (verdade nua)
 
-Atenção não é interesse.
-Atenção é **interrupção**.
+Atençêo nêo é interesse.
+Atençêo é **interrupçêo**.
 
-A pessoa não acorda querendo aprender.
+A pessoa nêo acorda querendo aprender.
 Ela acorda querendo **continuar vivendo como sempre**.
 
 Portanto, o papel do gatilho é:
 - Quebrar o fluxo automático
-- Criar tensão cognitiva
+- Criar tensêo cognitiva
 - Forçar o cérebro a pensar: "espera…"
 
 ---
@@ -26,69 +26,69 @@ Portanto, o papel do gatilho é:
 
 Todo gatilho forte funciona nos **primeiros 3 segundos**.
 Se nesses 3 segundos você:
-- não quebra uma crença
-- não cria curiosidade
-- não ameaça uma certeza
+- nêo quebra uma crença
+- nêo cria curiosidade
+- nêo ameaça uma certeza
 
 O cérebro descarta.
 
 ---
 
-## 3. Os 5 Pilares do Gatilho de Atenção
+## 3. Os 5 Pilares do Gatilho de Atençêo
 
 Todo gatilho forte combina pelo menos **2 desses pilares**:
 
 1. **Ruptura** – nega algo que a pessoa acredita
 2. **Assimetria** – poucos sabem, poucos fazem
-3. **Inversão** – o resultado não vem de onde se imagina
+3. **Inversêo** – o resultado nêo vem de onde se imagina
 4. **Inevitabilidade** – isso vai acontecer com ou sem você
 5. **Travessia** – existe um caminho guiado
 
 ---
 
-## 4. Gatilhos de Alta Interrupção (param o scroll)
+## 4. Gatilhos de Alta Interrupçêo (param o scroll)
 
-### 4.1 Quebra de padrão
+### 4.1 Quebra de padrêo
 Exemplos:
 - "Esquece tudo o que você aprendeu"
-- "Isso não começa onde você pensa"
+- "Isso nêo começa onde você pensa"
 
 Uso: quando o público acha que já sabe.
 
 ---
 
-### 4.2 Traição de expectativa
+### 4.2 Traiçêo de expectativa
 Promete uma coisa e entrega outra.
 
 Exemplo:
-> "A melhor ferramenta de vídeo não é de vídeo."
+> "A melhor ferramenta de vídeo nêo é de vídeo."
 
-Esse gatilho funciona porque sequestra a intenção errada da pessoa.
+Esse gatilho funciona porque sequestra a intençêo errada da pessoa.
 
 ---
 
-### 4.3 Inversão de processo
+### 4.3 Inversêo de processo
 Mostra que a maioria começa pelo lugar errado.
 
 Exemplo:
-> "O vídeo é a última etapa, não a primeira."
+> "O vídeo é a última etapa, nêo a primeira."
 
 ---
 
 ## 5. Gatilhos da Ferramenta Mágica (os que mais viralizam)
 
 As pessoas buscam soluções fáceis.
-Você não briga com isso. Você **entra por aí**.
+Você nêo briga com isso. Você **entra por aí**.
 
 ### Estrutura:
 1. Promessa da ferramenta
 2. Pausa
-3. Negação
-4. Revelação
+3. Negaçêo
+4. Revelaçêo
 
 Exemplo:
 > "Quer saber a melhor ferramenta para criar vídeos realistas?"
-> "Não é ferramenta de vídeo."
+> "Nêo é ferramenta de vídeo."
 > "É a ferramenta que constrói a imagem."
 
 ---
@@ -100,7 +100,7 @@ Exemplo:
 - "Os gurus fazem diferente"
 
 ### 6.2 Bastidor invisível
-- "Isso não é espontâneo"
+- "Isso nêo é espontâneo"
 - "É construído"
 
 Esses gatilhos funcionam porque elevam quem aprende.
@@ -109,12 +109,12 @@ Esses gatilhos funcionam porque elevam quem aprende.
 
 ## 7. Gatilhos Negativos Mentais (uso avançado)
 
-Não atacam a pessoa.
+Nêo atacam a pessoa.
 Atacam o **processo errado**.
 
 Exemplos:
 - "Quem começa pelo vídeo sempre sofre mais"
-- "A edição não cria realismo, só revela a base"
+- "A ediçêo nêo cria realismo, só revela a base"
 
 ---
 
@@ -123,8 +123,8 @@ Exemplos:
 Mostram que o método antigo deixa de funcionar.
 
 Exemplos:
-- "O mundo não ficou mais difícil. Seu método ficou insuficiente"
-- "Trabalhar mais não resolve"
+- "O mundo nêo ficou mais difícil. Seu método ficou insuficiente"
+- "Trabalhar mais nêo resolve"
 
 ---
 
@@ -135,18 +135,18 @@ Exemplos:
 
 Criam:
 - urgência
-- transição
-- janela de ação
+- transiçêo
+- janela de açêo
 
 ### 9.2 Inevitabilidade
-- "Isso não é tendência"
+- "Isso nêo é tendência"
 - "É infraestrutura"
 
 ---
 
 ## 10. Gatilhos de Autoridade Real
 
-Não é ego. É vivência.
+Nêo é ego. É vivência.
 
 Exemplos:
 - "Eu falo isso há anos"
@@ -156,24 +156,24 @@ Exemplos:
 
 ## 11. Gatilhos de Dignidade e Autonomia
 
-As pessoas não querem ser dependentes.
+As pessoas nêo querem ser dependentes.
 
 Exemplos:
-- "Quem não entende depende"
+- "Quem nêo entende depende"
 - "Entender o básico devolve controle"
 
 ---
 
 ## 12. Gatilhos-Âncora (frases que grudam)
 
-- "O realismo não é animado. É construído"
+- "O realismo nêo é animado. É construído"
 - "A imagem manda, o vídeo obedece"
 - "Quem começa pelo vídeo já começou errado"
 - "O ambiente mudou"
 
 ---
 
-## 13. Estrutura de Conteúdo de Atenção
+## 13. Estrutura de Conteúdo de Atençêo
 
 1. Mostre o efeito final
 2. Quebre a crença
@@ -185,22 +185,22 @@ Exemplos:
 ## 14. Erros Comuns
 
 - Explicar demais no início
-- Usar jargão técnico
+- Usar jargêo técnico
 - Prometer sem mostrar
-- Não entregar nada concreto
+- Nêo entregar nada concreto
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Atenção não se pede.
-Atenção se **provoca**.
+Atençêo nêo se pede.
+Atençêo se **provoca**.
 
-Quem domina gatilhos de atenção:
-- não depende de algoritmo
-- não depende de hype
+Quem domina gatilhos de atençêo:
+- nêo depende de algoritmo
+- nêo depende de hype
 - constrói autoridade real
 
 Este manual é um ponto de partida.
-O domínio vem com prática, observação e refinamento contínuo.
+O domínio vem com prática, observaçêo e refinamento contínuo.
 

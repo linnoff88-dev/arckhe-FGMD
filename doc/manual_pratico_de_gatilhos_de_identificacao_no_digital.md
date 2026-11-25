@@ -1,58 +1,58 @@
-# MANUAL PRÁTICO DE GATILHOS DE IDENTIFICAÇÃO NO DIGITAL
+# MANUAL PRÁTICO DE GATILHOS DE IDENTIFICAÇêO NO DIGITAL
 
-## Introdução
-Identificação é o momento em que a pessoa pensa:
+## Introduçêo
+Identificaçêo é o momento em que a pessoa pensa:
 > **“Isso é sobre mim.”**
 
-Sem identificação:
-- não há engajamento
-- não há confiança
-- não há conversão
+Sem identificaçêo:
+- nêo há engajamento
+- nêo há confiança
+- nêo há conversêo
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-**Identificação faz pertencer.**
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+**Identificaçêo faz pertencer.**
 
 ---
 
-## 1. O que é Identificação (a verdade)
+## 1. O que é Identificaçêo (a verdade)
 
-Identificação não é gostar de você.
-Identificação é **reconhecer a própria realidade no que está sendo dito**.
+Identificaçêo nêo é gostar de você.
+Identificaçêo é **reconhecer a própria realidade no que está sendo dito**.
 
-A pessoa não segue conteúdos.
+A pessoa nêo segue conteúdos.
 Ela segue **espelhos**.
 
 ---
 
-## 2. A Pergunta Mental da Identificação
+## 2. A Pergunta Mental da Identificaçêo
 
 Depois de entender, o cérebro pergunta:
 > “Isso tem a ver comigo?”
 
-Se a resposta for "não", a pessoa continua assistindo…
-mas **não se envolve**.
+Se a resposta for "nêo", a pessoa continua assistindo…
+mas **nêo se envolve**.
 
 ---
 
-## 3. Por que Identificação é um Gatilho
+## 3. Por que Identificaçêo é um Gatilho
 
 O cérebro humano busca pertencimento.
 
 Quando alguém descreve exatamente:
 - o que eu vivo
 - o que eu sinto
-- o que eu penso (e não falo)
+- o que eu penso (e nêo falo)
 
 O cérebro responde com:
 > “Esse cara me entende.”
 
 ---
 
-## 4. Os 4 Pilares da Identificação
+## 4. Os 4 Pilares da Identificaçêo
 
-Todo conteúdo que gera identificação trabalha pelo menos **2 desses pilares**:
+Todo conteúdo que gera identificaçêo trabalha pelo menos **2 desses pilares**:
 
 1. **Espelhamento** – descrever comportamentos reais
 2. **Contexto** – situar a pessoa na realidade dela
@@ -63,11 +63,11 @@ Todo conteúdo que gera identificação trabalha pelo menos **2 desses pilares**
 
 ## 5. Gatilhos de Espelhamento
 
-Você descreve o comportamento antes de explicar a solução.
+Você descreve o comportamento antes de explicar a soluçêo.
 
 Exemplos:
 - “Você salva esse vídeo para ver depois… e nunca volta.”
-- “Você sente que precisa aprender, mas não sabe por onde começar.”
+- “Você sente que precisa aprender, mas nêo sabe por onde começar.”
 
 👉 Quando a pessoa se reconhece, ela fica.
 
@@ -75,12 +75,12 @@ Exemplos:
 
 ## 6. Gatilhos de Contexto
 
-O mesmo conteúdo não serve para todos.
+O mesmo conteúdo nêo serve para todos.
 
 Exemplos:
 - “Se você está nessa fase…”
 - “Quem trabalha com isso sente…”
-- “Para quem já tentou e não conseguiu…”
+- “Para quem já tentou e nêo conseguiu…”
 
 Contexto filtra e conecta.
 
@@ -88,7 +88,7 @@ Contexto filtra e conecta.
 
 ## 7. Gatilhos de Vulnerabilidade Controlada
 
-Não é exposição emocional.
+Nêo é exposiçêo emocional.
 É mostrar processo humano.
 
 Exemplos:
@@ -131,18 +131,18 @@ A linguagem cria proximidade imediata.
 
 ## 10. Gatilhos de Dor Silenciosa
 
-Não fale do problema óbvio.
-Fale do que a pessoa sente e não verbaliza.
+Nêo fale do problema óbvio.
+Fale do que a pessoa sente e nêo verbaliza.
 
 Exemplos:
-- “A sensação de estar sempre correndo atrás.”
+- “A sensaçêo de estar sempre correndo atrás.”
 - “O medo de parecer perdido.”
 
-Isso cria conexão profunda.
+Isso cria conexêo profunda.
 
 ---
 
-## 11. Estrutura de Conteúdo com Alta Identificação
+## 11. Estrutura de Conteúdo com Alta Identificaçêo
 
 1. Descreva o comportamento
 2. Mostre que isso é comum
@@ -151,7 +151,7 @@ Isso cria conexão profunda.
 
 ---
 
-## 12. Erros que Destroem Identificação
+## 12. Erros que Destroem Identificaçêo
 
 - falar genérico demais
 - falar para todo mundo
@@ -160,9 +160,9 @@ Isso cria conexão profunda.
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Identificação não se força.
+Identificaçêo nêo se força.
 Ela se revela.
 
 Quando alguém se vê em você:
@@ -170,4 +170,4 @@ Quando alguém se vê em você:
 - permanece
 - caminha junto
 
-Identificação é o elo emocional da comunicação digital.
+Identificaçêo é o elo emocional da comunicaçêo digital.

@@ -1,35 +1,35 @@
 # MANUAL PRÁTICO DE GATILHOS DE CTA NO DIGITAL
 
-## Introdução
-CTA não é pedido.
-CTA não é botão.
-CTA não é frase decorativa no final do vídeo.
+## Introduçêo
+CTA nêo é pedido.
+CTA nêo é botêo.
+CTA nêo é frase decorativa no final do vídeo.
 
 CTA é **movimento**.
 
 Quando o CTA é correto, a pessoa pensa:
 > **“O próximo passo é óbvio.”**
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-Identificação faz conectar.
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+Identificaçêo faz conectar.
 Engajamento faz ativar.
 Autoridade faz legitimar.
 Consciência faz despertar.
 Pertencimento faz permanecer.
-Transformação faz avançar.
+Transformaçêo faz avançar.
 **CTA faz mover.**
 
 ---
 
 ## 1. O que é CTA (a verdade)
 
-CTA não cria desejo.
+CTA nêo cria desejo.
 CTA **continua um processo que já começou**.
 
-Quando o CTA falha, não é porque a pessoa não quis.
-É porque o caminho não estava claro.
+Quando o CTA falha, nêo é porque a pessoa nêo quis.
+É porque o caminho nêo estava claro.
 
 ---
 
@@ -38,16 +38,16 @@ Quando o CTA falha, não é porque a pessoa não quis.
 Depois de enxergar o caminho, o cérebro pergunta:
 > **“Qual é o próximo passo agora?”**
 
-Se essa pergunta não é respondida, a pessoa trava.
+Se essa pergunta nêo é respondida, a pessoa trava.
 
 ---
 
 ## 3. Por que CTA é um Gatilho
 
-O cérebro odeia interrupção de fluxo.
+O cérebro odeia interrupçêo de fluxo.
 
 Um bom CTA:
-- reduz esforço de decisão
+- reduz esforço de decisêo
 - remove ambiguidade
 - mantém continuidade
 
@@ -60,16 +60,16 @@ CTA mal feito quebra tudo que veio antes.
 Todo CTA forte trabalha pelo menos **2 desses pilares**:
 
 1. **Continuidade** – segue a lógica do conteúdo
-2. **Clareza** – ação única e simples
+2. **Clareza** – açêo única e simples
 3. **Baixo Atrito** – fácil de executar
-4. **Pertencimento** – não é sozinho
-5. **Direção** – agora, não depois
+4. **Pertencimento** – nêo é sozinho
+5. **Direçêo** – agora, nêo depois
 
 ---
 
 ## 5. Gatilhos de Continuidade
 
-CTA não muda o assunto.
+CTA nêo muda o assunto.
 Ele dá sequência.
 
 Exemplos:
@@ -86,26 +86,26 @@ Exemplos:
 - “Clica aqui.”
 - “Entra nesse link.”
 
-Uma ação. Um destino.
+Uma açêo. Um destino.
 
 ---
 
 ## 7. Gatilhos de Baixo Atrito
 
-Quanto menor o esforço, maior a ação.
+Quanto menor o esforço, maior a açêo.
 
 Exemplos:
 - “É gratuito.”
 - “Leva poucos minutos.”
 - “Sem compromisso.”
 
-Remova medo e fricção.
+Remova medo e fricçêo.
 
 ---
 
 ## 8. Gatilhos de Pertencimento no CTA
 
-O CTA não é solitário.
+O CTA nêo é solitário.
 
 Exemplos:
 - “Vem com a gente.”
@@ -116,7 +116,7 @@ Pertencer move mais que convencer.
 
 ---
 
-## 9. Gatilhos de Direção Temporal
+## 9. Gatilhos de Direçêo Temporal
 
 CTA precisa de agora.
 
@@ -140,7 +140,7 @@ Quando o objetivo é trazer para o ecossistema.
 ### CTA de Compromisso Leve
 Quando o público ainda está frio.
 
-### CTA de Decisão
+### CTA de Decisêo
 Quando a consciência já está formada.
 
 ---
@@ -149,7 +149,7 @@ Quando a consciência já está formada.
 
 1. Mostre o caminho
 2. Aponte o próximo passo
-3. Simplifique a ação
+3. Simplifique a açêo
 4. Reforce pertencimento
 
 ---
@@ -163,15 +163,15 @@ Quando a consciência já está formada.
 
 ---
 
-## Conclusão
+## Conclusêo
 
-CTA não empurra.
+CTA nêo empurra.
 CTA conduz.
 
 Quem move bem:
-- não força
-- não implora
-- não quebra confiança
+- nêo força
+- nêo implora
+- nêo quebra confiança
 
-CTA é o último gesto de respeito ao tempo e à atenção do outro.
+CTA é o último gesto de respeito ao tempo e à atençêo do outro.
 

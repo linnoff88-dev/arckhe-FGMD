@@ -1,17 +1,17 @@
 # MANUAL PRÁTICO DE GATILHOS DE PERTENCIMENTO NO DIGITAL
 
-## Introdução
-Pertencimento é o que faz a pessoa **ficar**, mesmo quando não há novidade.
+## Introduçêo
+Pertencimento é o que faz a pessoa **ficar**, mesmo quando nêo há novidade.
 
 É o gatilho que transforma:
 - audiência → comunidade
 - seguidores → participantes
 - conteúdo → vínculo
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-Identificação faz conectar.
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+Identificaçêo faz conectar.
 Engajamento faz ativar.
 Autoridade faz legitimar.
 Consciência faz despertar.
@@ -21,7 +21,7 @@ Consciência faz despertar.
 
 ## 1. O que é Pertencimento (a verdade)
 
-Pertencimento não é gostar de você.
+Pertencimento nêo é gostar de você.
 Pertencimento é **sentir que existe um lugar aqui**.
 
 O cérebro humano busca grupos.
@@ -34,7 +34,7 @@ Quando encontra um grupo seguro, ele reduz vigilância e permanece.
 Depois de despertar consciência, o cérebro pergunta:
 > **“Onde eu continuo isso?”**
 
-Se não houver um espaço claro, a pessoa volta ao ruído.
+Se nêo houver um espaço claro, a pessoa volta ao ruído.
 
 ---
 
@@ -78,12 +78,12 @@ Identidade filtra e conecta.
 
 ## 6. Gatilhos de Normas Claras
 
-Grupos sem regra não retêm.
+Grupos sem regra nêo retêm.
 
 Exemplos:
-- “Aqui a gente não…”
+- “Aqui a gente nêo…”
 - “Nesse espaço, o foco é…”
-- “Isso não funciona aqui.”
+- “Isso nêo funciona aqui.”
 
 Limites geram segurança.
 
@@ -104,7 +104,7 @@ Linguagem cria identidade.
 
 ## 8. Gatilhos de Rituais
 
-Repetição cria vínculo.
+Repetiçêo cria vínculo.
 
 Exemplos:
 - encontro semanal
@@ -121,8 +121,8 @@ Entrada define permanência.
 
 Exemplos:
 - mensagem de boas-vindas
-- orientação inicial
-- convite à primeira participação
+- orientaçêo inicial
+- convite à primeira participaçêo
 
 Quem é bem recebido, fica.
 
@@ -146,7 +146,7 @@ Reconhecimento reforça vínculo.
 1. Reforce identidade
 2. Mostre normas
 3. Use linguagem do grupo
-4. Convide à participação recorrente
+4. Convide à participaçêo recorrente
 
 ---
 
@@ -159,9 +159,9 @@ Reconhecimento reforça vínculo.
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Pertencimento não se força.
+Pertencimento nêo se força.
 Se constrói.
 
 Quem pertence:
@@ -169,5 +169,5 @@ Quem pertence:
 - participa
 - defende
 
-Pertencimento é retenção no longo prazo.
+Pertencimento é retençêo no longo prazo.
 

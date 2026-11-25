@@ -1,11 +1,11 @@
-# MANUAL PRÁTICO DE GATILHOS DE COMPREENSÃO NO DIGITAL
+# MANUAL PRÁTICO DE GATILHOS DE COMPREENSêO NO DIGITAL
 
-## Introdução
-Compreensão é o **ponto invisível** onde a maioria perde a audiência.
+## Introduçêo
+Compreensêo é o **ponto invisível** onde a maioria perde a audiência.
 
-Muitos conteúdos têm atenção.
-Alguns têm retenção.
-Pouquíssimos têm **compreensão**.
+Muitos conteúdos têm atençêo.
+Alguns têm retençêo.
+Pouquíssimos têm **compreensêo**.
 
 E aqui está a verdade dura:
 > **Quando a pessoa para de entender, ela sai — mesmo interessada.**
@@ -14,27 +14,27 @@ Este manual ensina como garantir que o público **acompanhe o raciocínio**, se 
 
 ---
 
-## 1. O que é Compreensão (a verdade)
+## 1. O que é Compreensêo (a verdade)
 
-Compreensão não é aprender tudo.
-Compreensão é o cérebro pensar:
+Compreensêo nêo é aprender tudo.
+Compreensêo é o cérebro pensar:
 > "Eu estou acompanhando."
 
-O oposto da compreensão não é desinteresse.
-É **confusão silenciosa**.
+O oposto da compreensêo nêo é desinteresse.
+É **confusêo silenciosa**.
 
 ---
 
-## 2. A Pergunta Mental da Compreensão
+## 2. A Pergunta Mental da Compreensêo
 
 Depois de parar e ficar, o cérebro avalia:
 > "Isso faz sentido para mim?"
 
-Se a resposta for "não", ocorre abandono imediato — sem comentário, sem dislike.
+Se a resposta for "nêo", ocorre abandono imediato — sem comentário, sem dislike.
 
 ---
 
-## 3. Por que Compreensão é um Gatilho
+## 3. Por que Compreensêo é um Gatilho
 
 O cérebro protege o ego.
 Sentir-se perdido gera desconforto.
@@ -43,38 +43,38 @@ Por isso:
 - pessoas abandonam conteúdos que parecem bons
 - pessoas evitam quem as faz se sentir incapazes
 
-Quem domina compreensão constrói **autoridade silenciosa**.
+Quem domina compreensêo constrói **autoridade silenciosa**.
 
 ---
 
-## 4. Os 4 Pilares da Compreensão
+## 4. Os 4 Pilares da Compreensêo
 
 Todo conteúdo compreensível trabalha pelo menos **2 desses pilares**:
 
-1. **Simplificação** – reduzir complexidade
-2. **Tradução** – trocar jargão por linguagem humana
+1. **Simplificaçêo** – reduzir complexidade
+2. **Traduçêo** – trocar jargêo por linguagem humana
 3. **Ancoragem** – ligar ao que a pessoa já conhece
-4. **Validação** – confirmar que ela está entendendo
+4. **Validaçêo** – confirmar que ela está entendendo
 
 ---
 
-## 5. Gatilhos de Simplificação
+## 5. Gatilhos de Simplificaçêo
 
-Menos informação = mais entendimento.
+Menos informaçêo = mais entendimento.
 
 Exemplos:
 - "Basicamente, é isso"
 - "No fundo, funciona assim"
 - "Se você entender só isso, já resolve"
 
-Simplificar não é empobrecer.
+Simplificar nêo é empobrecer.
 É **clarear**.
 
 ---
 
-## 6. Gatilhos de Tradução
+## 6. Gatilhos de Traduçêo
 
-Jargão quebra compreensão.
+Jargêo quebra compreensêo.
 
 Use:
 - analogias
@@ -99,7 +99,7 @@ Sem ancoragem, tudo parece abstrato.
 
 ---
 
-## 8. Gatilhos de Validação
+## 8. Gatilhos de Validaçêo
 
 Faça o cérebro sentir progresso.
 
@@ -118,16 +118,16 @@ Exemplo fixa entendimento.
 
 Use:
 - antes/depois
-- demonstração
+- demonstraçêo
 - caso simples
 
-> **Nada é tão claro quanto ver funcionando.**
+> **Nada é têo claro quanto ver funcionando.**
 
 ---
 
 ## 10. Gatilhos de Ritmo Cognitivo
 
-Compreensão exige pausa.
+Compreensêo exige pausa.
 
 Use:
 - frases curtas
@@ -138,20 +138,20 @@ Falar rápido demais quebra entendimento.
 
 ---
 
-## 11. Gatilhos de Redução de Medo
+## 11. Gatilhos de Reduçêo de Medo
 
-Muitas pessoas travam por achar que "não é para elas".
+Muitas pessoas travam por achar que "nêo é para elas".
 
 Exemplos:
-- "Você não precisa saber tudo"
+- "Você nêo precisa saber tudo"
 - "Isso é mais simples do que parece"
-- "Não precisa ser técnico"
+- "Nêo precisa ser técnico"
 
 Isso libera o cérebro para aprender.
 
 ---
 
-## 12. Estrutura de Conteúdo com Alta Compreensão
+## 12. Estrutura de Conteúdo com Alta Compreensêo
 
 1. Introduza a ideia
 2. Traduza o conceito
@@ -161,25 +161,25 @@ Isso libera o cérebro para aprender.
 
 ---
 
-## 13. Erros que Destroem Compreensão
+## 13. Erros que Destroem Compreensêo
 
 - excesso de termos técnicos
 - explicar tudo de uma vez
 - pular etapas
 - falar para especialistas
-- não checar entendimento
+- nêo checar entendimento
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Atenção faz parar.
-Retenção faz ficar.
-**Compreensão faz confiar.**
+Atençêo faz parar.
+Retençêo faz ficar.
+**Compreensêo faz confiar.**
 
 Quem entende, permanece.
 Quem permanece, aprende.
 Quem aprende, transforma.
 
-Compreensão é respeito à mente do outro.
+Compreensêo é respeito à mente do outro.
 

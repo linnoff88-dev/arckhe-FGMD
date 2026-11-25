@@ -1,35 +1,35 @@
-# MANUAL PRÁTICO DE GATILHOS DE RETENÇÃO NO DIGITAL
+# MANUAL PRÁTICO DE GATILHOS DE RETENÇêO NO DIGITAL
 
-## Introdução
-Se atenção é fazer a pessoa **parar**, retenção é fazer a pessoa **ficar**.
+## Introduçêo
+Se atençêo é fazer a pessoa **parar**, retençêo é fazer a pessoa **ficar**.
 
-No digital, a maioria perde o público **não por falta de interesse**, mas porque:
-- o cérebro não vê direção
-- não entende para onde aquilo vai
-- não sente progresso
+No digital, a maioria perde o público **nêo por falta de interesse**, mas porque:
+- o cérebro nêo vê direçêo
+- nêo entende para onde aquilo vai
+- nêo sente progresso
 
 Este documento ensina **como manter a mente presa ao conteúdo**, segundo a lógica real do comportamento humano.
 
 ---
 
-## 1. O que é Retenção (a verdade)
+## 1. O que é Retençêo (a verdade)
 
-Retenção não é duração de vídeo.
-Retenção é **continuidade mental**.
+Retençêo nêo é duraçêo de vídeo.
+Retençêo é **continuidade mental**.
 
 A pergunta inconsciente do cérebro é:
 > "Vale a pena continuar aqui?"
 
-Se essa pergunta não é respondida a cada poucos segundos, a pessoa sai.
+Se essa pergunta nêo é respondida a cada poucos segundos, a pessoa sai.
 
 ---
 
 ## 2. A Regra dos 30 Segundos
 
-Depois da atenção (0–3s), você entra no território da retenção.
+Depois da atençêo (0–3s), você entra no território da retençêo.
 
 Entre **3 e 30 segundos**, o cérebro precisa sentir:
-- direção
+- direçêo
 - promessa
 - progresso
 
@@ -37,13 +37,13 @@ Sem isso, ocorre abandono silencioso.
 
 ---
 
-## 3. Os 4 Pilares da Retenção
+## 3. Os 4 Pilares da Retençêo
 
-Todo conteúdo com alta retenção trabalha pelo menos **2 desses pilares**:
+Todo conteúdo com alta retençêo trabalha pelo menos **2 desses pilares**:
 
-1. **Promessa Aberta** – algo ainda não revelado
-2. **Tensão Cognitiva** – pergunta sem resposta
-3. **Progressão Visível** – algo está avançando
+1. **Promessa Aberta** – algo ainda nêo revelado
+2. **Tensêo Cognitiva** – pergunta sem resposta
+3. **Progressêo Visível** – algo está avançando
 4. **História em Movimento** – começo, meio, ainda sem fim
 
 ---
@@ -60,19 +60,19 @@ Exemplos:
 
 ---
 
-## 5. Gatilhos de Tensão Cognitiva
+## 5. Gatilhos de Tensêo Cognitiva
 
 Crie perguntas implícitas.
 
 Exemplos:
-- "Isso parece certo, mas não é"
-- "O erro não está onde você imagina"
+- "Isso parece certo, mas nêo é"
+- "O erro nêo está onde você imagina"
 
-O cérebro fica porque quer resolver a tensão.
+O cérebro fica porque quer resolver a tensêo.
 
 ---
 
-## 6. Gatilhos de Progressão
+## 6. Gatilhos de Progressêo
 
 A pessoa precisa sentir avanço.
 
@@ -88,30 +88,30 @@ Exemplo:
 
 ## 7. Gatilhos de História
 
-História não é storytelling emocional.
+História nêo é storytelling emocional.
 É **sequência lógica**.
 
 Exemplo:
-- Situação inicial
+- Situaçêo inicial
 - Conflito
-- Descoberta (ainda não final)
+- Descoberta (ainda nêo final)
 
 ---
 
 ## 8. Gatilhos de Autoridade Progressiva
 
-Autoridade não entra toda no início.
+Autoridade nêo entra toda no início.
 Ela cresce ao longo do conteúdo.
 
 Exemplos:
 - "Quando eu testei isso pela primeira vez…"
-- "Depois de anos observando esse padrão…"
+- "Depois de anos observando esse padrêo…"
 
 ---
 
-## 9. Gatilhos de Clareza (retenção silenciosa)
+## 9. Gatilhos de Clareza (retençêo silenciosa)
 
-Confusão mata retenção.
+Confusêo mata retençêo.
 
 Use:
 - frases curtas
@@ -123,7 +123,7 @@ Se a pessoa se sente burra, ela sai.
 
 ---
 
-## 10. Gatilhos Visuais de Retenção
+## 10. Gatilhos Visuais de Retençêo
 
 O olho também precisa ficar.
 
@@ -143,13 +143,13 @@ Exemplos:
 - "só esse ajuste já melhora tudo"
 - "guarda isso"
 
-Isso cria sensação de valor contínuo.
+Isso cria sensaçêo de valor contínuo.
 
 ---
 
-## 12. Estrutura de Conteúdo com Alta Retenção
+## 12. Estrutura de Conteúdo com Alta Retençêo
 
-1. Atenção (ruptura)
+1. Atençêo (ruptura)
 2. Promessa aberta
 3. Desenvolvimento progressivo
 4. Micro-entregas
@@ -157,26 +157,26 @@ Isso cria sensação de valor contínuo.
 
 ---
 
-## 13. Erros que Destroem Retenção
+## 13. Erros que Destroem Retençêo
 
 - explicar tudo de uma vez
-- não indicar direção
-- prometer e não fechar
-- excesso de jargão
+- nêo indicar direçêo
+- prometer e nêo fechar
+- excesso de jargêo
 - ritmo linear demais
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Atenção faz parar.
-Retenção faz continuar.
+Atençêo faz parar.
+Retençêo faz continuar.
 
-Quem domina retenção:
-- não depende de edição pesada
-- não depende de cortes rápidos
+Quem domina retençêo:
+- nêo depende de ediçêo pesada
+- nêo depende de cortes rápidos
 - domina a mente pela lógica
 
-Retenção é **condução**.
+Retençêo é **conduçêo**.
 Quem conduz bem, chega até o fim.
 

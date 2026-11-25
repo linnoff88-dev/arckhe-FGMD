@@ -1,15 +1,15 @@
 # MANUAL PRÁTICO DE GATILHOS DE ENGAJAMENTO NO DIGITAL
 
-## Introdução
-Engajamento não é like.
-Engajamento é **ação consciente**.
+## Introduçêo
+Engajamento nêo é like.
+Engajamento é **açêo consciente**.
 
 Quando alguém comenta, responde, compartilha ou reage, ela deixa de ser espectadora e passa a ser **participante**.
 
-Atenção faz parar.
-Retenção faz ficar.
-Compreensão faz entender.
-Identificação faz conectar.
+Atençêo faz parar.
+Retençêo faz ficar.
+Compreensêo faz entender.
+Identificaçêo faz conectar.
 **Engajamento faz ativar.**
 
 ---
@@ -19,10 +19,10 @@ Identificação faz conectar.
 Engajamento acontece quando o cérebro pensa:
 > **“Eu preciso reagir a isso.”**
 
-Não é obrigação.
+Nêo é obrigaçêo.
 É impulso.
 
-Conteúdos que não provocam reação geram audiência passiva — e audiência passiva não constrói comunidade.
+Conteúdos que nêo provocam reaçêo geram audiência passiva — e audiência passiva nêo constrói comunidade.
 
 ---
 
@@ -31,7 +31,7 @@ Conteúdos que não provocam reação geram audiência passiva — e audiência 
 Depois de se identificar, o cérebro pergunta:
 > “O que eu faço com isso?”
 
-Se não houver convite implícito ou explícito, a pessoa consome e vai embora.
+Se nêo houver convite implícito ou explícito, a pessoa consome e vai embora.
 
 ---
 
@@ -52,16 +52,16 @@ Engajamento fixa a mensagem.
 
 Todo conteúdo que gera engajamento trabalha pelo menos **2 desses pilares**:
 
-1. **Provocação** – algo que pede resposta
+1. **Provocaçêo** – algo que pede resposta
 2. **Posicionamento** – concordar ou discordar
-3. **Participação** – completar algo
+3. **Participaçêo** – completar algo
 4. **Pertencimento ativo** – fazer parte da conversa
 
 ---
 
-## 5. Gatilhos de Provocação
+## 5. Gatilhos de Provocaçêo
 
-Você não pergunta por educação.
+Você nêo pergunta por educaçêo.
 Você provoca pensamento.
 
 Exemplos:
@@ -69,13 +69,13 @@ Exemplos:
 - “Isso faz sentido pra você?”
 - “O que você faria diferente?”
 
-Provocação gera comentário.
+Provocaçêo gera comentário.
 
 ---
 
-## 6. Gatilhos de Polarização Suave
+## 6. Gatilhos de Polarizaçêo Suave
 
-Não é briga.
+Nêo é briga.
 É escolha.
 
 Exemplos:
@@ -104,15 +104,15 @@ Convide a pessoa a trazer a própria vivência.
 
 Exemplos:
 - “Isso já aconteceu com você?”
-- “Em que situação você percebeu isso?”
+- “Em que situaçêo você percebeu isso?”
 
 Histórias pessoais aumentam comentários longos.
 
 ---
 
-## 9. Gatilhos de Micro-Decisão
+## 9. Gatilhos de Micro-Decisêo
 
-Pequenas decisões geram ação.
+Pequenas decisões geram açêo.
 
 Exemplos:
 - “Curte se isso te ajudou.”
@@ -124,7 +124,7 @@ Micro-engajamento prepara engajamento maior.
 
 ## 10. Gatilhos de Comunidade
 
-Transforme reação em grupo.
+Transforme reaçêo em grupo.
 
 Exemplos:
 - “Quem está nessa fase costuma comentar isso.”
@@ -137,8 +137,8 @@ O engajamento deixa de ser individual.
 ## 11. Estrutura de Conteúdo com Alto Engajamento
 
 1. Conteúdo claro
-2. Provocação final
-3. Convite simples à reação
+2. Provocaçêo final
+3. Convite simples à reaçêo
 4. Resposta ativa aos comentários
 
 ---
@@ -148,13 +148,13 @@ O engajamento deixa de ser individual.
 - pedir engajamento sem contexto
 - perguntas genéricas
 - medo de polarizar
-- não responder comentários
+- nêo responder comentários
 
 ---
 
-## Conclusão
+## Conclusêo
 
-Engajamento não se implora.
+Engajamento nêo se implora.
 Engajamento se **ativa**.
 
 Quem reage, lembra.
